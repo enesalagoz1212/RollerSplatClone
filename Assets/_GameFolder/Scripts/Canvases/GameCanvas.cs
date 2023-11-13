@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RollerSplatClone.Controllers
+namespace RollerSplatClone.Canvases
 {
-    public class PlayerMovement : MonoBehaviour
+    public class GameCanvas : MonoBehaviour
     {
-       
-        void Start()
+
+		public void Initialize()
+		{
+			
+		}
+
+		void Start()
         {
 
         }
