@@ -52,6 +52,8 @@ namespace RollerSplatClone.Managers
 		private void GameInitialize()
 		{
 			uiManager.Initialize(this, ballMovement, inputManager);
+			inputManager.Initialize(ballMovement);
+			ballMovement.Initialize();
 
 			ChangeState(GameState.Menu);
 		}

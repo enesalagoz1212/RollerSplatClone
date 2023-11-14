@@ -7,15 +7,6 @@ namespace RollerSplatClone.Managers
     public class LevelManager : MonoBehaviour
     {
         
-        void Start()
-        {
-
-        }
-
-        void Update()
-        {
-
-        }
     }
 }
 
