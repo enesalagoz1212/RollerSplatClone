@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using RollerSplatClone.Controllers;
+using DG.Tweening;
 
 namespace RollerSplatClone.Managers
 {
@@ -43,11 +44,13 @@ namespace RollerSplatClone.Managers
 			{
 				return;
 			}
-			_isDragging = true;
-
-			_firstTouchPosition = Input.mousePosition;
-			_ballMovement.ChangeState(PlayerState.None);
-			_isFirstDraging = true;
+			if (!_isDragging)
+			{
+				_isDragging = true;
+				_firstTouchPosition = Input.mousePosition;
+				_ballMovement.ChangeState(PlayerState.None);
+				_isFirstDraging = true;
+			}
 		}
 
 		public void OnScreenDrag(PointerEventData eventData)
@@ -62,8 +65,8 @@ namespace RollerSplatClone.Managers
 				return;
 			}
 
-			_lastTouchPosition= Input.mousePosition;
-			
+			_lastTouchPosition = Input.mousePosition;
+
 
 			float touchDifferenceX = GetTouchDifferenceX();
 			float touchDifferenceY = GetTouchDifferenceY();
@@ -93,13 +96,18 @@ namespace RollerSplatClone.Managers
 				}
 
 				_isFirstDraging = false;
-			}			
+			}
+
 		}
 
 		public void OnScreenUp(PointerEventData eventData)
 		{
-			_isDragging = false;
-			Debug.Log(_lastTouchPosition - _firstTouchPosition);
+			DOVirtual.DelayedCall(0.3f, () =>
+			{
+				_isDragging = false;
+
+				Debug.Log(_lastTouchPosition - _firstTouchPosition);
+			});
 		}
 
 		public float GetTouchDifferenceX()
