@@ -55,8 +55,11 @@ namespace RollerSplatClone.Managers
 
 			CreateNextLevel();
 			levelContainer.gameObject.SetActive(true);
+
+		
 		}
 
+	
 		public LevelScriptableObject GetLevelData()
 		{
 			return _currentLevelData;
@@ -81,6 +84,8 @@ namespace RollerSplatClone.Managers
 			GameObject nextLevelPrefab = currentLevelData.levelPrefab;
 			_currentLevel = Instantiate(nextLevelPrefab, levelContainer.transform);
 		}
+
+		
 	}
 }
 

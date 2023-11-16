@@ -19,6 +19,9 @@ namespace RollerSplatClone.Controllers
 	{
 		public PlayerState PlayerState { get; set; }
 
+		private PaintController _paintController;
+		private LevelManager _levelManager;
+
 		private bool _canMove;
 		private GameObject _ballInstantiated;
 
@@ -27,12 +30,18 @@ namespace RollerSplatClone.Controllers
 		public LayerMask wallsLayer;
 		public float moveDuration;
 		public Ease move;
-		public void Initialize()
+
+		private List<GameObject> touchedGrounds = new List<GameObject>();
+		public void Initialize(PaintController paintController,LevelManager levelManager)
+		{
+			_paintController = paintController;
+			_levelManager = levelManager;
+		}
+
+		private void Awake()
 		{
 
 		}
-
-
 		private void OnEnable()
 		{
 			GameManager.OnMenuOpen += OnGameMenu;
@@ -64,7 +73,7 @@ namespace RollerSplatClone.Controllers
 		public void ChangeState(PlayerState playerState)
 		{
 			PlayerState = playerState;
-			Debug.Log($"Player State: {playerState}");
+			//Debug.Log($"Player State: {playerState}");
 
 			switch (PlayerState)
 			{
@@ -114,9 +123,10 @@ namespace RollerSplatClone.Controllers
 			if (Physics.Raycast(ray, out hit, Mathf.Infinity, wallsLayer.value))
 			{
 				float hitDistance = hit.distance;
-				if (hitDistance>1f)
+				if (hitDistance > 1f)
 				{
-					transform.DOMove(hit.point, moveDuration).SetEase(move);
+					Vector3 targetPoint = hit.point - direction * 0.5f;
+					transform.DOMove(targetPoint, moveDuration).SetEase(move);
 				}
 				else
 				{
@@ -125,19 +135,57 @@ namespace RollerSplatClone.Controllers
 			}
 		}
 
-	/*	 private void OnBallInstantiate()
+		private void OnTriggerEnter(Collider other)
 		{
-			if (ballPrefab!=null)
+			if (other.CompareTag("Ground"))
 			{
-				if (_ballInstantiated!=null)
-				{
-					Destroy(_ballInstantiated);
-				}
+				Renderer groundRenderer = other.GetComponent<Renderer>();
 
-				_ballInstantiated = Instantiate(ballPrefab, new Vector3(-4f, 0.9f, -4f), Quaternion.identity);
+				if (groundRenderer != null)
+				{
+					Color groundColor = groundRenderer.material.color;
+					Color ballColor = _paintController._ballRenderer.material.color;
+
+					if (groundColor != ballColor)
+					{
+						touchedGrounds.Add(other.gameObject);
+						Debug.Log($"Total Grounds: {touchedGrounds.Count}");
+
+						DOVirtual.DelayedCall(0.1f, () =>
+						{
+							groundRenderer.material.color = ballColor;
+
+							_levelManager.GetLevelData().paintedGroundCount++;
+							if (_levelManager.GetLevelData().paintedGroundCount >= _levelManager.GetLevelData().numberOffGroundToBePainted)
+							{
+								GameManager.Instance.GameEnd(true);
+								Debug.Log("Oyun basarili");
+							}
+						});
+					}
+				}
 			}
 		}
-	*/ // Instantiate ball 
+
+		public List<GameObject> GetTouchedGrounds()
+		{
+			return touchedGrounds;
+		}
+
+
+		/*	 private void OnBallInstantiate()
+			{
+				if (ballPrefab!=null)
+				{
+					if (_ballInstantiated!=null)
+					{
+						Destroy(_ballInstantiated);
+					}
+
+					_ballInstantiated = Instantiate(ballPrefab, new Vector3(-4f, 0.9f, -4f), Quaternion.identity);
+				}
+			}
+		*/ // Instantiate ball 
 	}
 }
 

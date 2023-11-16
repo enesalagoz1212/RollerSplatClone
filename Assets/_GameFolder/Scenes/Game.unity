@@ -210,7 +210,6 @@ Transform:
   - {fileID: 1470769799}
   - {fileID: 2067540673}
   - {fileID: 729998217}
-  - {fileID: 1040495453}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -230,6 +229,7 @@ MonoBehaviour:
   ballMovement: {fileID: 1180681837}
   uiManager: {fileID: 36309163}
   inputManager: {fileID: 1639755962}
+  paintController: {fileID: 1180681840}
 --- !u!1 &406347885
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,55 +519,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1040495452
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1040495453}
-  - component: {fileID: 1040495454}
-  m_Layer: 0
-  m_Name: BallMovement1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1040495453
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040495452}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 39522522}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1040495454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040495452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3f119ce8a1b416499ac418c31e2be78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallsLayer:
-    serializedVersion: 2
-    m_Bits: 2147483647
-  moveDuration: 0.3
-  move: 3
 --- !u!1 &1076807220
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,8 +644,9 @@ GameObject:
   - component: {fileID: 1180681834}
   - component: {fileID: 1180681833}
   - component: {fileID: 1180681838}
-  - component: {fileID: 1180681837}
   - component: {fileID: 1180681839}
+  - component: {fileID: 1180681837}
+  - component: {fileID: 1180681840}
   m_Layer: 0
   m_Name: BallMovement
   m_TagString: Ball
@@ -811,8 +763,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.25, y: 1, z: 1.25}
+  m_Size: {x: 1.2, y: 1.2, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1180681840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180681831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe143ecdaac214145a5871844ded0838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ballRenderer: {fileID: 1180681833}
 --- !u!1 &1198167340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503d891d1ec6dde418bf739fdb75e82d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 1.5
 --- !u!1 &2053096076
 GameObject:
   m_ObjectHideFlags: 0

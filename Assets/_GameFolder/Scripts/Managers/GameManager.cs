@@ -13,6 +13,7 @@ namespace RollerSplatClone.Managers
 		Playing = 2,
 		Reset = 3,
 		End = 4,
+		NextLevel=5,
 	}
 
 	public class GameManager : MonoBehaviour
@@ -34,7 +35,6 @@ namespace RollerSplatClone.Managers
 
 		public static Action OnMenuOpen;
 		public static Action OnGameStarted;
-		public static Action OnGamePlaying;
 		public static Action<bool> OnGameEnd;
 		public static Action OnGameReset;
 		public static Action OnGameLevel;
@@ -44,6 +44,7 @@ namespace RollerSplatClone.Managers
 		[SerializeField] private BallMovement ballMovement;
 		[SerializeField] private UiManager uiManager;
 		[SerializeField] private InputManager inputManager;
+		[SerializeField] private PaintController paintController;
 		private void Start()
 		{
 			GameInitialize();
@@ -53,8 +54,9 @@ namespace RollerSplatClone.Managers
 		{
 			uiManager.Initialize(this, ballMovement, inputManager);
 			inputManager.Initialize(ballMovement);
-			ballMovement.Initialize();
+			ballMovement.Initialize(paintController,levelManager);
 			levelManager.Initialize(ballMovement);
+			paintController.Initialize(ballMovement);
 
 			ChangeState(GameState.Menu);
 		}
@@ -64,6 +66,20 @@ namespace RollerSplatClone.Managers
 			ChangeState(GameState.Start);
 		}
 
+		public  void ResetGame()
+		{
+			ChangeState(GameState.Reset);
+		}
+
+		public void NextLevel()
+		{
+			ChangeState(GameState.NextLevel);
+		}
+
+		public void GameEnd(bool isSuccessful)
+		{
+			ChangeState(GameState.End);
+		}
 		public void ChangeState(GameState gameState)
 		{
 			GameState = gameState;
@@ -83,6 +99,8 @@ namespace RollerSplatClone.Managers
 				case GameState.Reset:
 					break;
 				case GameState.End:
+					break;
+				case GameState.NextLevel:
 					break;
 				default:
 					break;

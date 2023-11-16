@@ -12,6 +12,10 @@ namespace RollerSplatClone.ScritableObjects
 
         [Header("Level Prefab")]
         public GameObject levelPrefab;
+
+        public int numberOffGroundToBePainted;
+
+        public int paintedGroundCount;
     }
 }
 

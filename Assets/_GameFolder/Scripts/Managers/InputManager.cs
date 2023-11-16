@@ -14,8 +14,6 @@ namespace RollerSplatClone.Managers
 
 		public bool isInputEnabled { get; private set; } = true;
 
-		public float horizontalSpeed;
-
 		private bool _isFirstDraging = true;
 		private bool _isDragging;
 		private Vector3 _firstTouchPosition;
@@ -105,8 +103,6 @@ namespace RollerSplatClone.Managers
 			DOVirtual.DelayedCall(0.3f, () =>
 			{
 				_isDragging = false;
-
-				Debug.Log(_lastTouchPosition - _firstTouchPosition);
 			});
 		}
 
