@@ -32,7 +32,7 @@ namespace RollerSplatClone.Controllers
 		public Ease move;
 
 		private List<GameObject> touchedGrounds = new List<GameObject>();
-		public void Initialize(PaintController paintController,LevelManager levelManager)
+		public void Initialize(PaintController paintController, LevelManager levelManager)
 		{
 			_paintController = paintController;
 			_levelManager = levelManager;
@@ -46,12 +46,14 @@ namespace RollerSplatClone.Controllers
 		{
 			GameManager.OnMenuOpen += OnGameMenu;
 			GameManager.OnGameStarted += OnGameStart;
+			GameManager.OnGameReset += OnGameReset;
 		}
 
 		private void OnDisable()
 		{
 			GameManager.OnMenuOpen -= OnGameMenu;
 			GameManager.OnGameStarted -= OnGameStart;
+			GameManager.OnGameReset -= OnGameReset;
 
 		}
 
@@ -65,10 +67,20 @@ namespace RollerSplatClone.Controllers
 			_canMove = true;
 		}
 
-		void Update()
+		private void OnGameReset()
 		{
+			ResetBallPosition();
 
+			touchedGrounds.Clear();
+			Debug.Log(touchedGrounds);
 		}
+
+		private void ResetBallPosition()
+		{
+			Vector3 startPosition = _levelManager.GetLevelData().ballStartPosition;
+			transform.position = startPosition;
+		}
+
 
 		public void ChangeState(PlayerState playerState)
 		{
@@ -135,10 +147,12 @@ namespace RollerSplatClone.Controllers
 			}
 		}
 
+
 		private void OnTriggerEnter(Collider other)
 		{
 			if (other.CompareTag("Ground"))
 			{
+
 				Renderer groundRenderer = other.GetComponent<Renderer>();
 
 				if (groundRenderer != null)
@@ -148,20 +162,26 @@ namespace RollerSplatClone.Controllers
 
 					if (groundColor != ballColor)
 					{
-						touchedGrounds.Add(other.gameObject);
-						Debug.Log($"Total Grounds: {touchedGrounds.Count}");
-
-						DOVirtual.DelayedCall(0.1f, () =>
+						if (!touchedGrounds.Contains(other.gameObject))
 						{
-							groundRenderer.material.color = ballColor;
+							Debug.Log("kacdefa");
+							touchedGrounds.Add(other.gameObject);
+							Debug.Log($"Total Grounds: {touchedGrounds.Count}");
 
-							_levelManager.GetLevelData().paintedGroundCount++;
-							if (_levelManager.GetLevelData().paintedGroundCount >= _levelManager.GetLevelData().numberOffGroundToBePainted)
+							DOVirtual.DelayedCall(0.1f, () =>
 							{
+								groundRenderer.material.color = ballColor;
+							});
+
+							int addToGroundList = _levelManager.GetLevelData().addToGroundList;
+
+							if (touchedGrounds.Count >= addToGroundList)
+							{
+								Debug.Log("Level basarili");
 								GameManager.Instance.GameEnd(true);
-								Debug.Log("Oyun basarili");
 							}
-						});
+						}
+
 					}
 				}
 			}

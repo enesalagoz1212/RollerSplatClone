@@ -280,6 +280,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a81b32157a507634fa8290b56468795d, type: 2}
   - {fileID: 11400000, guid: 168d707f6d473b24ab636d36a7815122, type: 2}
   - {fileID: 11400000, guid: d798e1c1cba849744870a2a16a290f5b, type: 2}
+  - {fileID: 11400000, guid: 081b37a6a8cc0eb458c19e88455fa52c, type: 2}
+  - {fileID: 11400000, guid: 9bd4941456998254e9608802e942ef2a, type: 2}
+  - {fileID: 11400000, guid: 17dd2037389687b428d3fc94f3a02d73, type: 2}
+  - {fileID: 11400000, guid: 268112d396a92494699f0e4ebc60a46b, type: 2}
   levelContainer: {fileID: 764586964}
 --- !u!1 &729998216
 GameObject:

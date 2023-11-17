@@ -35,30 +35,30 @@ namespace RollerSplatClone.Managers
 		private void OnEnable()
 		{
 			GameManager.OnMenuOpen += OnGameMenu;
+			GameManager.OnGameLevel += OnNextLevel;
 		}
 
 		private void OnDisable()
 		{
 			GameManager.OnMenuOpen -= OnGameMenu;
+			GameManager.OnGameLevel -= OnNextLevel;
 			
 		}
 
 		private void OnGameMenu()
 		{
 			int currentLevelData = BallPrefsManager.CurrentLevel;
-			int moodCurrentLevel = currentLevelData % levels.Length;
-			if (moodCurrentLevel == 0)
-			{
-				moodCurrentLevel = levels.Length;
-			}
-			_currentLevelData = levels[moodCurrentLevel - 1];
+			_currentLevelData = levels[currentLevelData - 1];
 
 			CreateNextLevel();
-			levelContainer.gameObject.SetActive(true);
-
-		
+			levelContainer.gameObject.SetActive(true);		
 		}
 
+		private void OnNextLevel()
+		{
+			CreateNextLevel();
+			GameManager.Instance.ChangeState(GameState.Menu);
+		}
 	
 		public LevelScriptableObject GetLevelData()
 		{
@@ -73,15 +73,9 @@ namespace RollerSplatClone.Managers
 			}
 
 			int levelIndex = BallPrefsManager.CurrentLevel;
-			int mood = levelIndex % levels.Length;
 
-			if (mood == 0)
-			{
-				mood = levels.Length;
-			}
-
-			LevelScriptableObject currentLevelData = levels[mood - 1];
-			GameObject nextLevelPrefab = currentLevelData.levelPrefab;
+			_currentLevelData = levels[levelIndex - 1];
+			GameObject nextLevelPrefab = _currentLevelData.levelPrefab;
 			_currentLevel = Instantiate(nextLevelPrefab, levelContainer.transform);
 		}
 

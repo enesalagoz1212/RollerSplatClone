@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using RollerSplatClone.Controllers;
+using DG.Tweening;
 
 namespace RollerSplatClone.Managers
 {
@@ -21,6 +22,7 @@ namespace RollerSplatClone.Managers
 		public static GameManager Instance { get; private set; }
 		public GameState GameState { get; set; }
 
+		private bool _isSuccessful;
 		private void Awake()
 		{
 			if (Instance != null && Instance != this)
@@ -78,6 +80,7 @@ namespace RollerSplatClone.Managers
 
 		public void GameEnd(bool isSuccessful)
 		{
+			_isSuccessful = isSuccessful;
 			ChangeState(GameState.End);
 		}
 		public void ChangeState(GameState gameState)
@@ -97,10 +100,23 @@ namespace RollerSplatClone.Managers
 				case GameState.Playing:
 					break;
 				case GameState.Reset:
+					OnGameReset?.Invoke();
 					break;
 				case GameState.End:
+					if (_isSuccessful)
+					{
+						OnGameEnd?.Invoke(true);
+						DOVirtual.DelayedCall(1.5f, () =>
+						{
+							ResetGame();
+						});
+
+						NextLevel();
+					}
 					break;
 				case GameState.NextLevel:
+					OnGameLevel?.Invoke();
+					BallPrefsManager.CurrentLevel++;
 					break;
 				default:
 					break;
