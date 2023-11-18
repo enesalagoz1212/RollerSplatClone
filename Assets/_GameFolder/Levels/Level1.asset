@@ -15,4 +15,4 @@ MonoBehaviour:
   ballStartPosition: {x: -4, y: 0.9, z: -4}
   levelPrefab: {fileID: 5645520574974503246, guid: ecbcabdc94ce7e6408e33712ddce4fb5,
     type: 3}
-  numberOffGroundToBePainted: 55
+  addToGroundList: 55

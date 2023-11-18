@@ -35,14 +35,11 @@ namespace RollerSplatClone.Managers
 		private void OnEnable()
 		{
 			GameManager.OnMenuOpen += OnGameMenu;
-			GameManager.OnGameLevel += OnNextLevel;
 		}
 
 		private void OnDisable()
 		{
-			GameManager.OnMenuOpen -= OnGameMenu;
-			GameManager.OnGameLevel -= OnNextLevel;
-			
+			GameManager.OnMenuOpen -= OnGameMenu;			
 		}
 
 		private void OnGameMenu()
@@ -54,12 +51,6 @@ namespace RollerSplatClone.Managers
 			levelContainer.gameObject.SetActive(true);		
 		}
 
-		private void OnNextLevel()
-		{
-			CreateNextLevel();
-			GameManager.Instance.ChangeState(GameState.Menu);
-		}
-	
 		public LevelScriptableObject GetLevelData()
 		{
 			return _currentLevelData;

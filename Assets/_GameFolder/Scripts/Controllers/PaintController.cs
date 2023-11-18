@@ -30,6 +30,9 @@ namespace RollerSplatClone.Controllers
 		{
 			Color ballColor = GetRandomColor();
 			ColorTheBall(ballColor);
+
+			UiManager.Instance.EndCanvas.UpdateEndImageColor(ballColor);
+
 		}
 
 

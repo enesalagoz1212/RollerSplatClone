@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6046b13d68302499c30be5d1e4518d, type: 3}
   m_Name: Level8
   m_EditorClassIdentifier: 
-  ballStartPosition: {x: 0, y: 0, z: 0}
-  levelPrefab: {fileID: 0}
-  numberOffGroundToBePainted: 38
-  paintedGroundCount: 0
+  ballStartPosition: {x: -4, y: 0.9, z: -4}
+  levelPrefab: {fileID: 6299446391140749282, guid: c2eeae69b3a7e514a9baf73c641fe820,
+    type: 3}
+  addToGroundList: 38

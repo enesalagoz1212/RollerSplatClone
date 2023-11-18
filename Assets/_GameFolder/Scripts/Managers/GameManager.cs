@@ -14,7 +14,6 @@ namespace RollerSplatClone.Managers
 		Playing = 2,
 		Reset = 3,
 		End = 4,
-		NextLevel=5,
 	}
 
 	public class GameManager : MonoBehaviour
@@ -39,7 +38,6 @@ namespace RollerSplatClone.Managers
 		public static Action OnGameStarted;
 		public static Action<bool> OnGameEnd;
 		public static Action OnGameReset;
-		public static Action OnGameLevel;
 		public static Action<int> OnDiamondScored;
 
 		[SerializeField] private LevelManager levelManager;
@@ -73,11 +71,6 @@ namespace RollerSplatClone.Managers
 			ChangeState(GameState.Reset);
 		}
 
-		public void NextLevel()
-		{
-			ChangeState(GameState.NextLevel);
-		}
-
 		public void GameEnd(bool isSuccessful)
 		{
 			_isSuccessful = isSuccessful;
@@ -106,17 +99,14 @@ namespace RollerSplatClone.Managers
 					if (_isSuccessful)
 					{
 						OnGameEnd?.Invoke(true);
-						DOVirtual.DelayedCall(1.5f, () =>
+						BallPrefsManager.CurrentLevel++;
+
+						DOVirtual.DelayedCall(2f, () =>
 						{
 							ResetGame();
-						});
-
-						NextLevel();
+							ChangeState(GameState.Menu);
+						});				
 					}
-					break;
-				case GameState.NextLevel:
-					OnGameLevel?.Invoke();
-					BallPrefsManager.CurrentLevel++;
 					break;
 				default:
 					break;

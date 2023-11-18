@@ -10,9 +10,12 @@ namespace RollerSplatClone.Managers
 	{
 		public static UiManager Instance { get; private set; }
 
+		public EndCanvas EndCanvas => endCanvas;
+
 		[SerializeField] private MenuCanvas menuCanvas;
 		[SerializeField] private GameCanvas gameCanvas;
 		[SerializeField] private InputCanvas inputCanvas;
+		[SerializeField] private EndCanvas endCanvas;
 
 		private void Awake()
 		{
@@ -31,6 +34,7 @@ namespace RollerSplatClone.Managers
 			menuCanvas.Initialize(gameManager);
 			gameCanvas.Initialize();
 			inputCanvas.Initialize(inputManager);
+			endCanvas.Initialize();
 		}
 
 	}
