@@ -17,6 +17,7 @@ namespace RollerSplatClone.Managers
 		[SerializeField] private InputCanvas inputCanvas;
 		[SerializeField] private EndCanvas endCanvas;
 
+
 		private void Awake()
 		{
 			if (Instance == null)
