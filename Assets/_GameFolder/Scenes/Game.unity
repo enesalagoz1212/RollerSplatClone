@@ -530,7 +530,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelContainer: {fileID: 764586964}
-  _levelTexture: {fileID: 2800000, guid: 4b50d019266e50d40a77807cb9cea391, type: 3}
+  _levelTextures:
+  - {fileID: 2800000, guid: 4b50d019266e50d40a77807cb9cea391, type: 3}
+  - {fileID: 2800000, guid: a1c773692a5ba8143b8a6c81a9ffafbe, type: 3}
+  - {fileID: 2800000, guid: fb50aa789178b534d86ef232dc2db1a7, type: 3}
+  - {fileID: 2800000, guid: 493d89dad3535e6419a99472f5fab84b, type: 3}
+  - {fileID: 2800000, guid: bdacdb829ad0a4b4d9692a5d34625ac4, type: 3}
   prefabWall: {fileID: 588922172449519670, guid: 2a5a4c2bfb3dd27499297b6a7e6db08e,
     type: 3}
   prefabGround: {fileID: 5472398954372105081, guid: d9ff676d6236e814893ad1f1f08ed58a,

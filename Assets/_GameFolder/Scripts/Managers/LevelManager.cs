@@ -17,7 +17,7 @@ namespace RollerSplatClone.Managers
 		//private GameObject _currentLevel;
 
 		[Header("Level texture")]
-		[SerializeField] private Texture2D _levelTexture;
+		[SerializeField] private Texture2D[] _levelTextures;
 
 		[Header("Tiles Prefabs")]
 		[SerializeField] private GameObject prefabWall;
@@ -27,6 +27,9 @@ namespace RollerSplatClone.Managers
 		private Color colorGround = Color.black;
 
 		private float unitPerPixel;
+
+		private int spawnedGroundCount;
+		private int _currentLevelIndex;
 		public void Initialize(BallMovement ballMovement)
 		{
 			_ballMovement = ballMovement;
@@ -42,18 +45,20 @@ namespace RollerSplatClone.Managers
 			{
 				Instance = this;
 			}
-
+			_currentLevelIndex = 0;
 			Generate();
 		}
 
 		private void OnEnable()
 		{
 			GameManager.OnMenuOpen += OnGameMenu;
+			GameManager.OnGameEnd += OnGameEnd;
 		}
 
 		private void OnDisable()
 		{
 			GameManager.OnMenuOpen -= OnGameMenu;			
+			GameManager.OnGameEnd -= OnGameEnd;
 		}
 
 		
@@ -62,8 +67,11 @@ namespace RollerSplatClone.Managers
 			unitPerPixel = prefabWall.transform.lossyScale.x;
 			float halfUnitPerPixel = unitPerPixel;
 
-			float width = _levelTexture.width;
-			float height = _levelTexture.height;
+			float width = _levelTextures[_currentLevelIndex].width;
+			float height = _levelTextures[_currentLevelIndex].height;
+
+
+			spawnedGroundCount = 0;
 
 			Vector3 offset = (new Vector3(width/2 , 0f, height/2 ) * unitPerPixel)
 							 - new Vector3(halfUnitPerPixel, 0f, halfUnitPerPixel);
@@ -73,7 +81,7 @@ namespace RollerSplatClone.Managers
 				for (int y = 0; y < height; y++)
 				{
 					//Get pixel color :
-					Color pixelColor = _levelTexture.GetPixel(x, y);
+					Color pixelColor = _levelTextures[_currentLevelIndex].GetPixel(x, y);
 
 					Vector3 spawnPos = ((new Vector3(x, 0f, y) * unitPerPixel) - offset);
 
@@ -84,6 +92,7 @@ namespace RollerSplatClone.Managers
 					else if (pixelColor == colorGround)
 					{
 						Spawn(prefabGround, spawnPos);
+						spawnedGroundCount++;
 					}
 				}
 			}
@@ -100,13 +109,28 @@ namespace RollerSplatClone.Managers
 
 		}
 
+		public int GetSpawnedGroundCount()
+		{
+			return spawnedGroundCount;
+		}
 
+		private void OnGameEnd(bool isSuccessful)
+		{
+			if (isSuccessful)
+			{
+				ClearLevel();
+				_currentLevelIndex++;
+				Generate();
+			}
+		}
 
-
-
-
-
-
+		private void ClearLevel()
+		{
+			foreach (Transform child in levelContainer.transform)
+			{
+				Destroy(child.gameObject);
+			}
+		}
 
 
 		private void OnGameMenu()

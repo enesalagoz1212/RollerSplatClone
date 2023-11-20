@@ -31,6 +31,8 @@ namespace RollerSplatClone.Controllers
 		public float moveDuration;
 		public Ease move;
 
+		private Vector3 initialPosition;
+
 		private List<GameObject> touchedGrounds = new List<GameObject>();
 		public void Initialize(PaintController paintController, LevelManager levelManager)
 		{
@@ -40,7 +42,7 @@ namespace RollerSplatClone.Controllers
 
 		private void Awake()
 		{
-
+			initialPosition = transform.position;
 		}
 		private void OnEnable()
 		{
@@ -77,8 +79,7 @@ namespace RollerSplatClone.Controllers
 
 		private void ResetBallPosition()
 		{
-		//	Vector3 startPosition = _levelManager.GetLevelData().ballStartPosition;
-		//	transform.position = startPosition;
+			transform.position = initialPosition;
 		}
 
 
@@ -173,13 +174,13 @@ namespace RollerSplatClone.Controllers
 								groundRenderer.material.color = ballColor;
 							});
 
-							//int addToGroundList = _levelManager.GetLevelData().addToGroundList;
+							int spawnedGroundCount = _levelManager.GetSpawnedGroundCount();
 
-							//if (touchedGrounds.Count >= addToGroundList)
-							//{
-							//	Debug.Log("Level basarili");
-							//	GameManager.Instance.GameEnd(true);
-							//}
+							if (touchedGrounds.Count >= spawnedGroundCount)
+							{
+								Debug.Log("Level basarili");
+								GameManager.Instance.GameEnd(true);
+							}
 						}
 
 					}
