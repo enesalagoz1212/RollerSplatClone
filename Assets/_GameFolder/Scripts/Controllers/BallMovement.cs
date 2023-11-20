@@ -77,8 +77,8 @@ namespace RollerSplatClone.Controllers
 
 		private void ResetBallPosition()
 		{
-			Vector3 startPosition = _levelManager.GetLevelData().ballStartPosition;
-			transform.position = startPosition;
+		//	Vector3 startPosition = _levelManager.GetLevelData().ballStartPosition;
+		//	transform.position = startPosition;
 		}
 
 
@@ -173,13 +173,13 @@ namespace RollerSplatClone.Controllers
 								groundRenderer.material.color = ballColor;
 							});
 
-							int addToGroundList = _levelManager.GetLevelData().addToGroundList;
+							//int addToGroundList = _levelManager.GetLevelData().addToGroundList;
 
-							if (touchedGrounds.Count >= addToGroundList)
-							{
-								Debug.Log("Level basarili");
-								GameManager.Instance.GameEnd(true);
-							}
+							//if (touchedGrounds.Count >= addToGroundList)
+							//{
+							//	Debug.Log("Level basarili");
+							//	GameManager.Instance.GameEnd(true);
+							//}
 						}
 
 					}
