@@ -10,9 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d6046b13d68302499c30be5d1e4518d, type: 3}
-  m_Name: Level1
+  m_Name: Level_8
   m_EditorClassIdentifier: 
-  ballStartPosition: {x: -4, y: 0.9, z: -4}
-  levelPrefab: {fileID: 5645520574974503246, guid: ecbcabdc94ce7e6408e33712ddce4fb5,
-    type: 3}
-  addToGroundList: 55
+  levelTexture: {fileID: 2800000, guid: 61c665b9b15534c41bc3edec815b1b18, type: 3}

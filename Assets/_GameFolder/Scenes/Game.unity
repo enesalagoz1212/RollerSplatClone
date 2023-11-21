@@ -529,13 +529,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2714a1860698d3489a1dcf02822579a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levels:
+  - {fileID: 11400000, guid: 65627513c6c94824d8eea1f29a02a8a0, type: 2}
+  - {fileID: 11400000, guid: da8428a4cb9e2994aa07de7b8c714ba6, type: 2}
+  - {fileID: 11400000, guid: b2b29b20f6019634badfd413e1d3228d, type: 2}
+  - {fileID: 11400000, guid: c2510914132d95745b64ddabcec61892, type: 2}
+  - {fileID: 11400000, guid: 8ad78ee3c3cc15a47a9522207cf5e24d, type: 2}
+  - {fileID: 11400000, guid: b2f62765680d55947ad7ab80e958d6ae, type: 2}
+  - {fileID: 11400000, guid: d3275efd89c51fa47be7cc5683476b3a, type: 2}
+  - {fileID: 11400000, guid: 4e160fda8c1892a4ca4bdb018e2753c4, type: 2}
+  - {fileID: 11400000, guid: 290d5a847398acd4d8cabe5167f40d7d, type: 2}
+  - {fileID: 11400000, guid: ed232f0119abcf94ca89ee0c6e1cee32, type: 2}
+  - {fileID: 11400000, guid: 0a29465efd166d74f8e09c6c4358cf91, type: 2}
+  - {fileID: 11400000, guid: cc713d5acc315734391ee629b6acf391, type: 2}
+  - {fileID: 11400000, guid: 04b5880376bb3594e9f8cbdc40657a50, type: 2}
+  - {fileID: 11400000, guid: 5f36a437035c2844f8f597e32f8dabe2, type: 2}
+  - {fileID: 11400000, guid: 1335b9caac468b242b8e68545e784425, type: 2}
+  - {fileID: 11400000, guid: e945d9a2ffbfd80499c37eb1aa374cf5, type: 2}
+  - {fileID: 11400000, guid: a5ae1d354b4381c458c961708635ebab, type: 2}
   levelContainer: {fileID: 764586964}
-  _levelTextures:
-  - {fileID: 2800000, guid: 4b50d019266e50d40a77807cb9cea391, type: 3}
-  - {fileID: 2800000, guid: a1c773692a5ba8143b8a6c81a9ffafbe, type: 3}
-  - {fileID: 2800000, guid: fb50aa789178b534d86ef232dc2db1a7, type: 3}
-  - {fileID: 2800000, guid: 493d89dad3535e6419a99472f5fab84b, type: 3}
-  - {fileID: 2800000, guid: bdacdb829ad0a4b4d9692a5d34625ac4, type: 3}
   prefabWall: {fileID: 588922172449519670, guid: 2a5a4c2bfb3dd27499297b6a7e6db08e,
     type: 3}
   prefabGround: {fileID: 5472398954372105081, guid: d9ff676d6236e814893ad1f1f08ed58a,

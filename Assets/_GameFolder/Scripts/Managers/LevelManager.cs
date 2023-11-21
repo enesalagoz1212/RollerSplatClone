@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using RollerSplatClone.Controllers;
 using RollerSplatClone.ScritableObjects;
+using DG.Tweening;
 
 namespace RollerSplatClone.Managers
 {
-    public class LevelManager : MonoBehaviour
-    {
-        public static LevelManager Instance { get; private set; }
+	public class LevelManager : MonoBehaviour
+	{
+		public static LevelManager Instance { get; private set; }
 		private BallMovement _ballMovement;
-		//public LevelScriptableObject[] levels;
-		//private LevelScriptableObject _currentLevelData;
-
+		private Level _currentLevelData;
+		public Level[] levels;
 		public GameObject levelContainer;
-		//private GameObject _currentLevel;
 
-		[Header("Level texture")]
-		[SerializeField] private Texture2D[] _levelTextures;
+		//[Header("Level texture")]
+		//private Texture2D _levelTexture;
 
 		[Header("Tiles Prefabs")]
 		[SerializeField] private GameObject prefabWall;
@@ -57,23 +56,23 @@ namespace RollerSplatClone.Managers
 
 		private void OnDisable()
 		{
-			GameManager.OnMenuOpen -= OnGameMenu;			
+			GameManager.OnMenuOpen -= OnGameMenu;
 			GameManager.OnGameEnd -= OnGameEnd;
 		}
 
-		
+
 		private void Generate()
 		{
 			unitPerPixel = prefabWall.transform.lossyScale.x;
 			float halfUnitPerPixel = unitPerPixel;
 
-			float width = _levelTextures[_currentLevelIndex].width;
-			float height = _levelTextures[_currentLevelIndex].height;
+			float width = levels[_currentLevelIndex].levelTexture.width;
+			float height = levels[_currentLevelIndex].levelTexture.height;
 
 
 			spawnedGroundCount = 0;
 
-			Vector3 offset = (new Vector3(width/2 , 0f, height/2 ) * unitPerPixel)
+			Vector3 offset = (new Vector3(width / 2, 0f, height / 2) * unitPerPixel)
 							 - new Vector3(halfUnitPerPixel, 0f, halfUnitPerPixel);
 
 			for (int x = 0; x < width; x++)
@@ -81,7 +80,7 @@ namespace RollerSplatClone.Managers
 				for (int y = 0; y < height; y++)
 				{
 					//Get pixel color :
-					Color pixelColor = _levelTextures[_currentLevelIndex].GetPixel(x, y);
+					Color pixelColor = levels[_currentLevelIndex].levelTexture.GetPixel(x, y);
 
 					Vector3 spawnPos = ((new Vector3(x, 0f, y) * unitPerPixel) - offset);
 
@@ -118,9 +117,14 @@ namespace RollerSplatClone.Managers
 		{
 			if (isSuccessful)
 			{
-				ClearLevel();
 				_currentLevelIndex++;
-				Generate();
+				DOVirtual.DelayedCall(2f, () =>
+				{
+				    ClearLevel();
+					Generate();
+
+				});
+
 			}
 		}
 
@@ -135,17 +139,13 @@ namespace RollerSplatClone.Managers
 
 		private void OnGameMenu()
 		{
-		//	int currentLevelData = BallPrefsManager.CurrentLevel;
-		//	_currentLevelData = levels[currentLevelData - 1];
 
-		//	CreateNextLevel();
-		//	levelContainer.gameObject.SetActive(true);		
 		}
 
-		//public LevelScriptableObject GetLevelData()
-		//{
-		//	return _currentLevelData;
-		//}
+		public Level GetLevelData()
+		{
+			return _currentLevelData;
+		}
 
 		//private void CreateNextLevel()
 		//{
@@ -161,7 +161,7 @@ namespace RollerSplatClone.Managers
 		//	_currentLevel = Instantiate(nextLevelPrefab, levelContainer.transform);
 		//}
 
-		
+
 	}
 }
 
