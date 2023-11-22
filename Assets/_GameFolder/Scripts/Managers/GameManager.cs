@@ -45,6 +45,7 @@ namespace RollerSplatClone.Managers
 		[SerializeField] private UiManager uiManager;
 		[SerializeField] private InputManager inputManager;
 		[SerializeField] private PaintController paintController;
+		[SerializeField] private CameraController cameraController;
 		private void Start()
 		{
 			GameInitialize();
@@ -57,6 +58,7 @@ namespace RollerSplatClone.Managers
 			ballMovement.Initialize(paintController,levelManager);
 			levelManager.Initialize(ballMovement);
 			paintController.Initialize(ballMovement);
+			cameraController.Initialize(levelManager);
 
 			ChangeState(GameState.Menu);
 		}

@@ -31,8 +31,6 @@ namespace RollerSplatClone.Controllers
 		public float moveDuration;
 		public Ease move;
 
-		private Vector3 initialPosition;
-
 		private List<GameObject> touchedGrounds = new List<GameObject>();
 		public void Initialize(PaintController paintController, LevelManager levelManager)
 		{
@@ -42,7 +40,7 @@ namespace RollerSplatClone.Controllers
 
 		private void Awake()
 		{
-			initialPosition = transform.position;
+			
 		}
 		private void OnEnable()
 		{
@@ -74,12 +72,12 @@ namespace RollerSplatClone.Controllers
 			ResetBallPosition();
 
 			touchedGrounds.Clear();
-			Debug.Log(touchedGrounds);
 		}
 
 		private void ResetBallPosition()
 		{
-			transform.position = initialPosition;
+			Vector3 bottomLeftGroundPosition = _levelManager.GetBottomLeftGroundPosition();
+			transform.position = new Vector3(bottomLeftGroundPosition.x, transform.position.y, bottomLeftGroundPosition.z);
 		}
 
 
@@ -165,7 +163,6 @@ namespace RollerSplatClone.Controllers
 					{
 						if (!touchedGrounds.Contains(other.gameObject))
 						{
-							Debug.Log("kacdefa");
 							touchedGrounds.Add(other.gameObject);
 							Debug.Log($"Total Grounds: {touchedGrounds.Count}");
 

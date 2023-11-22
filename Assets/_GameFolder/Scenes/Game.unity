@@ -349,6 +349,7 @@ MonoBehaviour:
   uiManager: {fileID: 36309163}
   inputManager: {fileID: 1639755962}
   paintController: {fileID: 1180681840}
+  cameraController: {fileID: 1470769801}
 --- !u!1 &94751920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1447,6 +1448,7 @@ GameObject:
   - component: {fileID: 1470769798}
   - component: {fileID: 1470769797}
   - component: {fileID: 1470769800}
+  - component: {fileID: 1470769801}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1471,8 +1473,8 @@ Camera:
   m_GameObject: {fileID: 1470769796}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.47009614, g: 0.7169812, b: 0.71470344, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1513,7 +1515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470769796}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 1, y: 21.66, z: -10.11}
+  m_LocalPosition: {x: 0.57, y: 16.6, z: -7.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1553,6 +1555,19 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1470769801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470769796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40010cea839f8d43b98ae61a7a25bbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraDistance: 10
 --- !u!1 &1604116577
 GameObject:
   m_ObjectHideFlags: 0

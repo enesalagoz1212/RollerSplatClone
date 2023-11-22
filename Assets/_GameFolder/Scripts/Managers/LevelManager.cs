@@ -15,8 +15,6 @@ namespace RollerSplatClone.Managers
 		public Level[] levels;
 		public GameObject levelContainer;
 
-		//[Header("Level texture")]
-		//private Texture2D _levelTexture;
 
 		[Header("Tiles Prefabs")]
 		[SerializeField] private GameObject prefabWall;
@@ -29,6 +27,13 @@ namespace RollerSplatClone.Managers
 
 		private int spawnedGroundCount;
 		private int _currentLevelIndex;
+
+		private List<Transform> spawnedGroundList = new List<Transform>();
+		private Vector3 bottomLeftGroundPosition;
+
+		private List<Transform> spawnedWallList = new List<Transform>();
+		private Transform bottomLeftWall;
+		private Transform bottomRightWall;
 		public void Initialize(BallMovement ballMovement)
 		{
 			_ballMovement = ballMovement;
@@ -71,6 +76,8 @@ namespace RollerSplatClone.Managers
 
 
 			spawnedGroundCount = 0;
+			spawnedGroundList.Clear();
+			bottomLeftGroundPosition = Vector3.zero;
 
 			Vector3 offset = (new Vector3(width / 2, 0f, height / 2) * unitPerPixel)
 							 - new Vector3(halfUnitPerPixel, 0f, halfUnitPerPixel);
@@ -86,26 +93,50 @@ namespace RollerSplatClone.Managers
 
 					if (pixelColor == colorWall)
 					{
-						Spawn(prefabWall, spawnPos);
+						GameObject wallObj = Spawn(prefabWall, spawnPos);
+						spawnedWallList.Add(wallObj.transform);
 					}
 					else if (pixelColor == colorGround)
 					{
-						Spawn(prefabGround, spawnPos);
+						GameObject groundObj = Spawn(prefabGround, spawnPos);
+						spawnedGroundList.Add(groundObj.transform);
+
 						spawnedGroundCount++;
+
+						if (bottomLeftGroundPosition == Vector3.zero ||
+							groundObj.transform.position.x < bottomLeftGroundPosition.x ||
+							(groundObj.transform.position.x == bottomLeftGroundPosition.x &&
+							 groundObj.transform.position.z < bottomLeftGroundPosition.z))
+						{
+							bottomLeftGroundPosition = groundObj.transform.position;
+						}
 					}
 				}
 			}
+			
 		}
 
-		private void Spawn(GameObject prefab, Vector3 position)
+		private GameObject Spawn(GameObject prefab, Vector3 position)
 		{
-			//fix Y position:
 			position.y = prefab.transform.position.y;
-
 			GameObject obj = Instantiate(prefab, position, Quaternion.identity);
-
 			obj.transform.parent = levelContainer.transform;
+			return obj; 
+		}
 
+		public Vector3 GetBottomLeftGroundPosition()
+		{
+			return bottomLeftGroundPosition;
+		}
+
+		public Vector3 GetBottomLeftWallPosition()
+		{
+			return bottomLeftWall.position;
+		}
+
+		public Vector3 GetBottomRightWallPosition()
+		{
+			return bottomRightWall.position;
 		}
 
 		public int GetSpawnedGroundCount()
@@ -120,7 +151,7 @@ namespace RollerSplatClone.Managers
 				_currentLevelIndex++;
 				DOVirtual.DelayedCall(2f, () =>
 				{
-				    ClearLevel();
+					ClearLevel();
 					Generate();
 
 				});
@@ -146,21 +177,6 @@ namespace RollerSplatClone.Managers
 		{
 			return _currentLevelData;
 		}
-
-		//private void CreateNextLevel()
-		//{
-		//	if (_currentLevel!=null)
-		//	{
-		//		Destroy(_currentLevel);
-		//	}
-
-		//	int levelIndex = BallPrefsManager.CurrentLevel;
-
-		//	_currentLevelData = levels[levelIndex - 1];
-		//	GameObject nextLevelPrefab = _currentLevelData.levelPrefab;
-		//	_currentLevel = Instantiate(nextLevelPrefab, levelContainer.transform);
-		//}
-
 
 	}
 }
