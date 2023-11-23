@@ -19,6 +19,7 @@ namespace RollerSplatClone.Managers
 		[Header("Tiles Prefabs")]
 		[SerializeField] private GameObject prefabWall;
 		[SerializeField] private GameObject prefabGround;
+		[SerializeField] private GameObject prefabGold;
 
 		private Color colorWall = Color.white;
 		private Color colorGround = Color.black;
@@ -34,6 +35,8 @@ namespace RollerSplatClone.Managers
 		private List<Transform> spawnedWallList = new List<Transform>();
 		private Transform bottomLeftWall;
 		private Transform bottomRightWall;
+
+
 		public void Initialize(BallMovement ballMovement)
 		{
 			_ballMovement = ballMovement;
@@ -82,6 +85,8 @@ namespace RollerSplatClone.Managers
 			Vector3 offset = (new Vector3(width / 2, 0f, height / 2) * unitPerPixel)
 							 - new Vector3(halfUnitPerPixel, 0f, halfUnitPerPixel);
 
+			bool isBonusLevel = (_currentLevelIndex > 0 && _currentLevelIndex % 3 == 0);
+
 			for (int x = 0; x < width; x++)
 			{
 				for (int y = 0; y < height; y++)
@@ -109,11 +114,17 @@ namespace RollerSplatClone.Managers
 							 groundObj.transform.position.z < bottomLeftGroundPosition.z))
 						{
 							bottomLeftGroundPosition = groundObj.transform.position;
+						
 						}
+						if (isBonusLevel)
+						{
+							GameObject goldObj = Spawn(prefabGold, spawnPos);
+						}
+
 					}
 				}
 			}
-			
+
 		}
 
 		private GameObject Spawn(GameObject prefab, Vector3 position)
@@ -121,7 +132,7 @@ namespace RollerSplatClone.Managers
 			position.y = prefab.transform.position.y;
 			GameObject obj = Instantiate(prefab, position, Quaternion.identity);
 			obj.transform.parent = levelContainer.transform;
-			return obj; 
+			return obj;
 		}
 
 		public Vector3 GetBottomLeftGroundPosition()

@@ -12,6 +12,7 @@ namespace RollerSplatClone.Canvases
 
         public GameObject gamePanel;
         public TextMeshProUGUI gameLevelText;
+		public TextMeshProUGUI gameGoldScoreText;
 		public void Initialize()
 		{
 			
@@ -21,12 +22,14 @@ namespace RollerSplatClone.Canvases
 		{
 			GameManager.OnMenuOpen += OnGameMenu;
 			GameManager.OnGameEnd += OnGameEnd;
+			GameManager.OnGoldScored += OnGoldScored;
 		}
 
 		private void OnDisable()
 		{
 			GameManager.OnMenuOpen -= OnGameMenu;
 			GameManager.OnGameEnd -= OnGameEnd;
+			GameManager.OnGoldScored -= OnGoldScored;
 			
 		}
 
@@ -34,6 +37,7 @@ namespace RollerSplatClone.Canvases
 		{
 			gamePanel.gameObject.SetActive(true);
 			UpdateGameLevelText();
+			
 		}
 
 		private void OnGameEnd(bool isSuccessful)
@@ -43,10 +47,21 @@ namespace RollerSplatClone.Canvases
 				gamePanel.gameObject.SetActive(false);
 			}
 		}
+
+		private void OnGoldScored(int score)
+		{
+			UpdateGoldScoreText();
+		}
+
 		private void UpdateGameLevelText()
 		{
 			var gameLevel = BallPrefsManager.CurrentLevel;
 			gameLevelText.text = "LEVEL " + gameLevel.ToString();
+		}
+
+		private void UpdateGoldScoreText()
+		{
+			gameGoldScoreText.text = $"Gold: {GameManager.Instance.goldScore.ToString()}";
 		}
 	}
 }

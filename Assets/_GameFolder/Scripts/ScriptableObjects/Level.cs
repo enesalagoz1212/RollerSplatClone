@@ -9,6 +9,8 @@ namespace RollerSplatClone.ScritableObjects
     {
         public Texture2D levelTexture;
 
+        public bool isBonusLevel;
+
     }
 }
 

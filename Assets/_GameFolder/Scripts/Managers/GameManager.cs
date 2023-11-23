@@ -38,7 +38,7 @@ namespace RollerSplatClone.Managers
 		public static Action OnGameStarted;
 		public static Action<bool> OnGameEnd;
 		public static Action OnGameReset;
-		public static Action<int> OnDiamondScored;
+		public static Action<int> OnGoldScored;
 
 		[SerializeField] private LevelManager levelManager;
 		[SerializeField] private BallMovement ballMovement;
@@ -46,6 +46,8 @@ namespace RollerSplatClone.Managers
 		[SerializeField] private InputManager inputManager;
 		[SerializeField] private PaintController paintController;
 		[SerializeField] private CameraController cameraController;
+
+		public int goldScore;
 		private void Start()
 		{
 			GameInitialize();
@@ -113,6 +115,12 @@ namespace RollerSplatClone.Managers
 				default:
 					break;
 			}
+		}
+
+		public void IncreaseGoldScore(int score)
+		{
+			goldScore += score;
+			OnGoldScored?.Invoke(goldScore);
 		}
 	}
 }

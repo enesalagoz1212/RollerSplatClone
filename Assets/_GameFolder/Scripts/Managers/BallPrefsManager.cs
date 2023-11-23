@@ -7,8 +7,9 @@ namespace RollerSplatClone.Managers
     public class BallPrefsManager
     {
         private const string CurrentLevelKey = "CurrentLevel";
+		private const string GoldScorePrefsString = "DiamondScore";
 
-        public static int CurrentLevel
+		public static int CurrentLevel
 		{
 			get
 			{
@@ -20,6 +21,18 @@ namespace RollerSplatClone.Managers
 			}
 		}
 
-    }
+		public static int GoldScore
+		{
+			get
+			{
+				return PlayerPrefs.GetInt(GoldScorePrefsString);
+			}
+			set
+			{
+				PlayerPrefs.SetInt(GoldScorePrefsString, value);
+			}
+		}
+
+	}
 }
 
