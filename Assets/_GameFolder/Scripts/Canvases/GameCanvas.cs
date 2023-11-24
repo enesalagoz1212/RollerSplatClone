@@ -30,14 +30,14 @@ namespace RollerSplatClone.Canvases
 			GameManager.OnMenuOpen -= OnGameMenu;
 			GameManager.OnGameEnd -= OnGameEnd;
 			GameManager.OnGoldScored -= OnGoldScored;
-			
+		
 		}
 
 		private void OnGameMenu()
 		{
 			gamePanel.gameObject.SetActive(true);
 			UpdateGameLevelText();
-			
+			OnGoldScored(BallPrefsManager.GoldScore);
 		}
 
 		private void OnGameEnd(bool isSuccessful)
@@ -50,7 +50,7 @@ namespace RollerSplatClone.Canvases
 
 		private void OnGoldScored(int score)
 		{
-			UpdateGoldScoreText();
+			gameGoldScoreText.text = $"Gold: {BallPrefsManager.GoldScore.ToString()}";
 		}
 
 		private void UpdateGameLevelText()
@@ -59,10 +59,7 @@ namespace RollerSplatClone.Canvases
 			gameLevelText.text = "LEVEL " + gameLevel.ToString();
 		}
 
-		private void UpdateGoldScoreText()
-		{
-			gameGoldScoreText.text = $"Gold: {GameManager.Instance.goldScore.ToString()}";
-		}
+
 	}
 }
 

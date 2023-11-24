@@ -36,7 +36,6 @@ namespace RollerSplatClone.Managers
 		private Transform bottomLeftWall;
 		private Transform bottomRightWall;
 
-
 		public void Initialize(BallMovement ballMovement)
 		{
 			_ballMovement = ballMovement;
@@ -52,7 +51,7 @@ namespace RollerSplatClone.Managers
 			{
 				Instance = this;
 			}
-			_currentLevelIndex = 0;
+			_currentLevelIndex = BallPrefsManager.CurrentLevel;
 			Generate();
 		}
 
@@ -74,25 +73,24 @@ namespace RollerSplatClone.Managers
 			unitPerPixel = prefabWall.transform.lossyScale.x;
 			float halfUnitPerPixel = unitPerPixel;
 
-			float width = levels[_currentLevelIndex].levelTexture.width;
-			float height = levels[_currentLevelIndex].levelTexture.height;
+			float width = levels[_currentLevelIndex - 1].levelTexture.width;
+			float height = levels[_currentLevelIndex - 1].levelTexture.height;
 
 
 			spawnedGroundCount = 0;
 			spawnedGroundList.Clear();
 			bottomLeftGroundPosition = Vector3.zero;
 
-			Vector3 offset = (new Vector3(width / 2, 0f, height / 2) * unitPerPixel)
-							 - new Vector3(halfUnitPerPixel, 0f, halfUnitPerPixel);
+			Vector3 offset = (new Vector3(width / 2, 0f, height / 2) * unitPerPixel) - new Vector3(halfUnitPerPixel, 0f, halfUnitPerPixel);
 
-			bool isBonusLevel = (_currentLevelIndex > 0 && _currentLevelIndex % 3 == 0);
+			bool bonusLevel = levels[_currentLevelIndex - 1].isBonusLevel;
 
 			for (int x = 0; x < width; x++)
 			{
 				for (int y = 0; y < height; y++)
 				{
 					//Get pixel color :
-					Color pixelColor = levels[_currentLevelIndex].levelTexture.GetPixel(x, y);
+					Color pixelColor = levels[_currentLevelIndex - 1].levelTexture.GetPixel(x, y);
 
 					Vector3 spawnPos = ((new Vector3(x, 0f, y) * unitPerPixel) - offset);
 
@@ -105,7 +103,6 @@ namespace RollerSplatClone.Managers
 					{
 						GameObject groundObj = Spawn(prefabGround, spawnPos);
 						spawnedGroundList.Add(groundObj.transform);
-
 						spawnedGroundCount++;
 
 						if (bottomLeftGroundPosition == Vector3.zero ||
@@ -114,17 +111,20 @@ namespace RollerSplatClone.Managers
 							 groundObj.transform.position.z < bottomLeftGroundPosition.z))
 						{
 							bottomLeftGroundPosition = groundObj.transform.position;
-						
-						}
-						if (isBonusLevel)
-						{
-							GameObject goldObj = Spawn(prefabGold, spawnPos);
-						}
 
+						}
+						else
+						{
+							if (bonusLevel)
+							{
+								GameObject goldObj = Spawn(prefabGold, spawnPos);
+
+							}
+						}
 					}
 				}
-			}
 
+			}
 		}
 
 		private GameObject Spawn(GameObject prefab, Vector3 position)
@@ -134,6 +134,7 @@ namespace RollerSplatClone.Managers
 			obj.transform.parent = levelContainer.transform;
 			return obj;
 		}
+
 
 		public Vector3 GetBottomLeftGroundPosition()
 		{
@@ -159,6 +160,7 @@ namespace RollerSplatClone.Managers
 		{
 			if (isSuccessful)
 			{
+				BallPrefsManager.CurrentLevel = _currentLevelIndex;
 				_currentLevelIndex++;
 				DOVirtual.DelayedCall(2f, () =>
 				{
@@ -188,6 +190,7 @@ namespace RollerSplatClone.Managers
 		{
 			return _currentLevelData;
 		}
+
 
 	}
 }

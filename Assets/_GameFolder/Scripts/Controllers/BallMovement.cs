@@ -164,7 +164,7 @@ namespace RollerSplatClone.Controllers
 						if (!touchedGrounds.Contains(other.gameObject))
 						{
 							touchedGrounds.Add(other.gameObject);
-							Debug.Log($"Total Grounds: {touchedGrounds.Count}");
+							//Debug.Log($"Total Grounds: {touchedGrounds.Count}");
 
 							DOVirtual.DelayedCall(0.1f, () =>
 							{
@@ -175,7 +175,7 @@ namespace RollerSplatClone.Controllers
 
 							if (touchedGrounds.Count >= spawnedGroundCount)
 							{
-								Debug.Log("Level basarili");
+								//Debug.Log("Level basarili");
 								GameManager.Instance.GameEnd(true);
 							}
 						}

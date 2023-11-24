@@ -119,8 +119,8 @@ namespace RollerSplatClone.Managers
 
 		public void IncreaseGoldScore(int score)
 		{
-			goldScore += score;
-			OnGoldScored?.Invoke(goldScore);
+			BallPrefsManager.GoldScore += score;
+			OnGoldScored?.Invoke(BallPrefsManager.GoldScore);
 		}
 	}
 }
