@@ -15,6 +15,14 @@ namespace RollerSplatClone.Controllers
 		Back = 4,
 	}
 
+	public enum Direction
+	{
+		North=0,
+		South=1,
+		East=2,
+		West=3,
+	}
+
 	public class BallMovement : MonoBehaviour
 	{
 		public PlayerState PlayerState { get; set; }
@@ -94,13 +102,13 @@ namespace RollerSplatClone.Controllers
 				case PlayerState.Left:
 					if (GameManager.Instance.GameState == GameState.Playing && _canMove == true)
 					{
-						MovementBall(Vector3.left);
+						MovementBall(Direction.West);
 					}
 					break;
 				case PlayerState.Right:
 					if (GameManager.Instance.GameState == GameState.Playing && _canMove == true)
 					{
-						MovementBall(Vector3.right);
+						MovementBall(Direction.East);
 					}
 
 					break;
@@ -108,13 +116,13 @@ namespace RollerSplatClone.Controllers
 
 					if (GameManager.Instance.GameState == GameState.Playing && _canMove == true)
 					{
-						MovementBall(Vector3.forward);
+						MovementBall(Direction.North);
 					}
 					break;
 				case PlayerState.Back:
 					if (GameManager.Instance.GameState == GameState.Playing && _canMove == true)
 					{
-						MovementBall(Vector3.back);
+						MovementBall(Direction.South);
 					}
 					break;
 				default:
@@ -123,67 +131,38 @@ namespace RollerSplatClone.Controllers
 
 		}
 
-		private void MovementBall(Vector3 direction)
+		private void MovementBall(Direction direction)
 		{
-			_canMove = false;
-			Ray ray = new Ray(transform.position, direction);
-			RaycastHit hit;
+			Vector3 targetPosition = transform.position;
 
-			Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
-
-			if (Physics.Raycast(ray, out hit, Mathf.Infinity, wallsLayer.value))
+			switch (direction)
 			{
-				float hitDistance = hit.distance;
-				if (hitDistance > 1f)
-				{
-					Vector3 targetPoint = hit.point - direction * 0.5f;
-					transform.DOMove(targetPoint, moveDuration).SetEase(move);
-				}
-				else
-				{
-					_canMove = true;
-				}
+				case Direction.North:
+					targetPosition.z += 1f;
+					break;
+				case Direction.South:
+					targetPosition.z -= 1f;
+					break;
+				case Direction.East:
+					targetPosition.x += 1f;
+					break;
+				case Direction.West:
+					targetPosition.x -= 1f;
+					break;
+			}
+
+			if (_levelManager.CanMoveInDirection(targetPosition, direction))
+			{
+				transform.DOMove(targetPosition, moveDuration).SetEase(move);
+			}
+			else
+			{
+				Debug.Log("Hareket etmek mümkün deðil");
 			}
 		}
 
 
-		private void OnTriggerEnter(Collider other)
-		{
-			if (other.CompareTag("Ground"))
-			{
 
-				Renderer groundRenderer = other.GetComponent<Renderer>();
-
-				if (groundRenderer != null)
-				{
-					Color groundColor = groundRenderer.material.color;
-					Color ballColor = _paintController._ballRenderer.material.color;
-
-					if (groundColor != ballColor)
-					{
-						if (!touchedGrounds.Contains(other.gameObject))
-						{
-							touchedGrounds.Add(other.gameObject);
-							//Debug.Log($"Total Grounds: {touchedGrounds.Count}");
-
-							DOVirtual.DelayedCall(0.1f, () =>
-							{
-								groundRenderer.material.color = ballColor;
-							});
-
-							int spawnedGroundCount = _levelManager.GetSpawnedGroundCount();
-
-							if (touchedGrounds.Count >= spawnedGroundCount)
-							{
-								//Debug.Log("Level basarili");
-								GameManager.Instance.GameEnd(true);
-							}
-						}
-
-					}
-				}
-			}
-		}
 
 		public List<GameObject> GetTouchedGrounds()
 		{

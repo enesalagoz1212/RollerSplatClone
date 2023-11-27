@@ -36,6 +36,7 @@ namespace RollerSplatClone.Managers
 		private Transform bottomLeftWall;
 		private Transform bottomRightWall;
 
+		private GameObject[,] tilesArray;
 		public void Initialize(BallMovement ballMovement)
 		{
 			_ballMovement = ballMovement;
@@ -85,6 +86,8 @@ namespace RollerSplatClone.Managers
 
 			bool bonusLevel = levels[_currentLevelIndex - 1].isBonusLevel;
 
+			tilesArray = new GameObject[(int)width, (int)height];
+
 			for (int x = 0; x < width; x++)
 			{
 				for (int y = 0; y < height; y++)
@@ -98,6 +101,8 @@ namespace RollerSplatClone.Managers
 					{
 						GameObject wallObj = Spawn(prefabWall, spawnPos);
 						spawnedWallList.Add(wallObj.transform);
+
+						tilesArray[x, y] = wallObj;
 					}
 					else if (pixelColor == colorGround)
 					{
@@ -121,6 +126,7 @@ namespace RollerSplatClone.Managers
 
 							}
 						}
+						tilesArray[x, y] = groundObj;
 					}
 				}
 
@@ -132,9 +138,56 @@ namespace RollerSplatClone.Managers
 			position.y = prefab.transform.position.y;
 			GameObject obj = Instantiate(prefab, position, Quaternion.identity);
 			obj.transform.parent = levelContainer.transform;
+
+
 			return obj;
 		}
 
+		public bool CanMoveInDirection(Vector3 currentPosition, Direction direction)
+		{
+			int x = Mathf.RoundToInt(currentPosition.x);
+			int z = Mathf.RoundToInt(currentPosition.z);
+
+			switch (direction)
+			{
+				case Direction.North:
+					z += 1;
+					break;
+				case Direction.South:
+					z -= 1;
+					break;
+				case Direction.East:
+					x += 1;
+					break;
+				case Direction.West:
+					x -= 1;
+					break;
+			}
+
+			if (x >= 0 && x < tilesArray.GetLength(0) && z >= 0 && z < tilesArray.GetLength(1))
+			{
+				Debug.Log($" x: {x}, y: {z}");
+				GameObject tileObject = tilesArray[x, z];
+
+				if (tileObject != null && tileObject.CompareTag("Ground"))
+				{
+					Debug.Log("Can move");
+					return true;
+				}
+				else
+				{
+					Debug.Log("Hareket edemiyor -  Ground deðil");
+				}
+			}
+			else
+			{
+				Debug.Log($" x: {x}, y: {z}");
+				Debug.Log("hareket edemiyor- sýnýrlarýn dýsýnda!");
+			}
+
+			// Hareket edilemez
+			return false;
+		}
 
 		public Vector3 GetBottomLeftGroundPosition()
 		{
