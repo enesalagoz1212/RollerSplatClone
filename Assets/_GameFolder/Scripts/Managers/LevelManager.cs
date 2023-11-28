@@ -159,6 +159,7 @@ namespace RollerSplatClone.Managers
 				case Direction.North: // Y++
 					for (int y = yIndex + 1; y < groundControllers.GetLength(1); y++)
 					{
+						Debug.Log(y);
 						if (groundControllers[xIndex, y] == null)
 						{
 							break;
@@ -168,20 +169,21 @@ namespace RollerSplatClone.Managers
 					break;
 
 				case Direction.South: // Y--
-					for (int y = yIndex - 1; y < groundControllers.GetLength(1); y--)
+					for (int y = yIndex - 1; y >= 0; y--)
 					{
+						Debug.Log(y);
 						if (groundControllers[xIndex, y] == null)
 						{
 							break;
 						}
 						targetGroundController = groundControllers[xIndex, y];
 					}
-
 					break;
 
 				case Direction.East: // X++
 					for (int x = xIndex + 1; x < groundControllers.GetLength(0); x++)
 					{
+						Debug.Log(x);
 						if (groundControllers[x, yIndex] == null)
 						{
 							break;
@@ -191,9 +193,10 @@ namespace RollerSplatClone.Managers
 					break;
 
 				case Direction.West: // X--
-					for (int x = xIndex - 1; x < groundControllers.GetLength(0); x--)
+					for (int x = xIndex - 1; x >= 0; x--)
 					{
-						if (groundControllers[x, yIndex]==null)
+						Debug.Log(x);
+						if (groundControllers[x, yIndex] == null)
 						{
 							break;
 						}
@@ -202,10 +205,8 @@ namespace RollerSplatClone.Managers
 					break;
 			}
 
-
 			return targetGroundController;
 		}
-
 		public Vector3 GetBottomLeftWallPosition()
 		{
 			return bottomLeftWall.position;
