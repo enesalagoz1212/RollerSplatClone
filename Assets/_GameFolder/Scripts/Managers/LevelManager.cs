@@ -105,15 +105,15 @@ namespace RollerSplatClone.Managers
 					{
 						GameObject groundObj = Spawn(prefabGround, spawnPos);
 						var groundController = groundObj.GetComponent<GroundController>();
-                        spawnedGroundList.Add(groundObj.transform);
+						spawnedGroundList.Add(groundObj.transform);
 						spawnedGroundCount++;
 
-                        //if (bonusLevel)
-                        //{
-                        //    GameObject goldObj = Spawn(prefabGold, spawnPos);
-                        //}
+						//if (bonusLevel)
+						//{
+						//    GameObject goldObj = Spawn(prefabGold, spawnPos);
+						//}
 
-                        groundControllers[x, y] = groundController;
+						groundControllers[x, y] = groundController;
 						groundController.Initialize(x, y);
 					}
 				}
@@ -133,50 +133,74 @@ namespace RollerSplatClone.Managers
 			return obj;
 		}
 
-        public GroundController ReturnSpawnGroundController()
-        {
-            for (int x = 0; x < groundControllers.GetLength(0); x++)
-            {
-                for (int y = 0; y < groundControllers.GetLength(1); y++)
-                {
-                    if (groundControllers[x, y] != null)
-                    {
-                        return groundControllers[x, y];
-                    }
-                }
-            }
-            return null;
-        }
-
-        public GroundController ReturnDirectionGroundController(Direction direction, GroundController currentGroundController)
+		public GroundController ReturnSpawnGroundController()
 		{
-            var xIndex = currentGroundController.xIndex;
-            var yIndex = currentGroundController.yIndex;
-            GroundController targetGroundController = null;
+			for (int x = 0; x < groundControllers.GetLength(0); x++)
+			{
+				for (int y = 0; y < groundControllers.GetLength(1); y++)
+				{
+					if (groundControllers[x, y] != null)
+					{
+						return groundControllers[x, y];
+					}
+				}
+			}
+			return null;
+		}
+
+		public GroundController ReturnDirectionGroundController(Direction direction, GroundController currentGroundController)
+		{
+			var xIndex = currentGroundController.xIndex;
+			var yIndex = currentGroundController.yIndex;
+			GroundController targetGroundController = null;
 
 			switch (direction)
-            {
+			{
 				case Direction.North: // Y++
-                    for (int y = yIndex + 1; y < groundControllers.GetLength(1); y++)
-                    {
-                        if (groundControllers[xIndex, y] == null)
-                        {
-                            break;
-                        }
-                        targetGroundController = groundControllers[xIndex, y];
-                    }
-                    break;
+					for (int y = yIndex + 1; y < groundControllers.GetLength(1); y++)
+					{
+						if (groundControllers[xIndex, y] == null)
+						{
+							break;
+						}
+						targetGroundController = groundControllers[xIndex, y];
+					}
+					break;
 
-                case Direction.South: // Y--
-                    break;
+				case Direction.South: // Y--
+					for (int y = yIndex - 1; y < groundControllers.GetLength(1); y--)
+					{
+						if (groundControllers[xIndex, y] == null)
+						{
+							break;
+						}
+						targetGroundController = groundControllers[xIndex, y];
+					}
 
-                case Direction.East: // X++
-                    break;
+					break;
 
-                case Direction.West: // X--
-                    break;
+				case Direction.East: // X++
+					for (int x = xIndex + 1; x < groundControllers.GetLength(0); x++)
+					{
+						if (groundControllers[x, yIndex] == null)
+						{
+							break;
+						}
+						targetGroundController = groundControllers[x, yIndex];
+					}
+					break;
 
-            }
+				case Direction.West: // X--
+					for (int x = xIndex - 1; x < groundControllers.GetLength(0); x--)
+					{
+						if (groundControllers[x, yIndex]==null)
+						{
+							break;
+						}
+						targetGroundController = groundControllers[x, yIndex];
+					}
+					break;
+			}
 
 
 			return targetGroundController;

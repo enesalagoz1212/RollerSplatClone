@@ -90,13 +90,10 @@ namespace RollerSplatClone.Controllers
 
 		public void OnScreenDrag(Direction direction)
 		{
-			Debug.Log($"OnScreenDrag direction: {direction}");
 			if (!_canMove)
 			{
-                Debug.Log($"OnScreenDrag 1 direction: {direction}");
                 return;
 			}
-            Debug.Log($"OnScreenDrag 2 direction: {direction}");
 
             var targetGroundController = _levelManager.ReturnDirectionGroundController(direction, _groundController);
 			if(targetGroundController != null)
