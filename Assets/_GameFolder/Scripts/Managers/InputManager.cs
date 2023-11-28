@@ -46,7 +46,6 @@ namespace RollerSplatClone.Managers
 			{
 				_isDragging = true;
 				_firstTouchPosition = Input.mousePosition;
-				_ballMovement.ChangeState(PlayerState.None);
 				_isFirstDraging = true;
 			}
 		}
@@ -74,23 +73,23 @@ namespace RollerSplatClone.Managers
 				{
 					if (touchDifferenceX > 0)
 					{
-						_ballMovement.ChangeState(PlayerState.Right);
+						_ballMovement.OnScreenDrag(Direction.East);
 					}
 					else
 					{
-						_ballMovement.ChangeState(PlayerState.Left);
-					}
+                        _ballMovement.OnScreenDrag(Direction.West);
+                    }
 				}
 				else    // y > x
 				{
 					if (touchDifferenceY > 0)
 					{
-						_ballMovement.ChangeState(PlayerState.Forward);
-					}
+                        _ballMovement.OnScreenDrag(Direction.North);
+                    }
 					else
 					{
-						_ballMovement.ChangeState(PlayerState.Back);
-					}
+                        _ballMovement.OnScreenDrag(Direction.South);
+                    }
 				}
 
 				_isFirstDraging = false;

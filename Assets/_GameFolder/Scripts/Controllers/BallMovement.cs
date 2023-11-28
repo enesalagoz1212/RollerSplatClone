@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using RollerSplatClone.Managers;
+using TMPro;
 
 namespace RollerSplatClone.Controllers
 {
 	public enum PlayerState
 	{
-		None = 0,
-		Left = 1,
-		Right = 2,
-		Forward = 3,
-		Back = 4,
+		Idle = 0,
+		Moving = 1,
+		End = 2,
 	}
 
 	public enum Direction
@@ -40,6 +39,9 @@ namespace RollerSplatClone.Controllers
 		public Ease move;
 
 		private List<GameObject> touchedGrounds = new List<GameObject>();
+
+		private GroundController _groundController;
+
 		public void Initialize(PaintController paintController, LevelManager levelManager)
 		{
 			_paintController = paintController;
@@ -77,91 +79,41 @@ namespace RollerSplatClone.Controllers
 
 		private void OnGameReset()
 		{
-			ResetBallPosition();
-
 			touchedGrounds.Clear();
 		}
 
-		private void ResetBallPosition()
+		public void AssignSpawnPosition(GroundController groundController)
 		{
-			Vector3 bottomLeftGroundPosition = _levelManager.GetBottomLeftGroundPosition();
-			transform.position = new Vector3(bottomLeftGroundPosition.x, transform.position.y, bottomLeftGroundPosition.z);
-		}
+			_groundController = groundController;
+            transform.position = _groundController.position;
+        }
 
-
-		public void ChangeState(PlayerState playerState)
+		public void OnScreenDrag(Direction direction)
 		{
-			PlayerState = playerState;
-			//Debug.Log($"Player State: {playerState}");
-
-			switch (PlayerState)
+			Debug.Log($"OnScreenDrag direction: {direction}");
+			if (!_canMove)
 			{
-				case PlayerState.None:
-					_canMove = true;
-					break;
-				case PlayerState.Left:
-					if (GameManager.Instance.GameState == GameState.Playing && _canMove == true)
-					{
-						MovementBall(Direction.West);
-					}
-					break;
-				case PlayerState.Right:
-					if (GameManager.Instance.GameState == GameState.Playing && _canMove == true)
-					{
-						MovementBall(Direction.East);
-					}
-
-					break;
-				case PlayerState.Forward:
-
-					if (GameManager.Instance.GameState == GameState.Playing && _canMove == true)
-					{
-						MovementBall(Direction.North);
-					}
-					break;
-				case PlayerState.Back:
-					if (GameManager.Instance.GameState == GameState.Playing && _canMove == true)
-					{
-						MovementBall(Direction.South);
-					}
-					break;
-				default:
-					break;
+                Debug.Log($"OnScreenDrag 1 direction: {direction}");
+                return;
 			}
+            Debug.Log($"OnScreenDrag 2 direction: {direction}");
 
-		}
-
-		private void MovementBall(Direction direction)
-		{
-			Vector3 targetPosition = transform.position;
-
-			switch (direction)
+            var targetGroundController = _levelManager.ReturnDirectionGroundController(direction, _groundController);
+			if(targetGroundController != null)
 			{
-				case Direction.North:
-					targetPosition.z += 1f;
-					break;
-				case Direction.South:
-					targetPosition.z -= 1f;
-					break;
-				case Direction.East:
-					targetPosition.x += 1f;
-					break;
-				case Direction.West:
-					targetPosition.x -= 1f;
-					break;
-			}
-
-			if (_levelManager.CanMoveInDirection(targetPosition, direction))
-			{
-				transform.DOMove(targetPosition, moveDuration).SetEase(move);
-			}
+				_canMove = false;
+                var targetPosition = targetGroundController.transform.position;
+				transform.DOMove(targetPosition, moveDuration).SetEase(move).OnComplete(() =>
+				{
+					_groundController = targetGroundController;
+                    _canMove = true;
+                });
+            }
 			else
 			{
-				Debug.Log("Hareket etmek mümkün deðil");
+				Debug.Log($"Can not move!");
 			}
 		}
-
-
 
 
 		public List<GameObject> GetTouchedGrounds()

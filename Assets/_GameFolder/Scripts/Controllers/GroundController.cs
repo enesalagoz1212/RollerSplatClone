@@ -10,10 +10,19 @@ namespace RollerSplatClone.Controllers
         public Vector3 position;
         public bool isPainted;
 
+		public int xIndex;
+		public int yIndex;
+
 		private void Awake()
 		{
 			position = transform.position;
 			isPainted = false;
+		}
+
+		public void Initialize(int x, int y)
+		{
+			xIndex = x;
+			yIndex = y;
 		}
 	}
 

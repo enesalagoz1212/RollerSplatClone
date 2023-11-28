@@ -10,7 +10,7 @@ namespace RollerSplatClone.Managers
 	public class LevelManager : MonoBehaviour
 	{
 		public static LevelManager Instance { get; private set; }
-		private BallMovement _ballMovement;
+		public BallMovement _ballMovement;
 		private Level _currentLevelData;
 		public Level[] levels;
 		public GameObject levelContainer;
@@ -30,13 +30,13 @@ namespace RollerSplatClone.Managers
 		private int _currentLevelIndex;
 
 		private List<Transform> spawnedGroundList = new List<Transform>();
-		private Vector3 bottomLeftGroundPosition;
 
 		private List<Transform> spawnedWallList = new List<Transform>();
 		private Transform bottomLeftWall;
 		private Transform bottomRightWall;
 
-		private GameObject[,] tilesArray;
+		private GroundController[,] groundControllers;
+
 		public void Initialize(BallMovement ballMovement)
 		{
 			_ballMovement = ballMovement;
@@ -80,13 +80,12 @@ namespace RollerSplatClone.Managers
 
 			spawnedGroundCount = 0;
 			spawnedGroundList.Clear();
-			bottomLeftGroundPosition = Vector3.zero;
 
 			Vector3 offset = (new Vector3(width / 2, 0f, height / 2) * unitPerPixel) - new Vector3(halfUnitPerPixel, 0f, halfUnitPerPixel);
 
 			bool bonusLevel = levels[_currentLevelIndex - 1].isBonusLevel;
 
-			tilesArray = new GameObject[(int)width, (int)height];
+			groundControllers = new GroundController[(int)width, (int)height];
 
 			for (int x = 0; x < width; x++)
 			{
@@ -101,36 +100,27 @@ namespace RollerSplatClone.Managers
 					{
 						GameObject wallObj = Spawn(prefabWall, spawnPos);
 						spawnedWallList.Add(wallObj.transform);
-
-						tilesArray[x, y] = wallObj;
 					}
 					else if (pixelColor == colorGround)
 					{
 						GameObject groundObj = Spawn(prefabGround, spawnPos);
-						spawnedGroundList.Add(groundObj.transform);
+						var groundController = groundObj.GetComponent<GroundController>();
+                        spawnedGroundList.Add(groundObj.transform);
 						spawnedGroundCount++;
 
-						if (bottomLeftGroundPosition == Vector3.zero ||
-							groundObj.transform.position.x < bottomLeftGroundPosition.x ||
-							(groundObj.transform.position.x == bottomLeftGroundPosition.x &&
-							 groundObj.transform.position.z < bottomLeftGroundPosition.z))
-						{
-							bottomLeftGroundPosition = groundObj.transform.position;
+                        //if (bonusLevel)
+                        //{
+                        //    GameObject goldObj = Spawn(prefabGold, spawnPos);
+                        //}
 
-						}
-						else
-						{
-							if (bonusLevel)
-							{
-								GameObject goldObj = Spawn(prefabGold, spawnPos);
-
-							}
-						}
-						tilesArray[x, y] = groundObj;
+                        groundControllers[x, y] = groundController;
+						groundController.Initialize(x, y);
 					}
 				}
 
 			}
+
+			_ballMovement.AssignSpawnPosition(ReturnSpawnGroundController());
 		}
 
 		private GameObject Spawn(GameObject prefab, Vector3 position)
@@ -143,55 +133,53 @@ namespace RollerSplatClone.Managers
 			return obj;
 		}
 
-		public bool CanMoveInDirection(Vector3 currentPosition, Direction direction)
+        public GroundController ReturnSpawnGroundController()
+        {
+            for (int x = 0; x < groundControllers.GetLength(0); x++)
+            {
+                for (int y = 0; y < groundControllers.GetLength(1); y++)
+                {
+                    if (groundControllers[x, y] != null)
+                    {
+                        return groundControllers[x, y];
+                    }
+                }
+            }
+            return null;
+        }
+
+        public GroundController ReturnDirectionGroundController(Direction direction, GroundController currentGroundController)
 		{
-			int x = Mathf.RoundToInt(currentPosition.x);
-			int z = Mathf.RoundToInt(currentPosition.z);
+            var xIndex = currentGroundController.xIndex;
+            var yIndex = currentGroundController.yIndex;
+            GroundController targetGroundController = null;
 
 			switch (direction)
-			{
-				case Direction.North:
-					z += 1;
-					break;
-				case Direction.South:
-					z -= 1;
-					break;
-				case Direction.East:
-					x += 1;
-					break;
-				case Direction.West:
-					x -= 1;
-					break;
-			}
+            {
+				case Direction.North: // Y++
+                    for (int y = yIndex + 1; y < groundControllers.GetLength(1); y++)
+                    {
+                        if (groundControllers[xIndex, y] == null)
+                        {
+                            break;
+                        }
+                        targetGroundController = groundControllers[xIndex, y];
+                    }
+                    break;
 
-			if (x >= 0 && x < tilesArray.GetLength(0) && z >= 0 && z < tilesArray.GetLength(1))
-			{
-				Debug.Log($" x: {x}, y: {z}");
-				GameObject tileObject = tilesArray[x, z];
+                case Direction.South: // Y--
+                    break;
 
-				if (tileObject != null && tileObject.CompareTag("Ground"))
-				{
-					Debug.Log("Can move");
-					return true;
-				}
-				else
-				{
-					Debug.Log("Hareket edemiyor -  Ground deðil");
-				}
-			}
-			else
-			{
-				Debug.Log($" x: {x}, y: {z}");
-				Debug.Log("hareket edemiyor- sýnýrlarýn dýsýnda!");
-			}
+                case Direction.East: // X++
+                    break;
 
-			// Hareket edilemez
-			return false;
-		}
+                case Direction.West: // X--
+                    break;
 
-		public Vector3 GetBottomLeftGroundPosition()
-		{
-			return bottomLeftGroundPosition;
+            }
+
+
+			return targetGroundController;
 		}
 
 		public Vector3 GetBottomLeftWallPosition()
