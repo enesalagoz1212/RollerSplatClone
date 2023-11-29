@@ -9,10 +9,10 @@ namespace RollerSplatClone.Canvases
 {
     public class GameCanvas : MonoBehaviour
     {
-
         public GameObject gamePanel;
         public TextMeshProUGUI gameLevelText;
 		public TextMeshProUGUI gameGoldScoreText;
+
 		public void Initialize()
 		{
 			
@@ -30,7 +30,6 @@ namespace RollerSplatClone.Canvases
 			GameManager.OnMenuOpen -= OnGameMenu;
 			GameManager.OnGameEnd -= OnGameEnd;
 			GameManager.OnGoldScored -= OnGoldScored;
-		
 		}
 
 		private void OnGameMenu()
@@ -58,8 +57,6 @@ namespace RollerSplatClone.Canvases
 			var gameLevel = BallPrefsManager.CurrentLevel;
 			gameLevelText.text = "LEVEL " + gameLevel.ToString();
 		}
-
-
 	}
 }
 

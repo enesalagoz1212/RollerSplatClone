@@ -37,7 +37,5 @@ namespace RollerSplatClone.Managers
 			inputCanvas.Initialize(inputManager);
 			endCanvas.Initialize();
 		}
-
 	}
-
 }

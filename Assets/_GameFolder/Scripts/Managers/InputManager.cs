@@ -64,7 +64,6 @@ namespace RollerSplatClone.Managers
 
 			_lastTouchPosition = Input.mousePosition;
 
-
 			float touchDifferenceX = GetTouchDifferenceX();
 			float touchDifferenceY = GetTouchDifferenceY();
 			if (_isFirstDraging)

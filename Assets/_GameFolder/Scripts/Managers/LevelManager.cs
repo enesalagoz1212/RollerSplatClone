@@ -11,6 +11,7 @@ namespace RollerSplatClone.Managers
 	{
 		public static LevelManager Instance { get; private set; }
 		public BallMovement _ballMovement;
+		private PaintController _paintController;
 		private Level _currentLevelData;
 		public Level[] levels;
 		public GameObject levelContainer;
@@ -26,20 +27,23 @@ namespace RollerSplatClone.Managers
 
 		private float unitPerPixel;
 
-		private int spawnedGroundCount;
+		private int _spawnedGroundCount;
 		private int _currentLevelIndex;
 
-		private List<Transform> spawnedGroundList = new List<Transform>();
+		private List<GroundController> _currentDirectionGroundControllers = new List<GroundController>();
 
+		private List<Transform> spawnedGroundList = new List<Transform>();
 		private List<Transform> spawnedWallList = new List<Transform>();
+
 		private Transform bottomLeftWall;
 		private Transform bottomRightWall;
 
 		private GroundController[,] groundControllers;
 
-		public void Initialize(BallMovement ballMovement)
+		public void Initialize(BallMovement ballMovement,PaintController paintController)
 		{
 			_ballMovement = ballMovement;
+			_paintController = paintController;
 		}
 
 		private void Awake()
@@ -68,6 +72,26 @@ namespace RollerSplatClone.Managers
 			GameManager.OnGameEnd -= OnGameEnd;
 		}
 
+		private void OnGameEnd(bool isSuccessful)
+		{
+			if (isSuccessful)
+			{
+				BallPrefsManager.CurrentLevel = _currentLevelIndex;
+				_currentLevelIndex++;
+				DOVirtual.DelayedCall(2f, () =>
+				{
+					ClearLevel();
+					Generate();
+
+				});
+
+			}
+		}
+
+		private void OnGameMenu()
+		{
+
+		}
 
 		private void Generate()
 		{
@@ -78,7 +102,7 @@ namespace RollerSplatClone.Managers
 			float height = levels[_currentLevelIndex - 1].levelTexture.height;
 
 
-			spawnedGroundCount = 0;
+			_spawnedGroundCount = 0;
 			spawnedGroundList.Clear();
 
 			Vector3 offset = (new Vector3(width / 2, 0f, height / 2) * unitPerPixel) - new Vector3(halfUnitPerPixel, 0f, halfUnitPerPixel);
@@ -106,7 +130,7 @@ namespace RollerSplatClone.Managers
 						GameObject groundObj = Spawn(prefabGround, spawnPos);
 						var groundController = groundObj.GetComponent<GroundController>();
 						spawnedGroundList.Add(groundObj.transform);
-						spawnedGroundCount++;
+						_spawnedGroundCount++;
 
 						//if (bonusLevel)
 						//{
@@ -165,6 +189,7 @@ namespace RollerSplatClone.Managers
 							break;
 						}
 						targetGroundController = groundControllers[xIndex, y];
+						_currentDirectionGroundControllers.Add(targetGroundController);
 					}
 					break;
 
@@ -177,6 +202,7 @@ namespace RollerSplatClone.Managers
 							break;
 						}
 						targetGroundController = groundControllers[xIndex, y];
+						_currentDirectionGroundControllers.Add(targetGroundController);
 					}
 					break;
 
@@ -189,6 +215,7 @@ namespace RollerSplatClone.Managers
 							break;
 						}
 						targetGroundController = groundControllers[x, yIndex];
+						_currentDirectionGroundControllers.Add(targetGroundController);
 					}
 					break;
 
@@ -201,12 +228,19 @@ namespace RollerSplatClone.Managers
 							break;
 						}
 						targetGroundController = groundControllers[x, yIndex];
+						_currentDirectionGroundControllers.Add(targetGroundController);
 					}
 					break;
 			}
 
 			return targetGroundController;
 		}
+
+		public List<GroundController> GetCurrentDirectionGroundControllers()
+		{
+			return new List<GroundController>(_currentDirectionGroundControllers);
+		}
+
 		public Vector3 GetBottomLeftWallPosition()
 		{
 			return bottomLeftWall.position;
@@ -219,23 +253,7 @@ namespace RollerSplatClone.Managers
 
 		public int GetSpawnedGroundCount()
 		{
-			return spawnedGroundCount;
-		}
-
-		private void OnGameEnd(bool isSuccessful)
-		{
-			if (isSuccessful)
-			{
-				BallPrefsManager.CurrentLevel = _currentLevelIndex;
-				_currentLevelIndex++;
-				DOVirtual.DelayedCall(2f, () =>
-				{
-					ClearLevel();
-					Generate();
-
-				});
-
-			}
+			return _spawnedGroundCount;
 		}
 
 		private void ClearLevel()
@@ -246,18 +264,10 @@ namespace RollerSplatClone.Managers
 			}
 		}
 
-
-		private void OnGameMenu()
-		{
-
-		}
-
 		public Level GetLevelData()
 		{
 			return _currentLevelData;
 		}
-
-
 	}
 }
 

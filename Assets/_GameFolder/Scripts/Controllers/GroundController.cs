@@ -8,7 +8,8 @@ namespace RollerSplatClone.Controllers
     {
         public MeshRenderer meshRenderer;
         public Vector3 position;
-        public bool isPainted;
+        private bool _isPainted;
+		public Color paintedColor;
 
 		public int xIndex;
 		public int yIndex;
@@ -16,7 +17,7 @@ namespace RollerSplatClone.Controllers
 		private void Awake()
 		{
 			position = transform.position;
-			isPainted = false;
+			_isPainted = false;
 		}
 
 		public void Initialize(int x, int y)
@@ -24,6 +25,21 @@ namespace RollerSplatClone.Controllers
 			xIndex = x;
 			yIndex = y;
 		}
-	}
 
+		public bool IsPainted
+		{
+			get { return _isPainted; }
+		}
+		public void PaintGround(Color color)
+		{
+			if (!_isPainted)
+			{
+				meshRenderer.material.color = color;
+				_isPainted = true;
+				paintedColor = color;
+			}
+		}
+
+
+	}
 }

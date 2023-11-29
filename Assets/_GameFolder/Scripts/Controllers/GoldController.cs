@@ -7,7 +7,6 @@ namespace RollerSplatClone.Controllers
 {
     public class GoldController : MonoBehaviour
     {
-
 		private void OnTriggerEnter(Collider other)
 		{
 			if (other.gameObject.CompareTag("Ball"))
@@ -16,7 +15,5 @@ namespace RollerSplatClone.Controllers
 				Destroy(gameObject);
 			}
 		}
-
 	}
-
 }

@@ -15,7 +15,12 @@ namespace RollerSplatClone.Controllers
 		public void Initialize(BallMovement ballMovement)
 		{
 			_ballMovement = ballMovement;
+			Color ballColor = GetRandomColor();
+			ColorTheBall(ballColor);
+
+			UiManager.Instance.EndCanvas.UpdateEndImageColor(ballColor);
 		}
+
 		private void OnEnable()
 		{
 			GameManager.OnMenuOpen += OnGameMenu;
@@ -28,27 +33,23 @@ namespace RollerSplatClone.Controllers
 
 		private void OnGameMenu()
 		{
-			Color ballColor = GetRandomColor();
-			ColorTheBall(ballColor);
-
-			UiManager.Instance.EndCanvas.UpdateEndImageColor(ballColor);
-
+			
 		}
 
-
-		private Color GetRandomColor()
+		public Color GetRandomColor()
 		{
 			int randomIndex = Random.Range(0, randomColors.Length);
 			return randomColors[randomIndex];
 		}
 
-		private void ColorTheBall(Color color)
+		public void ColorTheBall(Color color)
 		{
 			_ballRenderer.material.color = color;
 		}
 
-	
-
+		public Color GetBallColor()
+		{
+			return _ballRenderer.material.color;
+		}
 	}
-
 }

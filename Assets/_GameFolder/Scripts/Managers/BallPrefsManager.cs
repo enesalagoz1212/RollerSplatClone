@@ -32,7 +32,6 @@ namespace RollerSplatClone.Managers
 				PlayerPrefs.SetInt(GoldScorePrefsString, value);
 			}
 		}
-
 	}
 }
 

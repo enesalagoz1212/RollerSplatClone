@@ -46,5 +46,4 @@ namespace RollerSplatClone.Canvases
 			_gameManager.OnGameStart();
 		}
 	}
-
 }

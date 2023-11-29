@@ -16,10 +16,10 @@ namespace RollerSplatClone.Controllers
 
 	public enum Direction
 	{
-		North=0,
-		South=1,
-		East=2,
-		West=3,
+		North = 0,
+		South = 1,
+		East = 2,
+		West = 3,
 	}
 
 	public class BallMovement : MonoBehaviour
@@ -28,19 +28,16 @@ namespace RollerSplatClone.Controllers
 
 		private PaintController _paintController;
 		private LevelManager _levelManager;
+		private GroundController _groundController;
 
 		private bool _canMove;
-		private GameObject _ballInstantiated;
 
+		//private GameObject _ballInstantiated;
 		//public GameObject ballPrefab;
 		//public Transform ballMovementTransform;
 		public LayerMask wallsLayer;
 		public float moveDuration;
 		public Ease move;
-
-		private List<GameObject> touchedGrounds = new List<GameObject>();
-
-		private GroundController _groundController;
 
 		public void Initialize(PaintController paintController, LevelManager levelManager)
 		{
@@ -48,10 +45,6 @@ namespace RollerSplatClone.Controllers
 			_levelManager = levelManager;
 		}
 
-		private void Awake()
-		{
-			
-		}
 		private void OnEnable()
 		{
 			GameManager.OnMenuOpen += OnGameMenu;
@@ -64,13 +57,14 @@ namespace RollerSplatClone.Controllers
 			GameManager.OnMenuOpen -= OnGameMenu;
 			GameManager.OnGameStarted -= OnGameStart;
 			GameManager.OnGameReset -= OnGameReset;
-
 		}
 
 		private void OnGameMenu()
 		{
 			//OnBallInstantiate();
+
 		}
+
 
 		private void OnGameStart()
 		{
@@ -79,45 +73,52 @@ namespace RollerSplatClone.Controllers
 
 		private void OnGameReset()
 		{
-			touchedGrounds.Clear();
+
 		}
 
 		public void AssignSpawnPosition(GroundController groundController)
 		{
 			_groundController = groundController;
-            transform.position = _groundController.position;
-        }
+			transform.position = _groundController.position;
+		}
 
 		public void OnScreenDrag(Direction direction)
 		{
 			if (!_canMove)
 			{
-                return;
+				return;
 			}
+			var targetGroundController = _levelManager.ReturnDirectionGroundController(direction, _groundController);
 
-            var targetGroundController = _levelManager.ReturnDirectionGroundController(direction, _groundController);
-			if(targetGroundController != null)
+			if (targetGroundController != null)
 			{
 				_canMove = false;
-                var targetPosition = targetGroundController.transform.position;
+				var targetPosition = targetGroundController.transform.position;
+				DOVirtual.DelayedCall(0.2f, () =>
+				{
+					PaintGroundControllersInDirection();
+				});
 				transform.DOMove(targetPosition, moveDuration).SetEase(move).OnComplete(() =>
 				{
 					_groundController = targetGroundController;
-                    _canMove = true;
-                });
-            }
+					_canMove = true;
+
+				});
+
+			}
 			else
 			{
 				Debug.Log($"Can not move!");
 			}
 		}
 
-
-		public List<GameObject> GetTouchedGrounds()
+		public void PaintGroundControllersInDirection()
 		{
-			return touchedGrounds;
+			foreach (var groundController in _levelManager.GetCurrentDirectionGroundControllers())
+			{
+				groundController.PaintGround(_paintController.GetBallColor());
+			}
 		}
-
 
 		/*	 private void OnBallInstantiate()
 			{
