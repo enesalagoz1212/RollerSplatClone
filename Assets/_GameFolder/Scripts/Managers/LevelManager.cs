@@ -143,10 +143,10 @@ namespace RollerSplatClone.Managers
 						spawnedGroundList.Add(groundObj.transform);
 						_spawnedGroundCount++;
 
-						//if (bonusLevel)
-						//{
-						//	GameObject goldObj = Spawn(prefabGold, spawnPos);
-						//}
+						if (bonusLevel)
+						{
+							GameObject goldObj = Spawn(prefabGold, spawnPos);
+						}
 
 						groundControllers[x, y] = groundController;
 						groundController.Initialize(x, y);

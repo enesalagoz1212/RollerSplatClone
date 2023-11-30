@@ -46,6 +46,7 @@ namespace RollerSplatClone.Managers
 		[SerializeField] private InputManager inputManager;
 		[SerializeField] private PaintController paintController;
 		[SerializeField] private CameraController cameraController;
+		[SerializeField] private GoldController goldController;
 
 
 		public int goldScore;
@@ -62,6 +63,7 @@ namespace RollerSplatClone.Managers
 			levelManager.Initialize(ballMovement,paintController);
 			paintController.Initialize(ballMovement);
 			cameraController.Initialize(levelManager);
+			goldController.Initialize(ballMovement);
 			
 			ChangeState(GameState.Menu);
 		}

@@ -76,6 +76,11 @@ namespace RollerSplatClone.Controllers
 
 		}
 
+		public Vector3 GetBallPosition()
+		{
+			return transform.position;
+		}
+
 		public void AssignSpawnPosition(GroundController groundController)
 		{
 			_groundController = groundController;
