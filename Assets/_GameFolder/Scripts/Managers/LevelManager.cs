@@ -31,8 +31,6 @@ namespace RollerSplatClone.Managers
 		private int _spawnedGroundCount;
 		private int _currentLevelIndex;
 
-		private List<GroundController> _currentDirectionGroundControllers = new List<GroundController>();
-
 		private List<Transform> spawnedGroundList = new List<Transform>();
 		private List<Transform> spawnedWallList = new List<Transform>();
 
@@ -41,7 +39,10 @@ namespace RollerSplatClone.Managers
 
 		private GroundController[,] groundControllers;
 
-		public void Initialize(BallMovement ballMovement, PaintController paintController)
+		private Color LevelColor => _paintController.GetBallColor();
+
+
+        public void Initialize(BallMovement ballMovement, PaintController paintController)
 		{
 			_ballMovement = ballMovement;
 			_paintController = paintController;
@@ -98,10 +99,7 @@ namespace RollerSplatClone.Managers
 
 		private void OnGameMenu()
 		{
-			var startGroundController = ReturnSpawnGroundController();
-			_currentDirectionGroundControllers.Add(startGroundController);
 
-			PaintCurrentDirectionGrounds(_paintController.GetBallColor());
 		}
 
 		private void Generate()
@@ -155,8 +153,9 @@ namespace RollerSplatClone.Managers
 
 			}
 
-			_ballMovement.AssignSpawnPosition(ReturnSpawnGroundController());
-		
+			var spawnGroundController = ReturnSpawnGroundController();
+            _ballMovement.AssignSpawnPosition(spawnGroundController);
+			PaintTargetGround(spawnGroundController);
 		}
 
 		private GameObject Spawn(GameObject prefab, Vector3 position)
@@ -189,7 +188,8 @@ namespace RollerSplatClone.Managers
 			var xIndex = currentGroundController.xIndex;
 			var yIndex = currentGroundController.yIndex;
 			GroundController targetGroundController = null;
-			_currentDirectionGroundControllers.Add(currentGroundController);
+
+			var targetGroundControllers = new List<GroundController>();
 			switch (direction)
 			{
 				case Direction.North: // Y++
@@ -200,7 +200,7 @@ namespace RollerSplatClone.Managers
 							break;
 						}
 						targetGroundController = groundControllers[xIndex, y];
-						_currentDirectionGroundControllers.Add(targetGroundController);
+                        targetGroundControllers.Add(targetGroundController);
 					}
 					break;
 
@@ -212,7 +212,7 @@ namespace RollerSplatClone.Managers
 							break;
 						}
 						targetGroundController = groundControllers[xIndex, y];
-						_currentDirectionGroundControllers.Add(targetGroundController);
+                        targetGroundControllers.Add(targetGroundController);
 					}
 					break;
 
@@ -224,7 +224,7 @@ namespace RollerSplatClone.Managers
 							break;
 						}
 						targetGroundController = groundControllers[x, yIndex];
-						_currentDirectionGroundControllers.Add(targetGroundController);
+                        targetGroundControllers.Add(targetGroundController);
 					}
 					break;
 
@@ -236,57 +236,39 @@ namespace RollerSplatClone.Managers
 							break;
 						}
 						targetGroundController = groundControllers[x, yIndex];
-						_currentDirectionGroundControllers.Add(targetGroundController);
+                        targetGroundControllers.Add(targetGroundController);
 					}
 					break;
 			}
-			DOVirtual.DelayedCall(0.2f, () =>
-			{
-				PaintCurrentDirectionGrounds(_paintController.GetBallColor());
-			});
+
+            for (int i = 0; i < targetGroundControllers.Count; i++)
+            {
+				PaintTargetGround(targetGroundControllers[i]);
+            }
 
 			return targetGroundController;
 		}
 
-		public void PaintCurrentDirectionGrounds(Color color)
+		public void PaintTargetGround(GroundController groundController)
 		{
-
-			foreach (var groundController in _currentDirectionGroundControllers)
+			if (groundController.IsPainted)
 			{
-				if (!groundController.IsPainted)
-				{
-					Debug.Log("12");
-					groundController.PaintGround(color);
-					_isPaintGroundController++;
-
-					if (_isPaintGroundController==TotalGroundControllers())
-					{
-						Debug.Log("Sonraki level");
-						GameManager.Instance.GameEnd(true);
-					}
-				}
+				return;
 			}
+			groundController.PaintGround(LevelColor);
 
-			
+			CheckLevelEnd();
 		}
 
-		private int TotalGroundControllers()
+		private void CheckLevelEnd()
 		{
-			int totalGroundControllers = 0;
-
-			for (int x = 0; x < groundControllers.GetLength(0); x++)
+			if(_isPaintGroundController >= _spawnedGroundCount)
 			{
-				for (int y = 0; y < groundControllers.GetLength(1); y++)
-				{
-					if (groundControllers[x, y] != null)
-					{
-						totalGroundControllers++;
-					}
-				}
-			}
+                Debug.Log("Sonraki level");
+                GameManager.Instance.GameEnd(true);
+            }
+        }
 
-			return totalGroundControllers;
-		}
 		public Vector3 GetBottomLeftWallPosition()
 		{
 			return bottomLeftWall.position;

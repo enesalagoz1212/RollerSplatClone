@@ -63,7 +63,7 @@ namespace RollerSplatClone.Managers
 			levelManager.Initialize(ballMovement,paintController);
 			paintController.Initialize(ballMovement);
 			cameraController.Initialize(levelManager);
-			goldController.Initialize(ballMovement);
+			//goldController.Initialize(ballMovement);
 			
 			ChangeState(GameState.Menu);
 		}

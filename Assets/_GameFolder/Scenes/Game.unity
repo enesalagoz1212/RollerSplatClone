@@ -350,6 +350,7 @@ MonoBehaviour:
   inputManager: {fileID: 1639755962}
   paintController: {fileID: 1180681840}
   cameraController: {fileID: 1470769801}
+  goldController: {fileID: 0}
   goldScore: 0
 --- !u!1 &93882750
 GameObject:
@@ -1381,8 +1382,8 @@ MonoBehaviour:
   wallsLayer:
     serializedVersion: 2
     m_Bits: 2147483647
-  moveDuration: 0.3
-  move: 4
+  moveDuration: 0.16
+  move: 27
 --- !u!54 &1180681838
 Rigidbody:
   m_ObjectHideFlags: 0
