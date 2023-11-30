@@ -94,10 +94,6 @@ namespace RollerSplatClone.Controllers
 			{
 				_canMove = false;
 				var targetPosition = targetGroundController.transform.position;
-				DOVirtual.DelayedCall(0.2f, () =>
-				{
-					PaintGroundControllersInDirection();
-				});
 				transform.DOMove(targetPosition, moveDuration).SetEase(move).OnComplete(() =>
 				{
 					_groundController = targetGroundController;
@@ -112,13 +108,6 @@ namespace RollerSplatClone.Controllers
 			}
 		}
 
-		public void PaintGroundControllersInDirection()
-		{
-			foreach (var groundController in _levelManager.GetCurrentDirectionGroundControllers())
-			{
-				groundController.PaintGround(_paintController.GetBallColor());
-			}
-		}
 
 		/*	 private void OnBallInstantiate()
 			{

@@ -26,6 +26,7 @@ namespace RollerSplatClone.Managers
 		private Color colorGround = Color.black;
 
 		private float unitPerPixel;
+		private int _isPaintGroundController = 0;
 
 		private int _spawnedGroundCount;
 		private int _currentLevelIndex;
@@ -40,7 +41,7 @@ namespace RollerSplatClone.Managers
 
 		private GroundController[,] groundControllers;
 
-		public void Initialize(BallMovement ballMovement,PaintController paintController)
+		public void Initialize(BallMovement ballMovement, PaintController paintController)
 		{
 			_ballMovement = ballMovement;
 			_paintController = paintController;
@@ -64,12 +65,14 @@ namespace RollerSplatClone.Managers
 		{
 			GameManager.OnMenuOpen += OnGameMenu;
 			GameManager.OnGameEnd += OnGameEnd;
+			GameManager.OnGameReset += OnGameReset;
 		}
 
 		private void OnDisable()
 		{
 			GameManager.OnMenuOpen -= OnGameMenu;
 			GameManager.OnGameEnd -= OnGameEnd;
+			GameManager.OnGameReset -= OnGameReset;
 		}
 
 		private void OnGameEnd(bool isSuccessful)
@@ -88,9 +91,17 @@ namespace RollerSplatClone.Managers
 			}
 		}
 
+		private void OnGameReset()
+		{
+			_isPaintGroundController = 0;
+		}
+
 		private void OnGameMenu()
 		{
+			var startGroundController = ReturnSpawnGroundController();
+			_currentDirectionGroundControllers.Add(startGroundController);
 
+			PaintCurrentDirectionGrounds(_paintController.GetBallColor());
 		}
 
 		private void Generate()
@@ -134,7 +145,7 @@ namespace RollerSplatClone.Managers
 
 						//if (bonusLevel)
 						//{
-						//    GameObject goldObj = Spawn(prefabGold, spawnPos);
+						//	GameObject goldObj = Spawn(prefabGold, spawnPos);
 						//}
 
 						groundControllers[x, y] = groundController;
@@ -145,6 +156,7 @@ namespace RollerSplatClone.Managers
 			}
 
 			_ballMovement.AssignSpawnPosition(ReturnSpawnGroundController());
+		
 		}
 
 		private GameObject Spawn(GameObject prefab, Vector3 position)
@@ -177,13 +189,12 @@ namespace RollerSplatClone.Managers
 			var xIndex = currentGroundController.xIndex;
 			var yIndex = currentGroundController.yIndex;
 			GroundController targetGroundController = null;
-
+			_currentDirectionGroundControllers.Add(currentGroundController);
 			switch (direction)
 			{
 				case Direction.North: // Y++
 					for (int y = yIndex + 1; y < groundControllers.GetLength(1); y++)
 					{
-						Debug.Log(y);
 						if (groundControllers[xIndex, y] == null)
 						{
 							break;
@@ -196,7 +207,6 @@ namespace RollerSplatClone.Managers
 				case Direction.South: // Y--
 					for (int y = yIndex - 1; y >= 0; y--)
 					{
-						Debug.Log(y);
 						if (groundControllers[xIndex, y] == null)
 						{
 							break;
@@ -209,7 +219,6 @@ namespace RollerSplatClone.Managers
 				case Direction.East: // X++
 					for (int x = xIndex + 1; x < groundControllers.GetLength(0); x++)
 					{
-						Debug.Log(x);
 						if (groundControllers[x, yIndex] == null)
 						{
 							break;
@@ -222,7 +231,6 @@ namespace RollerSplatClone.Managers
 				case Direction.West: // X--
 					for (int x = xIndex - 1; x >= 0; x--)
 					{
-						Debug.Log(x);
 						if (groundControllers[x, yIndex] == null)
 						{
 							break;
@@ -232,15 +240,53 @@ namespace RollerSplatClone.Managers
 					}
 					break;
 			}
+			DOVirtual.DelayedCall(0.2f, () =>
+			{
+				PaintCurrentDirectionGrounds(_paintController.GetBallColor());
+			});
 
 			return targetGroundController;
 		}
 
-		public List<GroundController> GetCurrentDirectionGroundControllers()
+		public void PaintCurrentDirectionGrounds(Color color)
 		{
-			return new List<GroundController>(_currentDirectionGroundControllers);
+
+			foreach (var groundController in _currentDirectionGroundControllers)
+			{
+				if (!groundController.IsPainted)
+				{
+					Debug.Log("12");
+					groundController.PaintGround(color);
+					_isPaintGroundController++;
+
+					if (_isPaintGroundController==TotalGroundControllers())
+					{
+						Debug.Log("Sonraki level");
+						GameManager.Instance.GameEnd(true);
+					}
+				}
+			}
+
+			
 		}
 
+		private int TotalGroundControllers()
+		{
+			int totalGroundControllers = 0;
+
+			for (int x = 0; x < groundControllers.GetLength(0); x++)
+			{
+				for (int y = 0; y < groundControllers.GetLength(1); y++)
+				{
+					if (groundControllers[x, y] != null)
+					{
+						totalGroundControllers++;
+					}
+				}
+			}
+
+			return totalGroundControllers;
+		}
 		public Vector3 GetBottomLeftWallPosition()
 		{
 			return bottomLeftWall.position;
