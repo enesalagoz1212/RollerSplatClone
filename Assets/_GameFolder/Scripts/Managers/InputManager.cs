@@ -10,7 +10,7 @@ namespace RollerSplatClone.Managers
 	public class InputManager : MonoBehaviour
 	{
 		public static InputManager Instance { get; private set; }
-		private BallMovement _ballMovement;
+		private BallController _ballController;
 
 		public bool isInputEnabled { get; private set; } = true;
 
@@ -31,9 +31,9 @@ namespace RollerSplatClone.Managers
 			}
 		}
 
-		public void Initialize(BallMovement ballMovement)
+		public void Initialize(BallController ballController)
 		{
-			_ballMovement = ballMovement;
+			_ballController = ballController;
 		}
 
 		public void OnScreenTouch(PointerEventData eventData)
@@ -72,22 +72,22 @@ namespace RollerSplatClone.Managers
 				{
 					if (touchDifferenceX > 0)
 					{
-						_ballMovement.OnScreenDrag(Direction.East);
+						_ballController.OnScreenDrag(Direction.East);
 					}
 					else
 					{
-                        _ballMovement.OnScreenDrag(Direction.West);
+						_ballController.OnScreenDrag(Direction.West);
                     }
 				}
 				else    // y > x
 				{
 					if (touchDifferenceY > 0)
 					{
-                        _ballMovement.OnScreenDrag(Direction.North);
+						_ballController.OnScreenDrag(Direction.North);
                     }
 					else
 					{
-                        _ballMovement.OnScreenDrag(Direction.South);
+						_ballController.OnScreenDrag(Direction.South);
                     }
 				}
 

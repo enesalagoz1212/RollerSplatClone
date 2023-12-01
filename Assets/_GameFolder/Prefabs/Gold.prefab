@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1594150277386062512}
   - component: {fileID: 5053259780135050150}
   - component: {fileID: 4808700755698898801}
-  - component: {fileID: 2936241280153643237}
   m_Layer: 0
   m_Name: Gold
   m_TagString: Gold
@@ -98,15 +97,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2936241280153643237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3081693315726328723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0455a55a7f2e59649a018aff647d1679, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

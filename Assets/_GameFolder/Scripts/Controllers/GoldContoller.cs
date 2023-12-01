@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RollerSplatClone.Managers;
 
 namespace RollerSplatClone.Controllers
 {
-    public class GoldController : MonoBehaviour
+    public class GoldContoller : MonoBehaviour
     {
-       
+        void Start()
+        {
+
+        }
+
+        void Update()
+        {
+
+        }
     }
 }
 

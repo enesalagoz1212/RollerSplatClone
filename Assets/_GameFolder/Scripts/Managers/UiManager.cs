@@ -30,7 +30,7 @@ namespace RollerSplatClone.Managers
 			}
 		}
 
-		public void Initialize(GameManager gameManager, BallMovement ballMovement, InputManager inputManager)
+		public void Initialize(GameManager gameManager, BallController ballController, InputManager inputManager)
 		{
 			menuCanvas.Initialize(gameManager);
 			gameCanvas.Initialize();

@@ -112,4 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7053931305995899208}
   position: {x: 0, y: 0, z: 0}
-  isPainted: 0
+  _isPainted: 0
+  xIndex: 0
+  yIndex: 0
+  gold: {fileID: 3081693315726328723, guid: c15db8fd8d23d0e41ad389334323536c, type: 3}

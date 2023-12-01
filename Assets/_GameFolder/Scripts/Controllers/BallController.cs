@@ -22,16 +22,15 @@ namespace RollerSplatClone.Controllers
 		West = 3,
 	}
 
-	public class BallMovement : MonoBehaviour
+	public class BallController : MonoBehaviour
 	{
 		public PlayerState PlayerState { get; set; }
 
-		private PaintController _paintController;
 		private LevelManager _levelManager;
 		private GroundController _groundController;
 
 		private bool _canMove;
-
+		public Renderer ballRenderer;
 		//private GameObject _ballInstantiated;
 		//public GameObject ballPrefab;
 		//public Transform ballMovementTransform;
@@ -39,9 +38,8 @@ namespace RollerSplatClone.Controllers
 		public float moveDuration;
 		public Ease move;
 
-		public void Initialize(PaintController paintController, LevelManager levelManager)
+		public void Initialize( LevelManager levelManager)
 		{
-			_paintController = paintController;
 			_levelManager = levelManager;
 		}
 
@@ -62,7 +60,6 @@ namespace RollerSplatClone.Controllers
 		private void OnGameMenu()
 		{
 			//OnBallInstantiate();
-
 		}
 
 
@@ -111,6 +108,11 @@ namespace RollerSplatClone.Controllers
 			{
 				Debug.Log($"Can not move!");
 			}
+		}
+
+		public void ColorTheBall(Color color)
+		{
+			ballRenderer.material.color = color;
 		}
 
 

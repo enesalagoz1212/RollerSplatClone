@@ -41,12 +41,10 @@ namespace RollerSplatClone.Managers
 		public static Action<int> OnGoldScored;
 
 		[SerializeField] private LevelManager levelManager;
-		[SerializeField] private BallMovement ballMovement;
+		[SerializeField] private BallController ballController;
 		[SerializeField] private UiManager uiManager;
 		[SerializeField] private InputManager inputManager;
-		[SerializeField] private PaintController paintController;
 		[SerializeField] private CameraController cameraController;
-		[SerializeField] private GoldController goldController;
 
 
 		public int goldScore;
@@ -57,13 +55,11 @@ namespace RollerSplatClone.Managers
 
 		private void GameInitialize()
 		{
-			uiManager.Initialize(this, ballMovement, inputManager);
-			inputManager.Initialize(ballMovement);
-			ballMovement.Initialize(paintController,levelManager);
-			levelManager.Initialize(ballMovement,paintController);
-			paintController.Initialize(ballMovement);
+			uiManager.Initialize(this, ballController, inputManager);
+			inputManager.Initialize(ballController);
+			ballController.Initialize(levelManager);
+			levelManager.Initialize(ballController);
 			cameraController.Initialize(levelManager);
-			//goldController.Initialize(ballMovement);
 			
 			ChangeState(GameState.Menu);
 		}

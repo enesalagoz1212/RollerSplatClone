@@ -13,6 +13,7 @@ namespace RollerSplatClone.Controllers
 		public int xIndex;
 		public int yIndex;
 
+	//	public GameObject gold;
 		private void Awake()
 		{
 			position = transform.position;
