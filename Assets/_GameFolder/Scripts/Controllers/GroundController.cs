@@ -15,6 +15,8 @@ namespace RollerSplatClone.Controllers
 		public int yIndex;
 
 		public GameObject goldPrefab;
+		private GameObject _createdGold;
+		
 		private void Awake()
 		{
 			position = transform.position;
@@ -42,21 +44,23 @@ namespace RollerSplatClone.Controllers
 			{
 				meshRenderer.material.color = color;
 				_isPainted = true;
+				DestroyGold();
 			}
 
 		}
 
-		public void DestoyGold()
+		private void DestroyGold()
 		{
-			Destroy(goldPrefab);
+			if(_createdGold != null)
+			{
+				Destroy(_createdGold);
+			}
 		}
 
 		public void SpawnGold()
 		{
-
-			GameObject goldObj = Instantiate(goldPrefab, transform.position, Quaternion.identity);
-			goldObj.transform.parent = transform;
-
+			_createdGold = Instantiate(goldPrefab, transform.position, Quaternion.identity);
+			_createdGold.transform.parent = transform;
 		}
 	}
 }

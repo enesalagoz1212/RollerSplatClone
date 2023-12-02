@@ -103,12 +103,13 @@ namespace RollerSplatClone.Managers
 
 		private void LevelGenerate()
 		{
+			_currentLevelData = levels[_currentLevelIndex - 1];
 
 			unitPerPixel = prefabWall.transform.lossyScale.x;
 			float halfUnitPerPixel = unitPerPixel;
 
-			float width = levels[_currentLevelIndex - 1].levelTexture.width;
-			float height = levels[_currentLevelIndex - 1].levelTexture.height;
+			float width = _currentLevelData.levelTexture.width;
+			float height = _currentLevelData.levelTexture.height;
 
 
 			_spawnedGroundCount = 0;
@@ -116,7 +117,7 @@ namespace RollerSplatClone.Managers
 
 			Vector3 offset = (new Vector3(width / 2, 0f, height / 2) * unitPerPixel) - new Vector3(halfUnitPerPixel, 0f, halfUnitPerPixel);
 
-			bool bonusLevel = levels[_currentLevelIndex - 1].isBonusLevel;
+			bool bonusLevel = _currentLevelData.isBonusLevel;
 
 			groundControllers = new GroundController[(int)width, (int)height];
 
@@ -125,7 +126,7 @@ namespace RollerSplatClone.Managers
 				for (int y = 0; y < height; y++)
 				{
 					//Get pixel color :
-					Color pixelColor = levels[_currentLevelIndex - 1].levelTexture.GetPixel(x, y);
+					Color pixelColor = _currentLevelData.levelTexture.GetPixel(x, y);
 
 					Vector3 spawnPos = ((new Vector3(x, 0f, y) * unitPerPixel) - offset);
 
@@ -243,11 +244,9 @@ namespace RollerSplatClone.Managers
 			for (int i = 0; i < targetGroundControllers.Count; i++)
 			{
 				PaintTargetGround(targetGroundControllers[i]);
-				if (levels[_currentLevelIndex - 1].isBonusLevel)
+				if (_currentLevelData.isBonusLevel)
 				{
-
 					GameManager.Instance.IncreaseGoldScore(1);
-
 				}
 			}
 
