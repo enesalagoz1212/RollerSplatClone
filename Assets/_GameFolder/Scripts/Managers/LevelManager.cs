@@ -11,6 +11,7 @@ namespace RollerSplatClone.Managers
 	{
 		public static LevelManager Instance { get; private set; }
 		private BallController _ballController;
+		private GroundController _groundController;
 
 		private Level _currentLevelData;
 		public Level[] levels;
@@ -20,7 +21,6 @@ namespace RollerSplatClone.Managers
 		[Header("Tiles Prefabs")]
 		[SerializeField] private GameObject prefabWall;
 		[SerializeField] private GameObject prefabGround;
-		[SerializeField] private GameObject prefabGold;
 
 		private Color colorWall = Color.white;
 		private Color colorGround = Color.black;
@@ -34,17 +34,15 @@ namespace RollerSplatClone.Managers
 
 		private List<Transform> spawnedGroundList = new List<Transform>();
 		private List<Transform> spawnedWallList = new List<Transform>();
-		private List<GameObject> goldSpawnlist = new List<GameObject>();
 
 		private Transform bottomLeftWall;
 		private Transform bottomRightWall;
 
 		private GroundController[,] groundControllers;
-
-		public GameObject gold;
-		public void Initialize(BallController ballController)
+		public void Initialize(BallController ballController, GroundController groundController)
 		{
 			_ballController = ballController;
+			_groundController = groundController;
 		}
 
 		private void Awake()
@@ -145,12 +143,12 @@ namespace RollerSplatClone.Managers
 
 						if (bonusLevel)
 						{
-							GameObject goldObj = Spawn(prefabGold, spawnPos);
-							//goldSpawnlist.Add(goldObj);
+							groundController.SpawnGold();
+
 						}
 
 						groundControllers[x, y] = groundController;
-						groundController.Initialize(x, y);
+						groundController.Init(x, y);
 					}
 				}
 
@@ -161,7 +159,7 @@ namespace RollerSplatClone.Managers
 			PaintTargetGround(spawnGroundController);
 		}
 
-		private GameObject Spawn(GameObject prefab, Vector3 position)
+		public GameObject Spawn(GameObject prefab, Vector3 position)
 		{
 			position.y = prefab.transform.position.y;
 			GameObject obj = Instantiate(prefab, position, Quaternion.identity);
@@ -245,7 +243,12 @@ namespace RollerSplatClone.Managers
 			for (int i = 0; i < targetGroundControllers.Count; i++)
 			{
 				PaintTargetGround(targetGroundControllers[i]);
+				if (levels[_currentLevelIndex - 1].isBonusLevel)
+				{
 
+					GameManager.Instance.IncreaseGoldScore(1);
+
+				}
 			}
 
 			return targetGroundController;
@@ -260,26 +263,13 @@ namespace RollerSplatClone.Managers
 			groundController.PaintGround(levelColor);
 			_isPaintGroundController++;
 			CheckLevelEnd();
-			if (levels[_currentLevelIndex - 1].isBonusLevel)
-			{
-				DestroyGoldOnPaintedGround(groundController);
-			}
 		}
 
-		private void DestroyGoldOnPaintedGround(GroundController groundController)
-		{
-			if (groundController.IsPainted)
-			{
-				GameManager.Instance.IncreaseGoldScore(1);
-				//Destroy(gold);
-			}
-		}
 
 		private void CheckLevelEnd()
 		{
 			if (_isPaintGroundController >= _spawnedGroundCount)
 			{
-				Debug.Log("Sonraki level");
 				GameManager.Instance.GameEnd(true);
 			}
 		}

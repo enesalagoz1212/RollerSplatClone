@@ -349,6 +349,8 @@ MonoBehaviour:
   uiManager: {fileID: 36309163}
   inputManager: {fileID: 1639755962}
   cameraController: {fileID: 1470769801}
+  groundController: {fileID: -8679145908213301598, guid: d9ff676d6236e814893ad1f1f08ed58a,
+    type: 3}
   goldScore: 0
 --- !u!1 &93882750
 GameObject:
@@ -764,9 +766,6 @@ MonoBehaviour:
     type: 3}
   prefabGround: {fileID: 5472398954372105081, guid: d9ff676d6236e814893ad1f1f08ed58a,
     type: 3}
-  prefabGold: {fileID: 3081693315726328723, guid: c15db8fd8d23d0e41ad389334323536c,
-    type: 3}
-  gold: {fileID: 3081693315726328723, guid: c15db8fd8d23d0e41ad389334323536c, type: 3}
 --- !u!1 &683249298
 GameObject:
   m_ObjectHideFlags: 0

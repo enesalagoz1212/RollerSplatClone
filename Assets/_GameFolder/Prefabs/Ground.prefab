@@ -115,4 +115,5 @@ MonoBehaviour:
   _isPainted: 0
   xIndex: 0
   yIndex: 0
-  gold: {fileID: 3081693315726328723, guid: c15db8fd8d23d0e41ad389334323536c, type: 3}
+  goldPrefab: {fileID: 3081693315726328723, guid: c15db8fd8d23d0e41ad389334323536c,
+    type: 3}
