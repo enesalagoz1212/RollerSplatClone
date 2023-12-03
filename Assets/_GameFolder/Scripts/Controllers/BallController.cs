@@ -31,51 +31,28 @@ namespace RollerSplatClone.Controllers
 
 		private bool _canMove;
 		public Renderer ballRenderer;
-		//private GameObject _ballInstantiated;
-		//public GameObject ballPrefab;
-		//public Transform ballMovementTransform;
 		public LayerMask wallsLayer;
 		public float moveDuration;
 		public Ease move;
 
-		public void Initialize( LevelManager levelManager)
+		public void Initialize(LevelManager levelManager)
 		{
 			_levelManager = levelManager;
 		}
 
 		private void OnEnable()
 		{
-			GameManager.OnMenuOpen += OnGameMenu;
 			GameManager.OnGameStarted += OnGameStart;
-			GameManager.OnGameReset += OnGameReset;
 		}
 
 		private void OnDisable()
 		{
-			GameManager.OnMenuOpen -= OnGameMenu;
 			GameManager.OnGameStarted -= OnGameStart;
-			GameManager.OnGameReset -= OnGameReset;
 		}
-
-		private void OnGameMenu()
-		{
-			//OnBallInstantiate();
-		}
-
 
 		private void OnGameStart()
 		{
 			_canMove = true;
-		}
-
-		private void OnGameReset()
-		{
-
-		}
-
-		public Vector3 GetBallPosition()
-		{
-			return transform.position;
 		}
 
 		public void AssignSpawnPosition(GroundController groundController)
@@ -102,7 +79,6 @@ namespace RollerSplatClone.Controllers
 					_canMove = true;
 
 				});
-
 			}
 			else
 			{
@@ -114,21 +90,6 @@ namespace RollerSplatClone.Controllers
 		{
 			ballRenderer.material.color = color;
 		}
-
-
-		/*	 private void OnBallInstantiate()
-			{
-				if (ballPrefab!=null)
-				{
-					if (_ballInstantiated!=null)
-					{
-						Destroy(_ballInstantiated);
-					}
-
-					_ballInstantiated = Instantiate(ballPrefab, new Vector3(-4f, 0.9f, -4f), Quaternion.identity);
-				}
-			}
-		*/ // Instantiate ball 
 	}
 }
 

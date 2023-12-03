@@ -11,38 +11,30 @@ namespace RollerSplatClone.Managers
 	{
 		public static LevelManager Instance { get; private set; }
 		private BallController _ballController;
-		private GroundController _groundController;
 
 		private Level _currentLevelData;
 		public Level[] levels;
 		public GameObject levelContainer;
 
-
-		[Header("Tiles Prefabs")]
 		[SerializeField] private GameObject prefabWall;
 		[SerializeField] private GameObject prefabGround;
 
-		private Color colorWall = Color.white;
-		private Color colorGround = Color.black;
-		private Color levelColor;
+		private Color _colorWall = Color.white;
+		private Color _colorGround = Color.black;
+		private Color _levelColor;
 
-		private float unitPerPixel;
+		private float _unitPerPixel;
 		private int _isPaintGroundController = 0;
 
 		private int _spawnedGroundCount;
 		private int _currentLevelIndex;
 
 		private List<Transform> spawnedGroundList = new List<Transform>();
-		private List<Transform> spawnedWallList = new List<Transform>();
-
-		private Transform bottomLeftWall;
-		private Transform bottomRightWall;
 
 		private GroundController[,] groundControllers;
-		public void Initialize(BallController ballController, GroundController groundController)
+		public void Initialize(BallController ballController)
 		{
 			_ballController = ballController;
-			_groundController = groundController;
 		}
 
 		private void Awake()
@@ -55,7 +47,6 @@ namespace RollerSplatClone.Managers
 			{
 				Instance = this;
 			}
-
 		}
 
 		private void OnEnable()
@@ -78,12 +69,19 @@ namespace RollerSplatClone.Managers
 			{
 				BallPrefsManager.CurrentLevel = _currentLevelIndex;
 				_currentLevelIndex++;
+				if (_currentLevelIndex % levels.Length == 0)
+				{
+					_currentLevelIndex = levels.Length;
+				}
+
+				int moodCurrentLevel = _currentLevelIndex % levels.Length;
+				_currentLevelData = levels[moodCurrentLevel];
+
 				DOVirtual.DelayedCall(2f, () =>
 				{
 					ClearLevel();
 					_isPaintGroundController = 0;
 				});
-
 			}
 		}
 
@@ -96,8 +94,14 @@ namespace RollerSplatClone.Managers
 		private void OnGameMenu()
 		{
 			_currentLevelIndex = BallPrefsManager.CurrentLevel;
-			levelColor = GetRandomColor();
-			_ballController.ColorTheBall(levelColor);
+			int moodCurrentLevel = _currentLevelIndex % levels.Length;
+			if (moodCurrentLevel == 0)
+			{
+				moodCurrentLevel = levels.Length;
+			}
+			_currentLevelIndex = moodCurrentLevel ;
+			_levelColor = GetRandomColor();
+			_ballController.ColorTheBall(_levelColor);
 			LevelGenerate();
 		}
 
@@ -105,8 +109,8 @@ namespace RollerSplatClone.Managers
 		{
 			_currentLevelData = levels[_currentLevelIndex - 1];
 
-			unitPerPixel = prefabWall.transform.lossyScale.x;
-			float halfUnitPerPixel = unitPerPixel;
+			_unitPerPixel = prefabWall.transform.lossyScale.x;
+			float halfUnitPerPixel = _unitPerPixel;
 
 			float width = _currentLevelData.levelTexture.width;
 			float height = _currentLevelData.levelTexture.height;
@@ -115,7 +119,7 @@ namespace RollerSplatClone.Managers
 			_spawnedGroundCount = 0;
 			spawnedGroundList.Clear();
 
-			Vector3 offset = (new Vector3(width / 2, 0f, height / 2) * unitPerPixel) - new Vector3(halfUnitPerPixel, 0f, halfUnitPerPixel);
+			Vector3 offset = (new Vector3(width / 2, 0f, height / 2) * _unitPerPixel) - new Vector3(halfUnitPerPixel, 0f, halfUnitPerPixel);
 
 			bool bonusLevel = _currentLevelData.isBonusLevel;
 
@@ -127,15 +131,13 @@ namespace RollerSplatClone.Managers
 				{
 					//Get pixel color :
 					Color pixelColor = _currentLevelData.levelTexture.GetPixel(x, y);
+					Vector3 spawnPos = ((new Vector3(x, 0f, y) * _unitPerPixel) - offset);
 
-					Vector3 spawnPos = ((new Vector3(x, 0f, y) * unitPerPixel) - offset);
-
-					if (pixelColor == colorWall)
+					if (pixelColor == _colorWall)
 					{
 						GameObject wallObj = Spawn(prefabWall, spawnPos);
-						spawnedWallList.Add(wallObj.transform);
 					}
-					else if (pixelColor == colorGround)
+					else if (pixelColor == _colorGround)
 					{
 						GameObject groundObj = Spawn(prefabGround, spawnPos);
 						var groundController = groundObj.GetComponent<GroundController>();
@@ -249,7 +251,6 @@ namespace RollerSplatClone.Managers
 					GameManager.Instance.IncreaseGoldScore(1);
 				}
 			}
-
 			return targetGroundController;
 		}
 
@@ -259,11 +260,10 @@ namespace RollerSplatClone.Managers
 			{
 				return;
 			}
-			groundController.PaintGround(levelColor);
+			groundController.PaintGround(_levelColor);
 			_isPaintGroundController++;
 			CheckLevelEnd();
 		}
-
 
 		private void CheckLevelEnd()
 		{
@@ -280,21 +280,6 @@ namespace RollerSplatClone.Managers
 			return randomColors[randomIndex];
 		}
 
-		public Vector3 GetBottomLeftWallPosition()
-		{
-			return bottomLeftWall.position;
-		}
-
-		public Vector3 GetBottomRightWallPosition()
-		{
-			return bottomRightWall.position;
-		}
-
-		public int GetSpawnedGroundCount()
-		{
-			return _spawnedGroundCount;
-		}
-
 		private void ClearLevel()
 		{
 			foreach (Transform child in levelContainer.transform)
@@ -302,12 +287,6 @@ namespace RollerSplatClone.Managers
 				Destroy(child.gameObject);
 			}
 			spawnedGroundList.Clear();
-			spawnedWallList.Clear();
-		}
-
-		public Level GetLevelData()
-		{
-			return _currentLevelData;
 		}
 	}
 }

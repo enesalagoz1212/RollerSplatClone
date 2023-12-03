@@ -8,25 +8,20 @@ namespace RollerSplatClone.Controllers
 	public class GroundController : MonoBehaviour
 	{
 		public MeshRenderer meshRenderer;
+		public GameObject goldPrefab;
+		private GameObject _createdGold;
+
 		public Vector3 position;
 		public bool _isPainted;
-
 		public int xIndex;
 		public int yIndex;
 
-		public GameObject goldPrefab;
-		private GameObject _createdGold;
-		
 		private void Awake()
 		{
 			position = transform.position;
 			_isPainted = false;
 		}
 
-		private void Start()
-		{
-		
-		}
 		public void Init(int x, int y)
 		{
 			xIndex = x;

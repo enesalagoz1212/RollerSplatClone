@@ -59,10 +59,9 @@ namespace RollerSplatClone.Managers
 			uiManager.Initialize(this, ballController, inputManager);
 			inputManager.Initialize(ballController);
 			ballController.Initialize(levelManager);
-			levelManager.Initialize(ballController,groundController);
+			levelManager.Initialize(ballController);
 			cameraController.Initialize(levelManager);
 			
-
 			ChangeState(GameState.Menu);
 		}
 
