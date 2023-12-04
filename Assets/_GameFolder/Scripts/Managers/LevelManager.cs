@@ -4,6 +4,7 @@ using UnityEngine;
 using RollerSplatClone.Controllers;
 using RollerSplatClone.ScritableObjects;
 using DG.Tweening;
+using RollerSplatClone.Pooling;
 
 namespace RollerSplatClone.Managers
 {
@@ -11,6 +12,7 @@ namespace RollerSplatClone.Managers
 	{
 		public static LevelManager Instance { get; private set; }
 		private BallController _ballController;
+		private GroundWallGoldPool _groundWallGoldPool;
 
 		private Level _currentLevelData;
 		public Level[] levels;
@@ -27,14 +29,15 @@ namespace RollerSplatClone.Managers
 		private int _isPaintGroundController = 0;
 
 		private int _spawnedGroundCount;
-		private int _currentLevelIndex;
 
 		private List<Transform> spawnedGroundList = new List<Transform>();
 
 		private GroundController[,] groundControllers;
-		public void Initialize(BallController ballController)
+		public void Initialize(BallController ballController,GroundWallGoldPool groundWallGoldPool)
 		{
 			_ballController = ballController;
+			_groundWallGoldPool = groundWallGoldPool;
+		
 		}
 
 		private void Awake()
@@ -57,7 +60,7 @@ namespace RollerSplatClone.Managers
 		}
 
 		private void OnDisable()
-		{
+		{ 
 			GameManager.OnMenuOpen -= OnGameMenu;
 			GameManager.OnGameEnd -= OnGameEnd;
 			GameManager.OnGameReset -= OnGameReset;
@@ -67,16 +70,6 @@ namespace RollerSplatClone.Managers
 		{
 			if (isSuccessful)
 			{
-				BallPrefsManager.CurrentLevel = _currentLevelIndex;
-				_currentLevelIndex++;
-				if (_currentLevelIndex % levels.Length == 0)
-				{
-					_currentLevelIndex = levels.Length;
-				}
-
-				int moodCurrentLevel = _currentLevelIndex % levels.Length;
-				_currentLevelData = levels[moodCurrentLevel];
-
 				DOVirtual.DelayedCall(2f, () =>
 				{
 					ClearLevel();
@@ -93,13 +86,13 @@ namespace RollerSplatClone.Managers
 
 		private void OnGameMenu()
 		{
-			_currentLevelIndex = BallPrefsManager.CurrentLevel;
-			int moodCurrentLevel = _currentLevelIndex % levels.Length;
-			if (moodCurrentLevel == 0)
+			int levelIndex = BallPrefsManager.CurrentLevel;
+			int mood = levelIndex % levels.Length;
+			if (mood == 0)
 			{
-				moodCurrentLevel = levels.Length;
+				mood = levels.Length;
 			}
-			_currentLevelIndex = moodCurrentLevel ;
+			_currentLevelData = levels[mood - 1];
 			_levelColor = GetRandomColor();
 			_ballController.ColorTheBall(_levelColor);
 			LevelGenerate();
@@ -107,7 +100,7 @@ namespace RollerSplatClone.Managers
 
 		private void LevelGenerate()
 		{
-			_currentLevelData = levels[_currentLevelIndex - 1];
+
 
 			_unitPerPixel = prefabWall.transform.lossyScale.x;
 			float halfUnitPerPixel = _unitPerPixel;
@@ -135,18 +128,18 @@ namespace RollerSplatClone.Managers
 
 					if (pixelColor == _colorWall)
 					{
-						GameObject wallObj = Spawn(prefabWall, spawnPos);
+						GameObject wallObj = _groundWallGoldPool.GetWall(spawnPos);
 					}
 					else if (pixelColor == _colorGround)
 					{
-						GameObject groundObj = Spawn(prefabGround, spawnPos);
+						GameObject groundObj = _groundWallGoldPool.GetGround(spawnPos);
 						var groundController = groundObj.GetComponent<GroundController>();
 						spawnedGroundList.Add(groundObj.transform);
 						_spawnedGroundCount++;
 
 						if (bonusLevel)
 						{
-							groundController.SpawnGold();
+							_groundWallGoldPool.GetGold(spawnPos);
 
 						}
 
@@ -162,14 +155,14 @@ namespace RollerSplatClone.Managers
 			PaintTargetGround(spawnGroundController);
 		}
 
-		public GameObject Spawn(GameObject prefab, Vector3 position)
-		{
-			position.y = prefab.transform.position.y;
-			GameObject obj = Instantiate(prefab, position, Quaternion.identity);
-			obj.transform.parent = levelContainer.transform;
+		//public GameObject Spawn(GameObject prefab, Vector3 position)
+		//{
+		//	position.y = prefab.transform.position.y;
+		//	GameObject obj = Instantiate(prefab, position, Quaternion.identity);
+		//	obj.transform.parent = levelContainer.transform;
 
-			return obj;
-		}
+		//	return obj;
+		//}
 
 		public GroundController ReturnSpawnGroundController()
 		{

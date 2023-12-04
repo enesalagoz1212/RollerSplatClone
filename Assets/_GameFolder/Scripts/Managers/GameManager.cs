@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using RollerSplatClone.Controllers;
 using DG.Tweening;
+using RollerSplatClone.Pooling;
 
 namespace RollerSplatClone.Managers
 {
@@ -46,6 +47,7 @@ namespace RollerSplatClone.Managers
 		[SerializeField] private InputManager inputManager;
 		[SerializeField] private CameraController cameraController;
 		[SerializeField] private GroundController groundController;
+		[SerializeField] private GroundWallGoldPool groundWallGoldPool;
 
 
 		public int goldScore;
@@ -59,8 +61,9 @@ namespace RollerSplatClone.Managers
 			uiManager.Initialize(this, ballController, inputManager);
 			inputManager.Initialize(ballController);
 			ballController.Initialize(levelManager);
-			levelManager.Initialize(ballController);
+			levelManager.Initialize(ballController,groundWallGoldPool);
 			cameraController.Initialize(levelManager);
+			groundWallGoldPool.Initialize();
 			
 			ChangeState(GameState.Menu);
 		}

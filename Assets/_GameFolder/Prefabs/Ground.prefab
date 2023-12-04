@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5472398954372105081}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.29, y: -2.4315, z: 15.06}
+  m_LocalPosition: {x: -3.5, y: 0, z: -1.5}
   m_LocalScale: {x: 1, y: 0.1105, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -111,9 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7053931305995899208}
+  goldPrefab: {fileID: 3081693315726328723, guid: c15db8fd8d23d0e41ad389334323536c,
+    type: 3}
   position: {x: 0, y: 0, z: 0}
   _isPainted: 0
   xIndex: 0
   yIndex: 0
-  goldPrefab: {fileID: 3081693315726328723, guid: c15db8fd8d23d0e41ad389334323536c,
-    type: 3}

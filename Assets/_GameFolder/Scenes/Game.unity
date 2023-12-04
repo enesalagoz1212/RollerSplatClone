@@ -352,6 +352,7 @@ MonoBehaviour:
   cameraController: {fileID: 1470769801}
   groundController: {fileID: -8679145908213301598, guid: d9ff676d6236e814893ad1f1f08ed58a,
     type: 3}
+  groundWallGoldPool: {fileID: 1625857032}
   goldScore: 0
 --- !u!1 &93882750
 GameObject:
@@ -1980,9 +1981,9 @@ MonoBehaviour:
   goldPrefab: {fileID: 3081693315726328723, guid: c15db8fd8d23d0e41ad389334323536c,
     type: 3}
   pools: {fileID: 1944668709}
-  initializeWallPoolSize: 10
-  initializeGroundPoolSize: 10
-  initializeGoldPoolSize: 10
+  initializeWallPoolSize: 50
+  initializeGroundPoolSize: 50
+  initializeGoldPoolSize: 50
 --- !u!1 &1638220126
 GameObject:
   m_ObjectHideFlags: 0
