@@ -274,7 +274,7 @@ Transform:
   - {fileID: 1284712660}
   - {fileID: 12326324}
   m_Father: {fileID: 39522522}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &36309163
 MonoBehaviour:
@@ -324,12 +324,12 @@ Transform:
   - {fileID: 1180681835}
   - {fileID: 406347886}
   - {fileID: 1639755961}
+  - {fileID: 1625857031}
   - {fileID: 36309162}
   - {fileID: 789687585}
   - {fileID: 1470769799}
   - {fileID: 2067540673}
   - {fileID: 729998217}
-  - {fileID: 1625857031}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -352,7 +352,7 @@ MonoBehaviour:
   cameraController: {fileID: 1470769801}
   groundController: {fileID: -8679145908213301598, guid: d9ff676d6236e814893ad1f1f08ed58a,
     type: 3}
-  groundWallGoldPool: {fileID: 1625857032}
+  poolController: {fileID: 1625857032}
   goldScore: 0
 --- !u!1 &93882750
 GameObject:
@@ -874,7 +874,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 39522522}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &757997326
 GameObject:
@@ -1013,7 +1013,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 39522522}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &913754368
 GameObject:
@@ -1358,7 +1358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180681831}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: -2, z: -3}
+  m_LocalPosition: {x: -2.5, y: 0, z: -3}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1802,7 +1802,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 39522522}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &1470769800
 MonoBehaviour:
@@ -1960,7 +1960,7 @@ Transform:
   m_Children:
   - {fileID: 1944668710}
   m_Father: {fileID: 39522522}
-  m_RootOrder: 8
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1625857032
 MonoBehaviour:
@@ -1981,9 +1981,9 @@ MonoBehaviour:
   goldPrefab: {fileID: 3081693315726328723, guid: c15db8fd8d23d0e41ad389334323536c,
     type: 3}
   pools: {fileID: 1944668709}
-  initializeWallPoolSize: 50
-  initializeGroundPoolSize: 50
-  initializeGoldPoolSize: 50
+  initializeWallPoolSize: 70
+  initializeGroundPoolSize: 70
+  initializeGoldPoolSize: 30
 --- !u!1 &1638220126
 GameObject:
   m_ObjectHideFlags: 0
@@ -2408,7 +2408,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 39522522}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &2067540674
 MonoBehaviour:

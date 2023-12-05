@@ -12,7 +12,7 @@ namespace RollerSplatClone.Managers
 	{
 		public static LevelManager Instance { get; private set; }
 		private BallController _ballController;
-		private GroundWallGoldPool _groundWallGoldPool;
+		private PoolController _poolController;
 
 		private Level _currentLevelData;
 		public Level[] levels;
@@ -33,10 +33,10 @@ namespace RollerSplatClone.Managers
 		private List<Transform> spawnedGroundList = new List<Transform>();
 
 		private GroundController[,] groundControllers;
-		public void Initialize(BallController ballController,GroundWallGoldPool groundWallGoldPool)
+		public void Initialize(BallController ballController,PoolController poolController)
 		{
 			_ballController = ballController;
-			_groundWallGoldPool = groundWallGoldPool;
+			_poolController = poolController;
 		
 		}
 
@@ -70,10 +70,14 @@ namespace RollerSplatClone.Managers
 		{
 			if (isSuccessful)
 			{
-				DOVirtual.DelayedCall(2f, () =>
+				DOVirtual.DelayedCall(1f, () =>
 				{
+					ReturnObjectsToPool();
 					ClearLevel();
 					_isPaintGroundController = 0;
+
+
+				
 				});
 			}
 		}
@@ -128,18 +132,18 @@ namespace RollerSplatClone.Managers
 
 					if (pixelColor == _colorWall)
 					{
-						GameObject wallObj = _groundWallGoldPool.GetWall(spawnPos);
+						GameObject wallObj = _poolController.GetWall(spawnPos);
 					}
 					else if (pixelColor == _colorGround)
 					{
-						GameObject groundObj = _groundWallGoldPool.GetGround(spawnPos);
+						GameObject groundObj = _poolController.GetGround(spawnPos);
 						var groundController = groundObj.GetComponent<GroundController>();
 						spawnedGroundList.Add(groundObj.transform);
 						_spawnedGroundCount++;
 
 						if (bonusLevel)
 						{
-							_groundWallGoldPool.GetGold(spawnPos);
+							
 
 						}
 
@@ -153,6 +157,32 @@ namespace RollerSplatClone.Managers
 			var spawnGroundController = ReturnSpawnGroundController();
 			_ballController.AssignSpawnPosition(spawnGroundController);
 			PaintTargetGround(spawnGroundController);
+		}
+
+		private void ReturnObjectsToPool()
+		{
+			GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+
+			foreach (GameObject obj in allObjects)
+			{
+				if (obj.CompareTag("Wall"))
+				{
+					_poolController.ReturnWall(obj);
+				}
+				else if (obj.CompareTag("Ground"))
+				{
+					_poolController.ReturnGround(obj);
+				}
+				else if (obj.CompareTag("Gold"))
+				{
+					_poolController.ReturnGold(obj);
+				}
+				else
+				{
+					
+				}
+			}
+			spawnedGroundList.Clear();
 		}
 
 		//public GameObject Spawn(GameObject prefab, Vector3 position)
