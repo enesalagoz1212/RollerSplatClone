@@ -16,9 +16,16 @@ namespace RollerSplatClone.Controllers
 		public int xIndex;
 		public int yIndex;
 
+		private Color defaultColor = Color.black;
 		private void Awake()
 		{
 			position = transform.position;
+			_isPainted = false;
+		}
+
+		private void OnDisable()
+		{
+			meshRenderer.material.color = defaultColor;
 			_isPainted = false;
 		}
 

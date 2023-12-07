@@ -113,7 +113,7 @@ namespace RollerSplatClone.Pooling
             {
                 DOVirtual.DelayedCall(1f, () =>
                 {
-                    Debug.Log("1");
+                  
                 });
             }
         }
