@@ -75,9 +75,7 @@ namespace RollerSplatClone.Managers
 					ReturnObjectsToPool();
 					ClearLevel();
 					_isPaintGroundController = 0;
-
-
-				
+			
 				});
 			}
 		}

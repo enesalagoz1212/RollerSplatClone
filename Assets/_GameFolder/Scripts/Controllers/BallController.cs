@@ -59,6 +59,7 @@ namespace RollerSplatClone.Controllers
 		{
 			_groundController = groundController;
 			transform.position = _groundController.position;
+
 		}
 
 		public void OnScreenDrag(Direction direction)
@@ -85,7 +86,7 @@ namespace RollerSplatClone.Controllers
 				Debug.Log($"Can not move!");
 			}
 		}
-
+		
 		public void ColorTheBall(Color color)
 		{
 			ballRenderer.material.color = color;
