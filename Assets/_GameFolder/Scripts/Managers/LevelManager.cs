@@ -18,9 +18,6 @@ namespace RollerSplatClone.Managers
 		public Level[] levels;
 		public GameObject levelContainer;
 
-		[SerializeField] private GameObject prefabWall;
-		[SerializeField] private GameObject prefabGround;
-
 		private Color _colorWall = Color.white;
 		private Color _colorGround = Color.black;
 		private Color _levelColor;
@@ -86,7 +83,7 @@ namespace RollerSplatClone.Managers
 
 		}
 
-		private void OnGameMenu()
+        private void OnGameMenu()
 		{
 			int levelIndex = BallPrefsManager.CurrentLevel;
 			int mood = levelIndex % levels.Length;
@@ -102,9 +99,7 @@ namespace RollerSplatClone.Managers
 
 		private void LevelGenerate()
 		{
-
-
-			_unitPerPixel = prefabWall.transform.lossyScale.x;
+			_unitPerPixel = 1f;
 			float halfUnitPerPixel = _unitPerPixel;
 
 			float width = _currentLevelData.levelTexture.width;
@@ -159,27 +154,8 @@ namespace RollerSplatClone.Managers
 
 		private void ReturnObjectsToPool()
 		{
-			GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+			_poolController.ReturnAllObjectsToThePool();
 
-			foreach (GameObject obj in allObjects)
-			{
-				if (obj.CompareTag("Wall"))
-				{
-					_poolController.ReturnWall(obj);
-				}
-				else if (obj.CompareTag("Ground"))
-				{
-					_poolController.ReturnGround(obj);
-				}
-				else if (obj.CompareTag("Gold"))
-				{
-					_poolController.ReturnGold(obj);
-				}
-				else
-				{
-					
-				}
-			}
 			spawnedGroundList.Clear();
 		}
 

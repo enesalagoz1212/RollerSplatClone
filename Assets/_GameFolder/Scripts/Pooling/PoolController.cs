@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RollerSplatClone.Managers;
 using DG.Tweening;
+using UnityEngine.UIElements;
 
 namespace RollerSplatClone.Pooling
 {
@@ -49,26 +50,28 @@ namespace RollerSplatClone.Pooling
             for (int i = 0; i < poolSize; i++)
             {
                 GameObject pooledObject = Instantiate(prefab, pools.transform);
-                pooledObject.SetActive(false);
                 poolList.Add(pooledObject);
+                pooledObject.SetActive(false);
             }
         }
 
-        private GameObject GetPooledObject(List<GameObject> poolList, Vector3 position)
+        private GameObject GetPooledObject(List<GameObject> poolList, GameObject poolPrefab ,Vector3 position)
         {
-            if (poolList.Count > 0)
+            for (int i = 0; i < poolList.Count; i++)
             {
-                GameObject pooledObject = poolList[poolList.Count - 1];
-                poolList.RemoveAt(poolList.Count - 1);
-                pooledObject.transform.position = position;
-                pooledObject.SetActive(true);
-                return pooledObject;
+                var pooledObject = poolList[i];
+                if (!pooledObject.activeSelf)
+                {
+                    pooledObject.transform.position = position;
+                    pooledObject.SetActive(true);
+                    return pooledObject;
+                }
             }
-            else
-            {
-                GameObject newObject = Instantiate(wallPrefab, position, Quaternion.identity);
-                return newObject;
-            }
+
+            GameObject newObject = Instantiate(poolPrefab, position, Quaternion.identity);
+            poolList.Add(newObject);
+            newObject.transform.position = position;
+            return newObject;
         }
 
         private void ReturnPooledObject(List<GameObject> poolList, GameObject obj)
@@ -79,33 +82,19 @@ namespace RollerSplatClone.Pooling
 
         public GameObject GetWall(Vector3 wallPosition)
         {
-            return GetPooledObject(pooledWalls, wallPosition);
+            return GetPooledObject(pooledWalls, wallPrefab, wallPosition);
         }
 
         public GameObject GetGround(Vector3 groundPosition)
         {
-            return GetPooledObject(pooledGrounds, groundPosition);
+            return GetPooledObject(pooledGrounds, groundPrefab, groundPosition);
         }
 
         public GameObject GetGold(Vector3 goldPosition)
         {
-            return GetPooledObject(pooledGolds, goldPosition);
+            return GetPooledObject(pooledGolds, goldPrefab, goldPosition);
         }
 
-        public void ReturnWall(GameObject wall)
-        {
-            ReturnPooledObject(pooledWalls, wall);
-        }
-
-        public void ReturnGround(GameObject ground)
-        {
-            ReturnPooledObject(pooledGrounds, ground);
-        }
-
-        public void ReturnGold(GameObject gold)
-        {
-            ReturnPooledObject(pooledGolds, gold);
-        }
 
         private void OnGameEnd(bool isSuccessful)
         {
@@ -115,6 +104,22 @@ namespace RollerSplatClone.Pooling
                 {
                   
                 });
+            }
+        }
+
+        public void ReturnAllObjectsToThePool()
+        {
+            for (int i = 0; i < pooledWalls.Count; i++)
+            {
+                pooledWalls[i].SetActive(false);
+            }
+            for (int i = 0; i < pooledGrounds.Count; i++)
+            {
+                pooledGrounds[i].SetActive(false);
+            }
+            for (int i = 0; i < pooledGolds.Count; i++)
+            {
+                pooledGolds[i].SetActive(false);
             }
         }
     }

@@ -52,17 +52,17 @@ namespace RollerSplatClone.Managers
 
 		public void OnScreenDrag(PointerEventData eventData)
 		{
-			if (!isInputEnabled || !_isDragging)
+            if (!isInputEnabled || !_isDragging)
 			{
-				return;
+                return;
 			}
 
-			if (GameManager.Instance.GameState != GameState.Playing)
+            if (GameManager.Instance.GameState != GameState.Playing)
 			{
-				return;
+                return;
 			}
 
-			_lastTouchPosition = Input.mousePosition;
+            _lastTouchPosition = Input.mousePosition;
 
 			float touchDifferenceX = GetTouchDifferenceX();
 			float touchDifferenceY = GetTouchDifferenceY();
@@ -70,10 +70,10 @@ namespace RollerSplatClone.Managers
 			{
 				if (Mathf.Abs(touchDifferenceX) > Mathf.Abs(touchDifferenceY))  // x > y 
 				{
-					if (touchDifferenceX > 0)
+                    if (touchDifferenceX > 0)
 					{
 						_ballController.OnScreenDrag(Direction.East);
-					}
+                    }
 					else
 					{
 						_ballController.OnScreenDrag(Direction.West);
@@ -93,10 +93,9 @@ namespace RollerSplatClone.Managers
 
 				_isFirstDraging = false;
 			}
+        }
 
-		}
-
-		public void OnScreenUp(PointerEventData eventData)
+        public void OnScreenUp(PointerEventData eventData)
 		{
 			DOVirtual.DelayedCall(0.3f, () =>
 			{

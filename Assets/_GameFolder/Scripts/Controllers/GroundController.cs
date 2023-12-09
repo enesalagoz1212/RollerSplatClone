@@ -11,7 +11,6 @@ namespace RollerSplatClone.Controllers
 		public GameObject goldPrefab;
 		private GameObject _createdGold;
 
-		public Vector3 position;
 		public bool _isPainted;
 		public int xIndex;
 		public int yIndex;
@@ -19,7 +18,6 @@ namespace RollerSplatClone.Controllers
 		private Color defaultColor = Color.black;
 		private void Awake()
 		{
-			position = transform.position;
 			_isPainted = false;
 		}
 

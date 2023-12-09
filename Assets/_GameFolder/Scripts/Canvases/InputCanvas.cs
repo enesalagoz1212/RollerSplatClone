@@ -20,21 +20,21 @@ namespace RollerSplatClone.Canvases
 		{
 			if (_inputEnabled)
 			{
-				_inputManager.OnScreenTouch(eventData);
+                _inputManager.OnScreenTouch(eventData);
 			}
 		}
 
 		public void OnDrag(PointerEventData eventData)
 		{
-			if (_inputEnabled)
+            if (_inputEnabled)
 			{
-				_inputManager.OnScreenDrag(eventData);
+                _inputManager.OnScreenDrag(eventData);
 			}
 		}
 
 		public void OnPointerUp(PointerEventData eventData)
 		{
-			_inputManager.OnScreenUp(eventData);
+            _inputManager.OnScreenUp(eventData);
 		}
 
 		public void DisableInput()

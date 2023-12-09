@@ -58,21 +58,21 @@ namespace RollerSplatClone.Controllers
 		public void AssignSpawnPosition(GroundController groundController)
 		{
 			_groundController = groundController;
-			transform.position = _groundController.position;
-
+			transform.position = _groundController.transform.position;
 		}
 
 		public void OnScreenDrag(Direction direction)
 		{
-			if (!_canMove)
+            if (!_canMove)
 			{
-				return;
+                return;
 			}
-			var targetGroundController = _levelManager.ReturnDirectionGroundController(direction, _groundController);
+
+            var targetGroundController = _levelManager.ReturnDirectionGroundController(direction, _groundController);
 
 			if (targetGroundController != null)
 			{
-				_canMove = false;
+                _canMove = false;
 				var targetPosition = targetGroundController.transform.position;
 				transform.DOMove(targetPosition, moveDuration).SetEase(move).OnComplete(() =>
 				{

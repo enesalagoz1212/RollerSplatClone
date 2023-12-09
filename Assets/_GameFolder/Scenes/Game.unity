@@ -764,10 +764,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e945d9a2ffbfd80499c37eb1aa374cf5, type: 2}
   - {fileID: 11400000, guid: a5ae1d354b4381c458c961708635ebab, type: 2}
   levelContainer: {fileID: 764586964}
-  prefabWall: {fileID: 588922172449519670, guid: 2a5a4c2bfb3dd27499297b6a7e6db08e,
-    type: 3}
-  prefabGround: {fileID: 5472398954372105081, guid: d9ff676d6236e814893ad1f1f08ed58a,
-    type: 3}
 --- !u!1 &683249298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,7 +1651,7 @@ GameObject:
   - component: {fileID: 1426502067}
   m_Layer: 0
   m_Name: InputImage
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
