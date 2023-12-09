@@ -39,7 +39,9 @@ namespace RollerSplatClone.Pooling
 
         private void InitializePool()
         {
-           
+            CreatePooledObjects(wallPrefab, initializeWallPoolSize, pooledWalls);
+            CreatePooledObjects(groundPrefab, initializeGroundPoolSize, pooledGrounds);
+            CreatePooledObjects(goldPrefab, initializeGoldPoolSize, pooledGolds);
         }
 
         private void CreatePooledObjects(GameObject prefab, int poolSize, List<GameObject> poolList)
