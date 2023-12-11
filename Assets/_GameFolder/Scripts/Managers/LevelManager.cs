@@ -18,6 +18,10 @@ namespace RollerSplatClone.Managers
 		public Level[] levels;
 		public GameObject levelContainer;
 
+		public Vector3 particlePositionOne;
+		public Vector3 particlePositionTwo;
+		public Vector3 particlePositionThree;
+
 		private Color _colorWall = Color.white;
 		private Color _colorGround = Color.black;
 		private Color _levelColor;
@@ -54,6 +58,7 @@ namespace RollerSplatClone.Managers
 			GameManager.OnMenuOpen += OnGameMenu;
 			GameManager.OnGameEnd += OnGameEnd;
 			GameManager.OnGameReset += OnGameReset;
+		
 		}
 
 		private void OnDisable()
@@ -61,13 +66,18 @@ namespace RollerSplatClone.Managers
 			GameManager.OnMenuOpen -= OnGameMenu;
 			GameManager.OnGameEnd -= OnGameEnd;
 			GameManager.OnGameReset -= OnGameReset;
+		
 		}
 
 		private void OnGameEnd(bool isSuccessful)
 		{
 			if (isSuccessful)
 			{
-				DOVirtual.DelayedCall(1f, () =>
+				var newParticle1 = _poolController.GetParticle(particlePositionOne);
+				var newParticle2 = _poolController.GetParticle(particlePositionTwo);
+				var newParticle3 = _poolController.GetParticle(particlePositionThree);
+
+				DOVirtual.DelayedCall(2f, () =>
 				{
 					ReturnObjectsToPool();
 					ClearLevel();
@@ -97,6 +107,7 @@ namespace RollerSplatClone.Managers
 			LevelGenerate();
 		}
 
+		
 		private void LevelGenerate()
 		{
 			_unitPerPixel = 1f;
@@ -136,7 +147,7 @@ namespace RollerSplatClone.Managers
 
 						if (bonusLevel)
 						{
-							
+							var newBonus = _poolController.GetGold(spawnPos);
 
 						}
 
@@ -158,15 +169,6 @@ namespace RollerSplatClone.Managers
 
 			spawnedGroundList.Clear();
 		}
-
-		//public GameObject Spawn(GameObject prefab, Vector3 position)
-		//{
-		//	position.y = prefab.transform.position.y;
-		//	GameObject obj = Instantiate(prefab, position, Quaternion.identity);
-		//	obj.transform.parent = levelContainer.transform;
-
-		//	return obj;
-		//}
 
 		public GroundController ReturnSpawnGroundController()
 		{
@@ -258,6 +260,7 @@ namespace RollerSplatClone.Managers
 				return;
 			}
 			groundController.PaintGround(_levelColor);
+
 			_isPaintGroundController++;
 			CheckLevelEnd();
 		}

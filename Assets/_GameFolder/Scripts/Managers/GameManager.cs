@@ -41,6 +41,7 @@ namespace RollerSplatClone.Managers
 		public static Action OnGameReset;
 		public static Action<int> OnGoldScored;
 
+
 		[SerializeField] private LevelManager levelManager;
 		[SerializeField] private BallController ballController;
 		[SerializeField] private UiManager uiManager;
@@ -63,7 +64,8 @@ namespace RollerSplatClone.Managers
 			ballController.Initialize(levelManager);
 			levelManager.Initialize(ballController, poolController);
 			cameraController.Initialize(levelManager);
-			poolController.Initialize();
+			poolController.Initialize(groundController);
+			groundController.Initialize(poolController);
 			
 			ChangeState(GameState.Menu);
 		}

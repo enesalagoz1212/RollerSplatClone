@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RollerSplatClone.Managers;
+using RollerSplatClone.Controllers;
+using RollerSplatClone.Pooling;
 
 namespace RollerSplatClone.Controllers
 {
 	public class GroundController : MonoBehaviour
 	{
+		private PoolController _poolController;
 		public MeshRenderer meshRenderer;
-		public GameObject goldPrefab;
-		private GameObject _createdGold;
 
 		public bool _isPainted;
 		public int xIndex;
@@ -21,12 +22,22 @@ namespace RollerSplatClone.Controllers
 			_isPainted = false;
 		}
 
+		public void Initialize(PoolController poolController)
+		{
+			_poolController = poolController;
+		}
+		private void OnEnable()
+		{
+			
+		}
 		private void OnDisable()
 		{
+
 			meshRenderer.material.color = defaultColor;
 			_isPainted = false;
 		}
 
+		
 		public void Init(int x, int y)
 		{
 			xIndex = x;
@@ -44,23 +55,7 @@ namespace RollerSplatClone.Controllers
 			{
 				meshRenderer.material.color = color;
 				_isPainted = true;
-				DestroyGold();
 			}
-
-		}
-
-		private void DestroyGold()
-		{
-			if(_createdGold != null)
-			{
-				Destroy(_createdGold);
-			}
-		}
-
-		public void SpawnGold()
-		{
-			_createdGold = Instantiate(goldPrefab, transform.position, Quaternion.identity);
-			_createdGold.transform.parent = transform;
 		}
 	}
 }
