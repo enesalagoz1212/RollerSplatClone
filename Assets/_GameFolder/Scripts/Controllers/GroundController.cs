@@ -12,11 +12,13 @@ namespace RollerSplatClone.Controllers
 		public MeshRenderer meshRenderer;
 
 		public bool _isPainted;
+		
 		public int xIndex;
 		public int yIndex;
-
-		private GameObject goldObject;
-		private Color defaultColor = Color.black;
+		private GameObject _goldObject;
+		
+		private Color _defaultColor = Color.black;
+		
 		private void Awake()
 		{
 			_isPainted = false;
@@ -28,15 +30,15 @@ namespace RollerSplatClone.Controllers
 		}
 		private void OnDisable()
 		{
-			meshRenderer.material.color = defaultColor;
+			meshRenderer.material.color = _defaultColor;
 			_isPainted = false;
 		}
-
 		
-		public void Init(int x, int y)
+		public void Init(int x, int y, GameObject goldObject)
 		{
 			xIndex = x;
 			yIndex = y;
+			_goldObject = goldObject;
 		}
 
 		public bool IsPainted
@@ -50,13 +52,13 @@ namespace RollerSplatClone.Controllers
 			{
 				meshRenderer.material.color = color;
 				_isPainted = true;
-			
-			}
-		}
 
-		public GameObject GetGoldObject()
-		{
-			return goldObject; // goldObject, altýn objesini referans olarak saklamalýdýr
+				if (_goldObject != null)
+				{
+					_goldObject.SetActive(false);
+					GameManager.Instance.IncreaseGoldScore(1);
+				}
+			}
 		}
 	}
 }

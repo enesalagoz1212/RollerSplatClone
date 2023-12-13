@@ -82,12 +82,6 @@ namespace RollerSplatClone.Pooling
 			return newObject;
 		}
 
-		public GameObject ReturnPooledObject(GameObject obj)
-		{
-			obj.SetActive(false);
-			return obj;
-		}
-
 		public GameObject GetWall(Vector3 wallPosition)
 		{
 			return GetPooledObject(pooledWalls, wallPrefab, wallPosition);
