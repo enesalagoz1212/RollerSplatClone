@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using RollerSplatClone.Managers;
+using Vector3 = UnityEngine.Vector3;
 
 namespace RollerSplatClone.Controllers
 {
     public class CameraController : MonoBehaviour
     {
+	    public Vector3 defaultCameraPos;
+	    public float yGap;
+	    public float zGap;
+	    
         private LevelManager _levelManager;
 
-        private int _levelIndex;
         public void Initialize(LevelManager levelManager)
 		{
             _levelManager = levelManager;
@@ -42,37 +47,20 @@ namespace RollerSplatClone.Controllers
 		{
 			if (isSuccessful)
 			{
-                _levelIndex++;
+                
 			}
-			
 		}
+        
 		public void SetCameraSettings()
-        {
-            float width = _levelManager.levels[BallPrefsManager.CurrentLevel-1].levelTexture.width;
+		{
+			float width = _levelManager.ReturnLevelWidth();
             Vector3 cameraPosition = CalculateCameraPosition(width);
             transform.position = cameraPosition;
         }
 
         private Vector3 CalculateCameraPosition(float width)
         {
-            Vector3 cameraPosition = Vector3.zero;
-
-            if (width == 7)
-            {
-                cameraPosition = new Vector3(0.5f, 13.16f, -5.2f);
-            }
-            else if (width == 9)
-            {
-                cameraPosition = new Vector3(0.5f, 16.6f, -7.2f);
-            }
-            else if (width == 10)
-            {
-                cameraPosition = new Vector3(0.5f, 18.5f, -8.27f);
-            }
-            else if (width == 11)
-            {
-                cameraPosition = new Vector3(0.5f, 20.1f, -9.21f);
-            }
+	        Vector3 cameraPosition = defaultCameraPos + Vector3.up * (width * yGap) + Vector3.back * (width * zGap);
 
             return cameraPosition;
         }

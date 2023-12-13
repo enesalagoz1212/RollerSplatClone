@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using RollerSplatClone.Controllers;
 using RollerSplatClone.ScritableObjects;
 using DG.Tweening;
 using RollerSplatClone.Pooling;
+using Random = UnityEngine.Random;
 
 namespace RollerSplatClone.Managers
 {
@@ -29,6 +31,8 @@ namespace RollerSplatClone.Managers
 		private float _unitPerPixel;
 		private int _isPaintGroundController = 0;
 		private int _spawnedGroundCount;
+		private int _levelWidth;
+		private int _levelHeight;
 
 		private List<Transform> spawnedGroundList = new List<Transform>();
 
@@ -107,6 +111,24 @@ namespace RollerSplatClone.Managers
 			LevelGenerate();
 		}
 
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.LeftArrow))
+			{
+				if (BallPrefsManager.CurrentLevel > 1)
+				{
+					BallPrefsManager.CurrentLevel--;
+				}
+				ReturnObjectsToPool();
+				OnGameMenu();
+			}
+			else if (Input.GetKeyDown(KeyCode.RightArrow))
+			{
+				BallPrefsManager.CurrentLevel++;
+				ReturnObjectsToPool();
+				OnGameMenu();
+			}
+		}
 
 		private void LevelGenerate()
 		{
@@ -124,7 +146,9 @@ namespace RollerSplatClone.Managers
 
 			bool bonusLevel = _currentLevelData.isBonusLevel;
 
-			groundControllers = new GroundController[(int)width, (int)height];
+			_levelWidth = (int)width;
+			_levelHeight = (int)height;
+			groundControllers = new GroundController[_levelWidth, _levelHeight];
 
 			for (int x = 0; x < width; x++)
 			{
@@ -171,6 +195,11 @@ namespace RollerSplatClone.Managers
 			_poolController.ReturnAllObjectsToThePool();
 
 			spawnedGroundList.Clear();
+		}
+
+		public int ReturnLevelWidth()
+		{
+			return _levelWidth;
 		}
 
 		public GroundController ReturnSpawnGroundController()

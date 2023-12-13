@@ -124,6 +124,10 @@ namespace RollerSplatClone.Pooling
 			{
 				pooledGrounds[i].SetActive(false);
 			}
+			for (int i = 0; i < pooledGolds.Count; i++)
+			{
+				pooledGolds[i].SetActive(false);
+			}
 			for (int i = 0; i < pooledParticle.Count; i++)
 			{
 				pooledParticle[i].SetActive(false);
