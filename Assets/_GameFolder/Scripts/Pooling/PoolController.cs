@@ -19,6 +19,7 @@ namespace RollerSplatClone.Pooling
 
 		public GameObject pools;
 
+		private GameObject gold;
 		public int initializeWallPoolSize;
 		public int initializeGroundPoolSize;
 		public int initializeGoldPoolSize;
@@ -39,9 +40,8 @@ namespace RollerSplatClone.Pooling
 			GameManager.OnGameEnd -= OnGameEnd;
 		}
 
-		public void Initialize(GroundController groundController)
+		public void Initialize()
 		{
-			_groundController = groundController;
 			InitializePool();
 		}
 
@@ -82,9 +82,10 @@ namespace RollerSplatClone.Pooling
 			return newObject;
 		}
 
-		public void ReturnPooledObject(GameObject obj)
+		public GameObject ReturnPooledObject(GameObject obj)
 		{
 			obj.SetActive(false);
+			return obj;
 		}
 
 		public GameObject GetWall(Vector3 wallPosition)
@@ -118,6 +119,7 @@ namespace RollerSplatClone.Pooling
 			}
 		}
 
+
 		public void ReturnAllObjectsToThePool()
 		{
 			for (int i = 0; i < pooledWalls.Count; i++)
@@ -132,16 +134,9 @@ namespace RollerSplatClone.Pooling
 			{
 				pooledParticle[i].SetActive(false);
 			}
-
 		}
 
-		public void ReturnObjectsThePool()
-		{
-			for (int i = 0; i < pooledGolds.Count; i++)
-			{
-				pooledGolds[i].SetActive(false);
-			}
-		}
+
 
 	}
 

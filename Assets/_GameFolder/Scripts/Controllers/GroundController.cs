@@ -9,30 +9,25 @@ namespace RollerSplatClone.Controllers
 {
 	public class GroundController : MonoBehaviour
 	{
-		private PoolController _poolController;
 		public MeshRenderer meshRenderer;
 
 		public bool _isPainted;
 		public int xIndex;
 		public int yIndex;
 
+		private GameObject goldObject;
 		private Color defaultColor = Color.black;
 		private void Awake()
 		{
 			_isPainted = false;
 		}
 
-		public void Initialize(PoolController poolController)
-		{
-			_poolController = poolController;
-		}
 		private void OnEnable()
 		{
 			
 		}
 		private void OnDisable()
 		{
-
 			meshRenderer.material.color = defaultColor;
 			_isPainted = false;
 		}
@@ -55,7 +50,13 @@ namespace RollerSplatClone.Controllers
 			{
 				meshRenderer.material.color = color;
 				_isPainted = true;
+			
 			}
+		}
+
+		public GameObject GetGoldObject()
+		{
+			return goldObject; // goldObject, altýn objesini referans olarak saklamalýdýr
 		}
 	}
 }

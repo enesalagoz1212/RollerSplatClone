@@ -28,17 +28,18 @@ namespace RollerSplatClone.Managers
 
 		private float _unitPerPixel;
 		private int _isPaintGroundController = 0;
-
 		private int _spawnedGroundCount;
 
+		private GameObject goldObj;
 		private List<Transform> spawnedGroundList = new List<Transform>();
 
 		private GroundController[,] groundControllers;
-		public void Initialize(BallController ballController,PoolController poolController)
+
+		public void Initialize(BallController ballController, PoolController poolController)
 		{
 			_ballController = ballController;
 			_poolController = poolController;
-		
+
 		}
 
 		private void Awake()
@@ -58,15 +59,15 @@ namespace RollerSplatClone.Managers
 			GameManager.OnMenuOpen += OnGameMenu;
 			GameManager.OnGameEnd += OnGameEnd;
 			GameManager.OnGameReset += OnGameReset;
-		
+
 		}
 
 		private void OnDisable()
-		{ 
+		{
 			GameManager.OnMenuOpen -= OnGameMenu;
 			GameManager.OnGameEnd -= OnGameEnd;
 			GameManager.OnGameReset -= OnGameReset;
-		
+
 		}
 
 		private void OnGameEnd(bool isSuccessful)
@@ -82,7 +83,7 @@ namespace RollerSplatClone.Managers
 					ReturnObjectsToPool();
 					ClearLevel();
 					_isPaintGroundController = 0;
-			
+
 				});
 			}
 		}
@@ -93,7 +94,7 @@ namespace RollerSplatClone.Managers
 
 		}
 
-        private void OnGameMenu()
+		private void OnGameMenu()
 		{
 			int levelIndex = BallPrefsManager.CurrentLevel;
 			int mood = levelIndex % levels.Length;
@@ -107,7 +108,7 @@ namespace RollerSplatClone.Managers
 			LevelGenerate();
 		}
 
-		
+
 		private void LevelGenerate()
 		{
 			_unitPerPixel = 1f;
@@ -147,7 +148,7 @@ namespace RollerSplatClone.Managers
 
 						if (bonusLevel)
 						{
-							var newBonus = _poolController.GetGold(spawnPos);
+							goldObj = _poolController.GetGold(spawnPos);
 
 						}
 
@@ -245,10 +246,7 @@ namespace RollerSplatClone.Managers
 			for (int i = 0; i < targetGroundControllers.Count; i++)
 			{
 				PaintTargetGround(targetGroundControllers[i]);
-				if (_currentLevelData.isBonusLevel)
-				{
-					GameManager.Instance.IncreaseGoldScore(1);
-				}
+				
 			}
 			return targetGroundController;
 		}
@@ -263,6 +261,17 @@ namespace RollerSplatClone.Managers
 
 			_isPaintGroundController++;
 			CheckLevelEnd();
+
+			if (_currentLevelData.isBonusLevel)
+			{
+				GameObject goldObject =_poolController.ReturnPooledObject(goldObj);
+				if (_currentLevelData.isBonusLevel)
+				{
+					goldObject.SetActive(false);
+					GameManager.Instance.IncreaseGoldScore(1);
+
+				}
+			}
 		}
 
 		private void CheckLevelEnd()

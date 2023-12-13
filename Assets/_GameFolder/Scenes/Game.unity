@@ -350,8 +350,6 @@ MonoBehaviour:
   uiManager: {fileID: 36309163}
   inputManager: {fileID: 1639755962}
   cameraController: {fileID: 1470769801}
-  groundController: {fileID: -8679145908213301598, guid: d9ff676d6236e814893ad1f1f08ed58a,
-    type: 3}
   poolController: {fileID: 1625857032}
   goldScore: 0
 --- !u!1 &93882750
@@ -1982,7 +1980,7 @@ MonoBehaviour:
   pools: {fileID: 1944668709}
   initializeWallPoolSize: 70
   initializeGroundPoolSize: 70
-  initializeGoldPoolSize: 30
+  initializeGoldPoolSize: 70
   initializeParticlePoolSize: 5
 --- !u!1 &1638220126
 GameObject:
