@@ -48,6 +48,7 @@ namespace RollerSplatClone.Managers
 				_firstTouchPosition = Input.mousePosition;
 				_isFirstDraging = true;
 			}
+			_ballController.OnScreenTap();
 		}
 
 		public void OnScreenDrag(PointerEventData eventData)

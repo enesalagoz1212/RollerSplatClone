@@ -98,16 +98,10 @@ namespace RollerSplatClone.Controllers
 
 		private void Update()
 		{
-			if (GameManager.Instance.GameState == GameState.Playing)
+			if (GameManager.Instance.GameState == GameState.Playing && Time.time - lastInputTime > jumpDelay)
 			{
-
+				Debug.Log("1");
 				JumpAnimation();
-				if (Input.GetMouseButtonDown(0) && isJumping)
-				{
-					KillJumpAnimation();
-					ReturnToOriginalPosition();
-					lastInputTime = Time.time;
-				}
 			}
 		}
 
@@ -118,7 +112,7 @@ namespace RollerSplatClone.Controllers
 
 		private void JumpAnimation()
 		{
-			if (Time.time - lastInputTime > jumpDelay && !isJumping)
+			if (!isJumping)
 			{
 				var jumpHeight = 1.5f;
 				isJumping = true;
@@ -136,6 +130,16 @@ namespace RollerSplatClone.Controllers
 			}
 		}
 
+		public void OnScreenTap()
+		{
+			if (isJumping)
+			{
+				KillJumpAnimation();
+				ReturnToOriginalPosition();
+				lastInputTime = Time.time;
+			}
+
+		}
 		public void ColorTheBall(Color color)
 		{
 			ballRenderer.material.color = color;
