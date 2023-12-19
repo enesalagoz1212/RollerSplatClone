@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RollerSplatClone.ScritableObjects
+namespace RollerSplatClone.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "NewLevel", menuName = "Custom/Level")]
     public class Level : ScriptableObject

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RollerSplatClone.Controllers;
-using RollerSplatClone.ScritableObjects;
+using RollerSplatClone.ScriptableObjects;
 using DG.Tweening;
 using RollerSplatClone.Pooling;
 using Random = UnityEngine.Random;
