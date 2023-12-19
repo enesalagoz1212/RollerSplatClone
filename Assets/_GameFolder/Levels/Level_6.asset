@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Level_6
   m_EditorClassIdentifier: 
   levelTexture: {fileID: 2800000, guid: d657178a07a798d469c88d4b37d664fd, type: 3}
+  isBonusLevel: 1

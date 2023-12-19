@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: _World_Ui_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 1
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 4
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 60d59ae86e80c45d5bfd2f5695d5725f, type: 3}
+    - {fileID: 102900000, guid: 074f5138057a9da4d8eb22b1b65182d9, type: 3}
+    totalSpriteSurfaceArea: 3384070
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: f3187040ae50e7142897e608393fb04c, type: 3}
+  - {fileID: 21300000, guid: 151eeef032ce798419d57b8b67cc7c56, type: 3}
+  - {fileID: 21300000, guid: 062c6811c2dbfd74d8e80ac1c2901c67, type: 3}
+  - {fileID: 21300000, guid: e5022821a102d4d4ab4d779392a87687, type: 3}
+  - {fileID: -2253941993142379998, guid: e48f3692cc953914fb58ee19d2e272d2, type: 3}
+  - {fileID: -3954598264886756745, guid: e48f3692cc953914fb58ee19d2e272d2, type: 3}
+  - {fileID: 7238226326602591440, guid: e48f3692cc953914fb58ee19d2e272d2, type: 3}
+  - {fileID: 9037882067205394370, guid: e48f3692cc953914fb58ee19d2e272d2, type: 3}
+  - {fileID: 21300000, guid: 38504353eb316694897518f91f92d11c, type: 3}
+  - {fileID: 21300000, guid: 06901574adc897542beeb8c1f2ac0cc4, type: 3}
+  - {fileID: 21300000, guid: dc8b70d5fbc03e84abfb925c1709c197, type: 3}
+  - {fileID: 21300000, guid: 32e86376a76aaab44b589e4fd87b0372, type: 3}
+  - {fileID: 21300000, guid: b0b20ba661ff8124185c25050702088b, type: 3}
+  - {fileID: 21300000, guid: 5bd22e977c19c6b459c3686fd2cd54b7, type: 3}
+  - {fileID: -2180948403246963832, guid: 8470df59d0281564ea930e35c1d731e4, type: 3}
+  - {fileID: -8655221945156773903, guid: 8470df59d0281564ea930e35c1d731e4, type: 3}
+  - {fileID: -3527170194283755997, guid: 8470df59d0281564ea930e35c1d731e4, type: 3}
+  - {fileID: 21300000, guid: b9ee4769667894a49bd0beff629ea920, type: 3}
+  - {fileID: 21300000, guid: 45a2e979dafa5224da6c917c493a266a, type: 3}
+  - {fileID: 21300000, guid: 24914bcad4f90a145b2a5d8ba18ea2ae, type: 3}
+  - {fileID: 21300000, guid: ddc4a5fa92e4fe0488e0ae2256ca1c35, type: 3}
+  - {fileID: 21300000, guid: 4aac2c7b6723f9845b3f6f1fa6d3e946, type: 3}
+  - {fileID: -4056439218885350235, guid: d3af10abf0a6e174886c51691a68887b, type: 3}
+  - {fileID: 1553991152606170326, guid: d3af10abf0a6e174886c51691a68887b, type: 3}
+  - {fileID: 21300000, guid: dbb1234ccc4b75944886560c9561a763, type: 3}
+  - {fileID: 21300000, guid: f752380e8a991874992d99450846bc31, type: 3}
+  - {fileID: -707346066167003194, guid: 0f161e3ffcbe04db0b4088bd26fa32e7, type: 3}
+  - {fileID: 5768374278686642779, guid: 0f161e3ffcbe04db0b4088bd26fa32e7, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - greenButton
+  - spark1
+  - goldbutton
+  - NoAds
+  - PubFill
+  - PubStroke
+  - BeachStroke
+  - BeachFill
+  - video
+  - NoAdsBack
+  - _abil
+  - roundback2
+  - WorldIcon
+  - Border2
+  - _anner 1_2
+  - _anner 1_0
+  - _anner 1_1
+  - NoAdsMan
+  - roundback
+  - arrow1
+  - CafeTheme
+  - True
+  - Key
+  - KeyBack
+  - _ip1
+  - shopbox
+  - World
+  - Shop
+  m_RenderDataMap: {}
+  m_Tag: _World_Ui_Atlas
+  m_IsVariant: 0

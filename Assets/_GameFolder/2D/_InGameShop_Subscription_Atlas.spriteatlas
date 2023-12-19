@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: _InGameShop_Subscription_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 1
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 4
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: d6ba0ddc7a92248a3a252f89d5419f50, type: 3}
+    - {fileID: 102900000, guid: 2084bdf7beb9b47e5a887234e2414269, type: 3}
+    totalSpriteSurfaceArea: 2508384
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 539c8f909fde9456abfb3b3e8fcd01e0, type: 3}
+  - {fileID: 21300000, guid: b536c7c00b03340a0b08480a704c0a9e, type: 3}
+  - {fileID: 21300000, guid: f2ba2f91a727a4ea6a4738ff41efd27b, type: 3}
+  - {fileID: 21300000, guid: 1f7a53e1a277d4f8b808fc6d5e8a0f5a, type: 3}
+  - {fileID: 21300000, guid: f6ef7e22d21144152a09f281af134f8d, type: 3}
+  - {fileID: 21300000, guid: 1e7a32f34e4d1452bb0688d9e17a5399, type: 3}
+  - {fileID: 21300000, guid: 57ee7914de80d431090c48d021727407, type: 3}
+  - {fileID: 21300000, guid: c68a4774db6cf4a6ca6b68b6024502f3, type: 3}
+  - {fileID: 21300000, guid: da7d2d9411ef64acc807b005c3f76b06, type: 3}
+  - {fileID: 21300000, guid: f47d07a4303d543b6a0d5cbd00caec87, type: 3}
+  - {fileID: -2230397233807619317, guid: 73c04525357c0433d9a93c2b8e84891a, type: 3}
+  - {fileID: 6436290787668577845, guid: 73c04525357c0433d9a93c2b8e84891a, type: 3}
+  - {fileID: 21300000, guid: 614520554e54c4d9f951fb5956b04ad9, type: 3}
+  - {fileID: 21300000, guid: 364a9265141c1454eb0395c3eee762a1, type: 3}
+  - {fileID: 21300000, guid: fb3b3bf51785644fe90216aee22c79ed, type: 3}
+  - {fileID: 21300000, guid: dcbef08667dfc4fd2a617ae6a8e4c045, type: 3}
+  - {fileID: 21300000, guid: e02910e60828642419fe02a30a432dc6, type: 3}
+  - {fileID: 21300000, guid: 798efff63b198442bbf6ff7505c26af9, type: 3}
+  - {fileID: 21300000, guid: 914cb8073a98943fda3028795e63750e, type: 3}
+  - {fileID: 21300000, guid: 54c7167773f1946c18e5a417fe31a64e, type: 3}
+  - {fileID: 21300000, guid: 01f309282dd054eeb9aa92c213ac462b, type: 3}
+  - {fileID: 21300000, guid: ddb80e79bf7434c8d8e85389637b2224, type: 3}
+  - {fileID: 21300000, guid: 095aa5b9097ce46daabb5afddc0b3e3b, type: 3}
+  - {fileID: 21300000, guid: 3903c2f9dffb8453bb73f8cf2d9966f6, type: 3}
+  - {fileID: 21300000, guid: 1e97ac1b3da604a59b80701470f1dd8e, type: 3}
+  - {fileID: 21300000, guid: 0231933b0f73b4c7ea1c14b8a0e19e60, type: 3}
+  - {fileID: 21300000, guid: 0c46733eec3a1438bab063e9489a57dc, type: 3}
+  - {fileID: 21300000, guid: 0a8708de81b344f2d88bfcc08a30f615, type: 3}
+  - {fileID: 21300000, guid: d443e52fe0d3b4c73acc8a9d43028403, type: 3}
+  - {fileID: 21300000, guid: f560103f154f746c6bdc44916e61a9bf, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - BeerGlass2
+  - TequilaBottle1
+  - Breaker2
+  - Cup1
+  - Shit3
+  - Broom1
+  - Breaker1
+  - Cup2
+  - Breaker3
+  - ChampagneSet3
+  - SubscribeButton
+  - SubscriptionOverlay
+  - Lock
+  - SlushBreak3
+  - ChampagneSet1
+  - SlushBreak1
+  - BeerGlass1
+  - Shit1
+  - TequilaGlass1
+  - Shit2
+  - Broom2
+  - TequilaBottle3
+  - Broom3
+  - BeerGlass3
+  - ChampagneSet2
+  - TequilaGlass2
+  - TequilaGlass3
+  - Cup3
+  - SlushBreak2
+  - TequilaBottle2
+  m_RenderDataMap: {}
+  m_Tag: _InGameShop_Subscription_Atlas
+  m_IsVariant: 0

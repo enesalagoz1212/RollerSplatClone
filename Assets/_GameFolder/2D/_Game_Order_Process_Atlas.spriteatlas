@@ -1,0 +1,205 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: _Game_Order_Process_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 1
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 4
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: f581c9c0a41f14c129efca75517d8bb4, type: 3}
+    - {fileID: 102900000, guid: 14618b2c6bcb245189bcaf0bb9824e64, type: 3}
+    - {fileID: 2800000, guid: 523131a7769004828aade482e99ad31e, type: 3}
+    - {fileID: 2800000, guid: 2ef6cccf8d47f417db37afd8a9259228, type: 3}
+    - {fileID: 102900000, guid: b02307502bf8e436c86d5015c671d65d, type: 3}
+    - {fileID: 2800000, guid: 2c4bd6c300e49e84d9a72dc632355533, type: 3}
+    - {fileID: 2800000, guid: 99327d2921a502f47aafa657231564a7, type: 3}
+    - {fileID: 102900000, guid: bbea23f64681f421b8840907f02bda24, type: 3}
+    totalSpriteSurfaceArea: 4688858
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 3dd9284050380423985914dd057a935d, type: 3}
+  - {fileID: 21300000, guid: 350ca270826cf4346935a4b49b006905, type: 3}
+  - {fileID: 21300000, guid: e63a52b0c9cb94fc39b2e627f7339e0f, type: 3}
+  - {fileID: 21300000, guid: 8b1c20d0173e040bd81d12e7996dbb8f, type: 3}
+  - {fileID: -3659193687611514354, guid: 9e8bdd31b12d14889b7ab122662e0a71, type: 3}
+  - {fileID: -5450325692947699341, guid: 9e8bdd31b12d14889b7ab122662e0a71, type: 3}
+  - {fileID: -742432145382286177, guid: 9e8bdd31b12d14889b7ab122662e0a71, type: 3}
+  - {fileID: -5585927866179556026, guid: 9e8bdd31b12d14889b7ab122662e0a71, type: 3}
+  - {fileID: 21300000, guid: 6724c5610b75f40c2b03ddffa783476b, type: 3}
+  - {fileID: 21300000, guid: 73978f916d5ef492ea2f9b4ed0f46a82, type: 3}
+  - {fileID: 21300000, guid: 1398d39207ba4448dba87384c3203489, type: 3}
+  - {fileID: 21300000, guid: 80fc4ba2c2ce145709ed1fecabe56224, type: 3}
+  - {fileID: 21300000, guid: 55a4b673913d04580a29ac38c7676edd, type: 3}
+  - {fileID: -8074399022843963922, guid: 2c4bd6c300e49e84d9a72dc632355533, type: 3}
+  - {fileID: 4795200191225804684, guid: 2c4bd6c300e49e84d9a72dc632355533, type: 3}
+  - {fileID: -8116929012743721556, guid: 2c4bd6c300e49e84d9a72dc632355533, type: 3}
+  - {fileID: 7869012115185610714, guid: 2c4bd6c300e49e84d9a72dc632355533, type: 3}
+  - {fileID: -13459082688773684, guid: 2c4bd6c300e49e84d9a72dc632355533, type: 3}
+  - {fileID: 21300000, guid: f0fcd1e31972e46a7b798f0a6ca6faeb, type: 3}
+  - {fileID: 21300000, guid: 35a353f37228f453491c00ce190f5aeb, type: 3}
+  - {fileID: 21300000, guid: 4c564e357ec53489bad674b04a50e1ac, type: 3}
+  - {fileID: 21300000, guid: f99710a64490442cf888fa4323659149, type: 3}
+  - {fileID: 21300000, guid: dbc154073883a4df881168f5b870de94, type: 3}
+  - {fileID: 21300000, guid: 74511137aa8a84c1090f50a7b1adc40c, type: 3}
+  - {fileID: 21300000, guid: ff6702377f42d432f83de627db6462cc, type: 3}
+  - {fileID: 21300000, guid: 523131a7769004828aade482e99ad31e, type: 3}
+  - {fileID: 2255996052237076477, guid: 75802dd703680634bb87a61d34c838ab, type: 3}
+  - {fileID: -3425318208263771459, guid: 75802dd703680634bb87a61d34c838ab, type: 3}
+  - {fileID: -1905199019654866228, guid: 75802dd703680634bb87a61d34c838ab, type: 3}
+  - {fileID: 6873930626182839279, guid: 75802dd703680634bb87a61d34c838ab, type: 3}
+  - {fileID: 21300000, guid: 1b50ea18b6b044b23ada90b3886176d7, type: 3}
+  - {fileID: 21300000, guid: 91ee0eb80b6814459b9a144a26d23064, type: 3}
+  - {fileID: 21300000, guid: abba141908e2f42c285e185781374e53, type: 3}
+  - {fileID: 21300000, guid: 99327d2921a502f47aafa657231564a7, type: 3}
+  - {fileID: 21300000, guid: f7a8c6790243c4975b29b430149be720, type: 3}
+  - {fileID: 21300000, guid: 03ef528a133a14186b4851153dfb1ee9, type: 3}
+  - {fileID: 21300000, guid: ecf7c2aa9962e4f90883d149a51dd07c, type: 3}
+  - {fileID: 21300000, guid: 326425aa138c64a0e81ee9f9c319ba82, type: 3}
+  - {fileID: 21300000, guid: 30c39baa5870e4ce481f555ddb3d3e79, type: 3}
+  - {fileID: 2536724726911805353, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: 4011957957032945047, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: 5323945209176153474, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: -1271419033884042271, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: 3603218533590625600, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: 801030738231700364, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: 4722265860957814677, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: 7646061441117436193, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: 771283116622391540, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: -1974440839468578330, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: -3762142944137387370, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: 7554308539564591187, guid: b2390e1be3862454c8d46b6a04676058, type: 3}
+  - {fileID: 21300000, guid: 46b1435b0286c4d709f04d2f4e703ab6, type: 3}
+  - {fileID: 21300000, guid: a536c06b1b59642beb2323934f60a127, type: 3}
+  - {fileID: 8217767151690779948, guid: 5b8c61bb394cb3c4b8d942b608df5403, type: 3}
+  - {fileID: 1279338857750794054, guid: 5b8c61bb394cb3c4b8d942b608df5403, type: 3}
+  - {fileID: 8287205173786540920, guid: 5b8c61bb394cb3c4b8d942b608df5403, type: 3}
+  - {fileID: 8605090411264995353, guid: 5b8c61bb394cb3c4b8d942b608df5403, type: 3}
+  - {fileID: 21300000, guid: 2528ad0c318ae4433a76860be797f08e, type: 3}
+  - {fileID: 21300000, guid: cf43fb2cd27b348ecae6fdd1f9753214, type: 3}
+  - {fileID: 21300000, guid: 7d71aeac89272490f8b0b80ec19cff9c, type: 3}
+  - {fileID: -7889672506145902712, guid: 311fe89d5b7db4771a90649b0609dc9c, type: 3}
+  - {fileID: 7753670335294128365, guid: 311fe89d5b7db4771a90649b0609dc9c, type: 3}
+  - {fileID: 21300000, guid: 7b9f2b9ee5ea443e09abe89885336d8b, type: 3}
+  - {fileID: 21300000, guid: 92be6f9ec5c9b18489458921069742ea, type: 3}
+  - {fileID: 21300000, guid: fc6e2ede600554e23bb2ecd2190b58e7, type: 3}
+  - {fileID: 21300000, guid: d0cdf21fddbc546158524eafcc1ed1a6, type: 3}
+  - {fileID: 21300000, guid: 0778091f0faf8444cabaff3217458b41, type: 3}
+  - {fileID: 21300000, guid: 763a422ffa85a440a8bd04f78595beac, type: 3}
+  - {fileID: 21300000, guid: cb17365fbbbb54b4896ed8c45d54b5dd, type: 3}
+  - {fileID: 21300000, guid: 1632306fabd904ab9b1783a9f9f97580, type: 3}
+  - {fileID: 21300000, guid: 2ef6cccf8d47f417db37afd8a9259228, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - ShakerProcess
+  - IceSlushOrder
+  - SplatOrder
+  - ThreeCupsProcess
+  - TequilaBomb_Order
+  - FruitSand
+  - FruitSand_Order
+  - TequilaBomb
+  - ChampagneOrder
+  - Gold
+  - DecorationProcess
+  - TequilaProcess
+  - Sort
+  - settings-icon_3
+  - settings-icon_1
+  - settings-icon_0
+  - settings-icon_5
+  - settings-icon_8
+  - icebreak
+  - SplatEnd
+  - robot
+  - OrderNote
+  - ThreeCupsOrder
+  - SortOrder
+  - ChampagneProcess
+  - True
+  - _ew_3
+  - _ew_2
+  - _ew_1
+  - _ew_0
+  - cleaning_order
+  - ShotRaceOrder
+  - BeerProcess
+  - settings-back
+  - x2cash
+  - cleaning
+  - HugeMouth
+  - IceSlushProcess
+  - TequillaOrder
+  - FruitSprites_6
+  - FruitSprites_7
+  - FruitSprites_4
+  - FruitSprites_5
+  - FruitSprites_11
+  - FruitSprites_10
+  - FruitSprites_8
+  - FruitSprites_9
+  - FruitSprites_2
+  - FruitSprites_3
+  - FruitSprites_0
+  - FruitSprites_1
+  - StarFill
+  - idplease
+  - _rinkIcons_0
+  - _rinkIcons_3
+  - _rinkIcons_2
+  - _rinkIcons_1
+  - beerBomb
+  - icebreak_order
+  - StarStroke
+  - ShotSurfOrder
+  - ShotSurf
+  - ShotRace
+  - dash
+  - robot_order
+  - HugeMouthOrder
+  - orderback
+  - idplease_order
+  - IceStageProcess
+  - beerBomb_order
+  - Wrong
+  m_RenderDataMap: {}
+  m_Tag: _Game_Order_Process_Atlas
+  m_IsVariant: 0

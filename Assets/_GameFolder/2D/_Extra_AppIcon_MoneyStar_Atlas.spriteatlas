@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: _Extra_AppIcon_MoneyStar_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 1
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 4
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: dcfcf9aa70dd84471896a28da978d5a2, type: 3}
+    - {fileID: 102900000, guid: 5fad13feda4fa4a61894933bf4785f5f, type: 3}
+    - {fileID: 102900000, guid: b02307502bf8e436c86d5015c671d65d, type: 3}
+    totalSpriteSurfaceArea: 2885935
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 98b433e02c9ad48e6864c00e921d98d9, type: 3}
+  - {fileID: 21300000, guid: 05d0d4f01a6ec415baa8010117f12d1a, type: 3}
+  - {fileID: 21300000, guid: 4800ed71b8e35a94dbfcf52268d03b7a, type: 3}
+  - {fileID: 21300000, guid: 73978f916d5ef492ea2f9b4ed0f46a82, type: 3}
+  - {fileID: 21300000, guid: 43b898531c03d56428abbb2eb63cbc97, type: 3}
+  - {fileID: 21300000, guid: dc0c15d3f9c47174d97ff8f4d842dd95, type: 3}
+  - {fileID: 21300000, guid: 03bab7d48824b4f5ea24d37363271539, type: 3}
+  - {fileID: 21300000, guid: 4feec215d79534099b38703fd9621fbc, type: 3}
+  - {fileID: 21300000, guid: 7d7dba35fbeac418fb965a211e7a1af5, type: 3}
+  - {fileID: 21300000, guid: 54c213459d373a449be4117f780860a6, type: 3}
+  - {fileID: -1154214333093496660, guid: 3b3c345566c4bca468dd590e8f5a4c9f, type: 3}
+  - {fileID: 236103108868181852, guid: 3b3c345566c4bca468dd590e8f5a4c9f, type: 3}
+  - {fileID: 7520551082710846112, guid: 3b3c345566c4bca468dd590e8f5a4c9f, type: 3}
+  - {fileID: -4907272853570934515, guid: 3b3c345566c4bca468dd590e8f5a4c9f, type: 3}
+  - {fileID: 21300000, guid: 29342c954cef048d689691f1cb84f5d8, type: 3}
+  - {fileID: 21300000, guid: 3e289a677a0884e719fd9cc409ca030a, type: 3}
+  - {fileID: 21300000, guid: 523131a7769004828aade482e99ad31e, type: 3}
+  - {fileID: 2255996052237076477, guid: 75802dd703680634bb87a61d34c838ab, type: 3}
+  - {fileID: -3425318208263771459, guid: 75802dd703680634bb87a61d34c838ab, type: 3}
+  - {fileID: -1905199019654866228, guid: 75802dd703680634bb87a61d34c838ab, type: 3}
+  - {fileID: 6873930626182839279, guid: 75802dd703680634bb87a61d34c838ab, type: 3}
+  - {fileID: 21300000, guid: 7aa43698ffcae4562b6e5434c369db1c, type: 3}
+  - {fileID: 21300000, guid: f7a8c6790243c4975b29b430149be720, type: 3}
+  - {fileID: 21300000, guid: 68c78dc9b6714274bb79f011413990d7, type: 3}
+  - {fileID: 3737897332693287829, guid: 4457a4d9a7a114b74a6542d9934ccdf7, type: 3}
+  - {fileID: -7767105433804115491, guid: 4457a4d9a7a114b74a6542d9934ccdf7, type: 3}
+  - {fileID: 21300000, guid: 33b22cda5f2e042c1a27354dc84c8091, type: 3}
+  - {fileID: 21300000, guid: f42b513bf739d48d8814f4a713a10816, type: 3}
+  - {fileID: 21300000, guid: 46b1435b0286c4d709f04d2f4e703ab6, type: 3}
+  - {fileID: 21300000, guid: 07dfc4bb4ff68a940b1520a42dc445fc, type: 3}
+  - {fileID: 21300000, guid: d7152b9cb174a49a9aa2771c92c5a0fa, type: 3}
+  - {fileID: 21300000, guid: 7d71aeac89272490f8b0b80ec19cff9c, type: 3}
+  - {fileID: 21300000, guid: fa67cccca57cc480d9bf23f3c5e679aa, type: 3}
+  - {fileID: 1302892651974697151, guid: dfd4f05d18c470c4c892efdccc18ba34, type: 3}
+  - {fileID: -1247970833483597112, guid: dfd4f05d18c470c4c892efdccc18ba34, type: 3}
+  - {fileID: 6257092266086522495, guid: dfd4f05d18c470c4c892efdccc18ba34, type: 3}
+  - {fileID: 2013261503205373015, guid: c1ca30ddfdc4b47d9994835810356115, type: 3}
+  - {fileID: -5402412272178277761, guid: c1ca30ddfdc4b47d9994835810356115, type: 3}
+  - {fileID: 7664807735657788756, guid: c1ca30ddfdc4b47d9994835810356115, type: 3}
+  - {fileID: 8894201953851282084, guid: c1ca30ddfdc4b47d9994835810356115, type: 3}
+  - {fileID: 21300000, guid: 92db101f230ab114184ba6e93d72dbad, type: 3}
+  - {fileID: 21300000, guid: 2ef6cccf8d47f417db37afd8a9259228, type: 3}
+  - {fileID: 21300000, guid: b265b6df7474c433d9c840f1ef3dbd38, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - OrderFill
+  - RoundedSquare
+  - back
+  - Gold
+  - clock
+  - lock22
+  - Order
+  - RoundedSprite
+  - Gret
+  - Circle
+  - Buttons2_1
+  - Buttons2_0
+  - Buttons2_3
+  - Buttons2_2
+  - Circle2
+  - glow6 1
+  - True
+  - _ew_3
+  - _ew_2
+  - _ew_1
+  - _ew_0
+  - RoundCorner
+  - x2cash
+  - _x
+  - BarFill
+  - BarStroke
+  - down-arrow
+  - Watch_Rewarded
+  - StarFill
+  - tick
+  - Rounded128
+  - StarStroke
+  - OrderStroke
+  - Wrong
+  - Excellent
+  - Good
+  - Buttons_3
+  - Buttons_2
+  - Buttons_1
+  - Buttons_0
+  - Logo
+  - Wrong
+  - Finish
+  m_RenderDataMap: {}
+  m_Tag: _Extra_AppIcon_MoneyStar_Atlas
+  m_IsVariant: 0
