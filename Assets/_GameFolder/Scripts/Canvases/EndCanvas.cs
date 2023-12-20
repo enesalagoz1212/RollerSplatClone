@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using RollerSplatClone.Managers;
+using DG.Tweening;
 
 namespace RollerSplatClone.Canvases
 {
@@ -39,8 +40,12 @@ namespace RollerSplatClone.Canvases
 		{
 			if (isSuccessful)
 			{
-				endPanel.gameObject.SetActive(true);
-				UpdateEndLevelText();
+				DOVirtual.DelayedCall(0.5f, () =>
+				{
+					endPanel.gameObject.SetActive(true);
+					UpdateEndLevelText();
+				});
+				
 			}
 		}
 

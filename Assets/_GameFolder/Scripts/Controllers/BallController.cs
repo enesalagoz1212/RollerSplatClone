@@ -100,7 +100,6 @@ namespace RollerSplatClone.Controllers
 		{
 			if (GameManager.Instance.GameState == GameState.Playing && Time.time - lastInputTime > jumpDelay)
 			{
-				Debug.Log("1");
 				JumpAnimation();
 			}
 		}
