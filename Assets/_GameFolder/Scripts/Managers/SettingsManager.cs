@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RollerSplatClone.Managers;
+using DG.Tweening;
 
 namespace RollerSplatClone.Managers
 {
@@ -34,7 +35,7 @@ namespace RollerSplatClone.Managers
 			{
 				Destroy(gameObject);
 			}
-			
+
 		}
 
 		private void OnEnable()
@@ -45,14 +46,18 @@ namespace RollerSplatClone.Managers
 		private void OnDisable()
 		{
 			GameManager.OnGameEnd -= OnGameEnd;
-			
+
 		}
 
 		private void OnGameEnd(bool isSuccessful)
 		{
 			if (isSuccessful)
 			{
-				currentSettings.CurrentLevel++;
+				DOVirtual.DelayedCall(0.8f, () =>
+				{
+					currentSettings.CurrentLevel++;
+				});
+
 			}
 		}
 

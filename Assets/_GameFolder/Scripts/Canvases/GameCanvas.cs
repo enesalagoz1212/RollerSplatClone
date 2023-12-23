@@ -60,7 +60,8 @@ namespace RollerSplatClone.Canvases
 
 		private void UpdateGameLevelText()
 		{
-			var gameLevel = BallPrefsManager.CurrentLevel;
+			//var gameLevel = BallPrefsManager.CurrentLevel;
+			var gameLevel = SettingsManager.Instance.GetCurrentLevel();
 			gameLevelText.text = "LEVEL " + gameLevel.ToString();
 		}
 

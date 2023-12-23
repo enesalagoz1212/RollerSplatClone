@@ -52,7 +52,8 @@ namespace RollerSplatClone.Canvases
 
 		private void UpdateEndLevelText()
 		{
-			var finishedLevel = BallPrefsManager.CurrentLevel;
+			//var finishedLevel = BallPrefsManager.CurrentLevel;
+			var finishedLevel = SettingsManager.Instance.GetCurrentLevel();
 			endLevelText.text = "LEVEL " + finishedLevel.ToString();
 		}
 
