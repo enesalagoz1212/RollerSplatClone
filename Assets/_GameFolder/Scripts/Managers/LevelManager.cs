@@ -99,7 +99,8 @@ namespace RollerSplatClone.Managers
 
 		private void OnGameMenu()
 		{
-			int levelIndex = BallPrefsManager.CurrentLevel;
+			//int levelIndex = BallPrefsManager.CurrentLevel;
+			int levelIndex = SettingsManager.Instance.GetCurrentLevel();
 			int mood = levelIndex % levels.Length;
 			if (mood == 0)
 			{

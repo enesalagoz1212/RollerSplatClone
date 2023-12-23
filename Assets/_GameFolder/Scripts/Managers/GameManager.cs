@@ -48,10 +48,9 @@ namespace RollerSplatClone.Managers
 		[SerializeField] private InputManager inputManager;
 		[SerializeField] private CameraController cameraController;
 		[SerializeField] private PoolController poolController;
+		[SerializeField] private SettingsManager settingsManager;
 
 
-
-		public int goldScore;
 		private void Start()
 		{
 			GameInitialize();
@@ -65,7 +64,7 @@ namespace RollerSplatClone.Managers
 			levelManager.Initialize(ballController, poolController);
 			cameraController.Initialize(levelManager);
 			poolController.Initialize();
-
+			settingsManager.Initialize();
 			
 			ChangeState(GameState.Menu);
 		}
@@ -108,7 +107,8 @@ namespace RollerSplatClone.Managers
 					if (_isSuccessful)
 					{
 						OnGameEnd?.Invoke(true);
-						BallPrefsManager.CurrentLevel++;
+						//BallPrefsManager.CurrentLevel++;
+						
 
 						DOVirtual.DelayedCall(2f, () =>
 						{

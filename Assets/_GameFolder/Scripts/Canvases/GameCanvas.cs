@@ -19,7 +19,7 @@ namespace RollerSplatClone.Canvases
 		public RectTransform panelGoldTextRectTransform;
 		public void Initialize()
 		{
-			Debug.Log("123");
+			
 		}
 
 		private void OnEnable()
